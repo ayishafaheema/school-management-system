@@ -1,0 +1,652 @@
+body{
+    margin: 0;
+}
+
+
+.collage-box{
+    width: 100%;
+    position: relative;
+    height: 700px;
+        background-color: darkred;
+
+
+}
+
+.collage_bg{
+    height:600px;
+    width: 96%;
+    margin: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.6);
+
+}
+.logo {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    width: 90px;
+    height: auto;
+}
+
+.custom-navbar{
+    position: absolute;
+    top: 40px;
+    right: 50px;   /* Pushes it to the right */
+    z-index: 100;
+
+}
+.nav-link{
+    color: white;
+}
+.nav-item{
+    margin-left: 20px;
+}
+.signup-btn{
+    color: white;
+    background: darkred;
+    border: 2px solid white;
+    border-radius: 25px;
+    padding: 8px 20px;
+    margin-left: 20px;
+
+
+}
+
+.signup-btn:hover{
+    background: white;
+    color: darkred;
+}
+.hero-text{
+    position: absolute;
+    top: 27%;
+    left:17%;
+    text-align: center;
+}
+.hero-text h2{
+    font-size: 35px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-family: Cambria;
+    color: white;
+}
+
+.hero-text p{
+    font-size: 15px;
+    line-height: 1.6;
+    color: white;
+
+}
+.three-qlty{
+    position: absolute;
+    top: 490px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 65%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: rgba(110, 0.9, 0, 0.6); /* red transparent */
+    padding: 20px 30px;
+    border-radius: 7px;
+}
+.quality-text{
+    flex: 1;
+    text-align: center;
+    color: white;
+}
+.parent-class{
+    width: 90%;
+    margin: 120px auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* LEFT SIDE */
+
+.left-cards{
+    width: 48%;
+    position: relative;
+}
+
+.card1 img{
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 15px 30px rgba(0,0,0,.25);
+}
+
+/* Floating Student Count */
+
+.card2{
+    position: absolute;
+    top: 35px;
+    right: -30px;
+
+    width: 170px;
+    padding: 18px;
+
+    background: darkred;
+    color: white;
+
+    border-radius: 12px;
+    text-align: center;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,.35);
+}
+
+.card2 h4{
+    font-size: 32px;
+    margin:0;
+    font-weight:bold;
+}
+
+.card2 p{
+    margin-top:4px;
+}
+
+/* Bottom Floating Card */
+
+.card3{
+    position:absolute;
+
+    left:-30px;
+    bottom:30px;
+
+    background:white;
+
+    padding:18px 25px;
+
+    border-radius:12px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+}
+
+.card3 h5{
+    margin:0;
+    color:darkred;
+    font-weight:bold;
+}
+
+.card2:hover{
+    color:darkred ;
+    background-color:white ;
+
+}
+
+/* RIGHT SIDE */
+
+.right-cards{
+    width:40%;
+
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.card4{
+    background:white;
+
+    padding:18px;
+
+    border-radius:15px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+
+    transition:.3s;
+}
+
+.card4:hover{
+    transform:translateY(-6px);
+
+    background:darkred;
+
+    color:white;
+}
+
+.card4 h4{
+    font-size:40px;
+    margin:0;
+    color:darkred;
+}
+
+.card4:hover h4{
+    color:white;
+}
+
+.card4 p{
+    margin-top:6px;
+    font-size:14px;
+}
+
+
+
+
+/*.Student-testimonials {*/
+/*    background-color: #832b2b;*/
+/*}*/
+
+.student-card{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:15px;
+
+    text-align:center;
+
+    height:100%;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    transition:.3s;
+}
+
+.student-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
+
+}
+
+/* MOST IMPORTANT PART */
+
+.student-card img{
+
+    width:120px;
+
+    height:120px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    object-position:center;
+
+    margin-bottom:15px;
+
+    border:5px solid #fff;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+
+}
+
+.student-card h4{
+
+    font-weight:700;
+
+    margin-bottom:5px;
+
+}
+
+.department{
+
+    color:#6c757d;
+
+    margin-bottom:10px;
+
+}
+.Student-testimonials h4{
+    color: darkred;
+}
+.stars{
+
+    color:#ffc107;
+
+    font-size:20px;
+
+    margin-bottom:15px;
+
+}
+
+.testimony{
+
+    color:#555;
+
+    font-style:italic;
+
+}
+
+.carousel-indicators button{
+
+    width:12px;
+
+    height:12px;
+
+    border-radius:50%;
+
+}
+
+
+.Student-testimonials{
+    background: linear-gradient(
+        180deg,
+        white 0%,
+        #b64545 35%,
+        #832b2b 60%,
+        #832b2b 100%
+    );
+}
+
+.parent-class{
+    width:90%;
+    margin:auto;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+}
+.second-and-third{
+
+    width:100%;
+
+    background: linear-gradient(
+        180deg,
+        #cc3333 0%,
+        #b54a4a 30%,
+        #ba4d4d 50%,
+        white 100%
+    );
+
+    padding:120px 0;
+}
+.Student-testimonials{
+    background: transparent;
+}
+
+
+
+/*================ FOOTER ================*/
+
+.footer{
+
+    background:#6d0000;
+    color:white;
+
+    margin-top:70px;
+}
+
+/*========== TOP ==========*/
+
+.footer-top{
+
+    width:90%;
+
+    margin:auto;
+
+    padding:25px 0;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+/* Logo */
+
+.footer-brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+}
+
+.footer-brand img{
+
+    width:65px;
+}
+
+.footer-brand h3{
+
+    margin:0;
+
+    font-size:24px;
+
+    font-weight:bold;
+}
+
+.footer-brand p{
+
+    margin:0;
+
+    font-size:13px;
+
+    color:#d9d9d9;
+}
+
+/* Center */
+
+.footer-center{
+
+    flex:1;
+
+    text-align:center;
+}
+
+.footer-center h2{
+
+    font-size:28px;
+
+    margin-bottom:8px;
+
+    font-weight:bold;
+}
+
+.footer-center p{
+
+    font-size:17px;
+
+    color:#e6e6e6;
+
+    margin-bottom:18px;
+}
+
+/* Buttons */
+
+.footer-buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:12px;
+}
+
+.footer-buttons button{
+
+    padding:8px 22px;
+
+    border-radius:25px;
+
+    font-size:14px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    font-weight:600;
+}
+
+.apply-btn{
+
+    background:white;
+
+    color:darkred;
+
+    border:none;
+}
+
+.apply-btn:hover{
+
+    background:#f3d8d8;
+}
+
+.contact-btn{
+
+    background:transparent;
+
+    color:white;
+
+    border:1px solid white;
+}
+
+.contact-btn:hover{
+
+    background:white;
+
+    color:darkred;
+}
+
+/*========== MAIN FOOTER ==========*/
+
+.footer-main{
+
+    width:90%;
+
+    margin:auto;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    flex-wrap:wrap;
+
+    gap:30px;
+
+    padding:25px 0;
+}
+
+.footer-column{
+
+    flex:1;
+
+    min-width:170px;
+}
+
+.footer-column h4{
+
+    font-size:18px;
+
+    margin-bottom:12px;
+
+    color:white;
+}
+
+.footer-column ul{
+
+    list-style:none;
+
+    padding:0;
+
+    margin:0;
+}
+
+.footer-column li{
+
+    margin-bottom:8px;
+}
+
+.footer-column a{
+
+    color:#dddddd;
+
+    text-decoration:none;
+
+    font-size:15px;
+
+    transition:.3s;
+}
+
+.footer-column a:hover{
+
+    color:white;
+
+    padding-left:5px;
+}
+
+.footer-column p{
+
+    font-size:13px;
+
+    color:#dddddd;
+
+    margin-bottom:10px;
+}
+
+/*========== SOCIAL ==========*/
+
+.social-icons{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:8px;
+}
+.footer-column{
+    flex:1;
+    min-width:170px;
+
+    padding:0 25px;
+    border-right:1px solid rgba(255,255,255,0.2);
+}
+
+/* Remove the line from the last column */
+
+.footer-column:last-child{
+    border-right:none;
+}
+.social-icons a{
+
+    width:35px;
+
+    height:35px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:rgba(255,255,255,.12);
+
+    color:white;
+
+    text-decoration:none;
+
+    transition:.3s;
+}
+
+
+/*========== COPYRIGHT ==========*/
+
+.footer hr{
+
+    width:90%;
+
+    margin:auto;
+
+    border:1px solid rgba(255,255,255,.15);
+}
+
+.copyright{
+
+    text-align:center;
+
+    padding:12px;
+
+    font-size:12px;
+
+    color:#d6d6d6;
+}

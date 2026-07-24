@@ -1,0 +1,423 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+
+    background:linear-gradient(#a55a5a);
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+body::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background: url("../images/collage_bg.png") no-repeat center center;
+
+    background-size:55%;
+
+    opacity:0.08;
+
+    z-index:-1;
+}
+.login-container{
+
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.login-card{
+
+    width:460px;
+    background:white;
+
+    border-radius:25px;
+
+    padding:20px;
+
+    box-shadow:0 15px 45px rgba(0,0,0,.12);
+
+    text-align:center;
+}
+
+.logo{
+
+    width:90px;
+    height:90px;
+
+    background:darkred;
+
+    border-radius:50%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    margin:auto;
+
+    color:white;
+
+    font-size:40px;
+}
+
+.login-card h1{
+
+    margin-top:25px;
+
+    color: #a13f3f;
+
+    font-size:32px;
+}
+
+.subtitle{
+
+    color:#a13f3f;
+
+    margin-top:10px;
+}
+
+.login-card h2{
+
+    margin-top:35px;
+
+    color:darkred;
+}
+
+.welcome-text{
+
+    color:#a13f3f;
+
+    margin-top:5px;
+}
+
+/* ===========================
+        FORM SECTION
+=========================== */
+
+form{
+
+    margin-top:35px;
+
+    text-align:left;
+}
+
+
+/* Each Input Section */
+
+.input-group{
+
+    margin-bottom:22px;
+}
+
+
+/* Label */
+
+.input-group label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    color:darkred;
+}
+
+
+/* Input Container */
+
+.input-box{
+
+    display:flex;
+
+    align-items:center;
+
+    border:1px solid #d1d5db;
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+    transition:.3s;
+
+    background:white;
+}
+
+
+/* Hover Effect */
+
+.input-box:hover{
+
+    border-color:darkred;
+}
+
+
+/* When user clicks */
+
+.input-box:focus-within{
+
+    border-color:darkred;
+
+    box-shadow:0 0 8px rgba(139,0,0,1.0);
+}
+
+
+/* Left Icon */
+
+.input-box i:first-child{
+
+    font-size:20px;
+
+    color:darkred;
+
+    padding:16px;
+}
+
+
+/* Input */
+
+.input-box input{
+
+    flex:1;
+
+    border:none;
+
+    outline:none;
+
+    padding:16px 10px;
+
+    font-size:15px;
+}
+
+
+/* Placeholder */
+
+.input-box input::placeholder{
+
+    color:#a13f3f;
+}
+
+
+/* Eye Icon */
+
+.eye-icon{
+
+    padding:16px;
+
+    cursor:pointer;
+
+    color:#a13f3f;
+
+    font-size:18px;
+}
+
+.eye-icon:hover{
+
+    color:darkred;
+}
+
+/* ===========================
+      OPTIONS
+=========================== */
+
+.options{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+    font-size:14px;
+}
+
+.remember{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    color:#a13f3f;
+}
+
+.remember input{
+
+    width:16px;
+
+    height:16px;
+
+    cursor:pointer;
+}
+
+.options a{
+
+    text-decoration:none;
+
+    color:darkred;
+
+    font-weight:600;
+}
+
+.options a:hover{
+
+    text-decoration:underline;
+}
+
+
+
+/* ===========================
+      LOGIN BUTTON
+=========================== */
+
+.login-btn{
+
+    width:100%;
+
+    border:none;
+
+    background:darkred;
+
+    color:white;
+
+    padding:16px;
+
+    border-radius:12px;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.login-btn:hover{
+
+    background:darkred;
+
+    transform:translateY(-2px);
+
+    box-shadow:0 8px 20px rgba(139,0,0,1.0);
+}
+
+.login-btn i{
+
+    margin-right:8px;
+}
+
+
+
+/* ===========================
+        DIVIDER
+=========================== */
+
+.divider{
+
+    display:flex;
+
+    align-items:center;
+
+    margin:30px 0;
+}
+
+.divider span{
+
+    flex:1;
+
+    height:1px;
+
+    background:#d1d5db;
+}
+
+.divider p{
+
+    margin:0 15px;
+
+    color:darkred;
+
+    font-size:14px;
+}
+
+
+
+/* ===========================
+      ADMIN BUTTON
+=========================== */
+
+.admin-btn{
+
+    width:100%;
+
+    background:white;
+
+    border:1px solid darkred;
+
+    color:darkred;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.admin-btn:hover{
+
+    background:darkred;
+
+    color:white;
+}
+
+.admin-btn i{
+
+    margin-right:8px;
+}
+
+
+
+/* ===========================
+        FOOTER
+=========================== */
+
+.footer-text{
+
+    margin-top:35px;
+
+    text-align:center;
+
+    color:#a13f3f;
+
+    font-size:14px;
+}
+
+.footer-text i{
+
+    color:darkred;
+
+    margin-right:6px;
+}

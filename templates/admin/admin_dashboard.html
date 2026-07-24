@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- FullCalendar -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.css" rel="stylesheet">
+
+    <!-- Your CSS LAST -->
+    <link rel="stylesheet"
+          href="{% static 'css/admin_dashboard.css' %}">
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <!-- ================= Sidebar ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h3>EduAdmin</h3>
+        </div>
+
+        <ul class="menu">
+
+            <li class="active">
+                <i class="bi bi-grid-fill"></i>
+                Dashboard
+            </li>
+
+            <li>
+                <i class="bi bi-people-fill"></i>
+                Students
+            </li>
+
+            <li>
+                <i class="bi bi-person-workspace"></i>
+                Teachers
+            </li>
+
+            <li>
+                <i class="bi bi-building"></i>
+                Classes
+            </li>
+
+            <li>
+                <i class="bi bi-calendar-check"></i>
+                Attendance
+            </li>
+
+            <li>
+                <i class="bi bi-file-earmark-bar-graph"></i>
+                Reports
+            </li>
+
+            <li>
+                <i class="bi bi-calendar-event"></i>
+                Calendar
+            </li>
+
+            <li>
+                <i class="bi bi-gear-fill"></i>
+                Settings
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- ================= Main Content ================= -->
+
+    <main class="main-content">
+
+        <!-- Top Navbar -->
+
+        <header class="top-navbar">
+
+            <div class="search-box">
+
+                <i class="bi bi-search"></i>
+
+                <input
+                        type="text"
+                        placeholder="Search..."
+                >
+
+            </div>
+
+            <div class="top-right">
+
+                <i class="bi bi-bell-fill notification"></i>
+
+                <div class="admin-profile">
+
+                    <img src="https://i.pravatar.cc/100?img=12">
+
+                    <div>
+
+                        <h6>Admin</h6>
+
+                        <small>Administrator</small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- Dashboard Grid -->
+
+        <section class="dashboard-grid">
+
+            <!-- Student Overview -->
+            <div class="student-card">
+
+    <!-- Card Header -->
+
+    <div class="card-header">
+
+        <h4>Student Overview</h4>
+
+        <div class="header-buttons">
+
+            <a href="#" class="view-all">View All</a>
+                <button class="create-btn"
+                        onclick="window.location.href='{% url 'student_add' %}'">
+                    <i class="bi bi-plus-circle"></i>
+                    Create Student
+                </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- Student Profiles -->
+
+    <div class="student-container">
+
+        <!-- Student 1 -->
+
+                    <div class="student-profile">
+
+                        <img src="https://i.pravatar.cc/150?img=12">
+
+                        <h5>Aisha</h5>
+
+                        <p>BSc Computer Science</p>
+
+                        <span>Semester 3</span>
+
+                    </div>
+
+
+                    <!-- Student 2 -->
+
+                    <div class="student-profile">
+
+                        <img src="https://i.pravatar.cc/150?img=25">
+
+                        <h5>Ahmed</h5>
+
+                        <p>BCA</p>
+
+                        <span>Semester 1</span>
+
+                    </div>
+
+
+                    <!-- Student 3 -->
+
+                    <div class="student-profile">
+
+                        <img src="https://i.pravatar.cc/150?img=35">
+
+                        <h5>Sarah</h5>
+
+                        <p>MBA</p>
+
+                        <span>Semester 2</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+                    <!-- Teacher Overview -->
+            <div class="teacher-card">
+
+    <!-- Card Header -->
+
+    <div class="card-header">
+
+        <h4>Teacher Overview</h4>
+
+        <div class="header-buttons">
+
+            <a href="#" class="view-all">View All</a>
+
+
+                <button class="create-btn"
+                        onclick="window.location.href='{% url 'teacher_add' %}'">
+                    <i class="bi bi-plus-circle"></i>
+                    Create Teacher
+                </button>
+
+        </div>
+
+    </div>
+
+    <!-- Teacher Profiles -->
+
+            <div class="teacher-container">
+
+                <!-- Teacher 1 -->
+
+                <div class="teacher-profile">
+
+                    <img src="https://i.pravatar.cc/150?img=50" alt="Teacher">
+
+                    <h5>Mr. James</h5>
+
+                    <p>Computer Science</p>
+
+                    <span>Professor</span>
+
+                </div>
+
+                <!-- Teacher 2 -->
+
+                <div class="teacher-profile">
+
+                    <img src="https://i.pravatar.cc/150?img=53" alt="Teacher">
+
+                    <h5>Ms. Emily</h5>
+
+                    <p>Mathematics</p>
+
+                    <span>Senior Lecturer</span>
+
+                </div>
+
+                <!-- Teacher 3 -->
+
+                <div class="teacher-profile">
+
+                    <img src="https://i.pravatar.cc/150?img=60" alt="Teacher">
+
+                    <h5>Mr. David</h5>
+
+                    <p>Physics</p>
+
+                    <span>Assistant Professor</span>
+
+                </div>
+
+            </div>
+
+        </div>
+            <!-- Calendar -->
+            <div class="calendar-card">
+
+                <div class="card-header-custom">
+                    <h4>Academic Calendar</h4>
+                </div>
+
+                <div id="calendar"></div>
+
+            </div>
+                        <!-- Notice Board -->
+            <div class="notice-card">
+                Notice Board
+            </div>
+
+            <!-- Attendance -->
+            <div class="attendance-card">
+                Attendance Graph
+            </div>
+
+            <!-- Student Distribution -->
+            <div class="distribution-card">
+                Boys vs Girls
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js"></script>
+<script src="{% static 'js/admin_dashboard.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,995 @@
+/*=========================
+        Google Font
+==========================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+}
+
+.wrapper{
+    display:flex;
+}
+
+/*=========================
+        Sidebar
+==========================*/
+
+.sidebar{
+
+    width:260px;
+
+    min-height:100vh;
+
+    background:#7B1113;
+
+    color:white;
+
+    padding:30px 20px;
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+}
+
+.logo{
+
+    text-align:center;
+
+    margin-bottom:40px;
+
+}
+
+.logo img{
+
+    width:75px;
+
+    margin-bottom:10px;
+
+}
+
+.logo h4{
+
+    font-weight:600;
+
+}
+
+.sidebar ul{
+
+    list-style:none;
+
+    padding-left:0;
+
+}
+
+.sidebar ul li{
+
+    padding:15px;
+
+    border-radius:12px;
+
+    margin-bottom:12px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.sidebar ul li:hover{
+
+    background:white;
+
+    color:#7B1113;
+
+}
+
+.sidebar ul li.active{
+
+    background:white;
+
+    color:#7B1113;
+
+    font-weight:600;
+
+}
+
+.sidebar i{
+
+    margin-right:12px;
+
+}
+
+/*=========================
+       Main
+==========================*/
+
+.main-content{
+
+    margin-left:260px;
+
+    padding:35px;
+
+    width:100%;
+
+}
+
+/*=========================
+      Header
+==========================*/
+
+.top-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.top-header h2{
+
+    font-weight:700;
+
+}
+
+.top-header p{
+
+    color:gray;
+
+}
+
+.header-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+}
+
+.search-box{
+
+    background:white;
+
+    border-radius:30px;
+
+    padding:10px 20px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.search-box input{
+
+    border:none;
+
+    outline:none;
+
+    background:none;
+
+}
+
+.notification{
+
+    width:45px;
+
+    height:45px;
+
+    border-radius:50%;
+
+    background:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+    cursor:pointer;
+
+}
+
+.profile-photo{
+
+    width:50px;
+
+    height:50px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+}
+
+/*=========================
+      Statistic Cards
+==========================*/
+
+.stat-card{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    text-align:center;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.stat-card:hover{
+
+    transform:translateY(-6px);
+
+}
+
+.stat-card i{
+
+    font-size:35px;
+
+    color:#7B1113;
+
+}
+
+.stat-card h3{
+
+    margin-top:15px;
+
+    font-weight:700;
+
+}
+
+.stat-card p{
+
+    color:gray;
+
+}
+
+/*=========================
+        Profile Card
+==========================*/
+
+.profile-card{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+
+}
+
+.profile-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.profile-header h4{
+
+    font-weight:600;
+
+}
+
+.edit-btn{
+
+    background:#7B1113;
+
+    color:white;
+
+    border-radius:10px;
+
+    padding:8px 18px;
+
+}
+
+.edit-btn:hover{
+
+    background:#9b181b;
+
+    color:white;
+
+}
+
+.student-image{
+
+    width:170px;
+
+    height:170px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:5px solid #f1f1f1;
+
+}
+
+.profile-info{
+
+    margin-bottom:18px;
+
+}
+
+.profile-info label{
+
+    color:gray;
+
+    font-size:14px;
+
+}
+
+.profile-info p{
+
+    font-weight:600;
+
+    margin-top:4px;
+
+}
+
+/*=========================
+      Attendance Card
+==========================*/
+
+.attendance-card{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+
+}
+
+.attendance-card h4{
+
+    margin-bottom:25px;
+
+    font-weight:600;
+
+}
+
+.attendance-circle{
+
+    width:170px;
+
+    height:170px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    border:12px solid #7B1113;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.attendance-circle h2{
+
+    font-weight:700;
+
+}
+
+.attendance-details{
+
+    display:flex;
+
+    justify-content:space-around;
+
+    margin-top:30px;
+
+}
+
+.attendance-details h5{
+
+    margin-bottom:4px;
+
+    font-weight:700;
+
+}
+
+.attendance-details span{
+
+    color:gray;
+
+    font-size:14px;
+
+}
+
+/*=========================
+    Common Card Header
+=========================*/
+
+.card-header-custom{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+.card-header-custom h4{
+
+    font-weight:600;
+
+}
+
+.card-header-custom a{
+
+    text-decoration:none;
+
+    color:#7B1113;
+
+    font-weight:600;
+
+}
+
+/*=========================
+      Assignment Card
+=========================*/
+
+.assignment-card{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+
+}
+
+.assignment-card table{
+
+    margin-bottom:0;
+
+}
+
+.assignment-card th{
+
+    color:#666;
+
+    font-weight:600;
+
+}
+
+.assignment-card td{
+
+    vertical-align:middle;
+
+}
+
+.status{
+
+    padding:6px 15px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.pending{
+
+    background:#fff4d6;
+
+    color:#d48806;
+
+}
+
+.submitted{
+
+    background:#e8f7ee;
+
+    color:#2e8b57;
+
+}
+
+.late{
+
+    background:#ffe5e5;
+
+    color:#c0392b;
+
+}
+
+/*=========================
+      Calendar
+=========================*/
+
+.calendar-card{
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:20px;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+
+}
+
+/* FullCalendar Styling */
+
+.fc{
+
+    font-family:'Poppins',sans-serif;
+
+}
+
+.fc-toolbar-title{
+
+    font-size:18px !important;
+
+    font-weight:600;
+
+}
+
+.fc-button{
+
+    background:#7B1113 !important;
+
+    border:none !important;
+
+}
+
+.fc-button:hover{
+
+    background:#991b1b !important;
+
+}
+
+.fc-daygrid-day-number{
+
+    color:#333;
+
+    text-decoration:none;
+
+}
+
+.fc-event{
+
+    border:none;
+
+    border-radius:6px;
+
+    padding:2px;
+
+    font-size:12px;
+
+}
+
+.today{
+
+    background:#7B1113;
+
+    color:white;
+
+}
+
+.assignment{
+
+    background:#dff5e1;
+
+    color:#2e8b57;
+
+}
+
+.exam{
+
+    background:#ffe4b3;
+
+    color:#d48806;
+
+}
+/*=========================
+      Top Performers
+=========================*/
+
+.topper-card{
+
+    background:#fff;
+
+    padding:10px;
+
+    border-radius:20px;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+
+    height:100%;
+
+}
+
+.topper-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:15px;
+
+}
+
+.topper-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+.topper-left img{
+
+    width:65px;
+
+    height:65px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:3px solid #f2f2f2;
+
+}
+
+.topper-left h6{
+
+    margin-bottom:3px;
+
+    font-weight:600;
+
+    font-size:12px;
+
+}
+
+.topper-left small{
+
+    color:#777;
+
+    font-size:10px;
+
+}
+
+.rank{
+
+    padding:8px 10px;
+
+    border-radius:25px;
+
+    font-weight:600;
+
+    font-size:14px;
+
+}
+
+.gold{
+
+    background:#FFF4CC;
+
+}
+
+.silver{
+
+    background:#ECECEC;
+
+}
+
+.bronze{
+
+    background:#F7E2D2;
+
+}
+
+.my-rank{
+
+    text-align:center;
+
+    margin-top:25px;
+
+}
+
+.my-rank h5{
+
+    color:#666;
+
+}
+
+.my-rank h2{
+
+    color:#7B1113;
+
+    font-size:42px;
+
+    font-weight:700;
+
+    margin:10px 0;
+
+}
+
+.my-rank p{
+
+    color:#777;
+
+}
+
+/*=========================
+      Quote Card
+=========================*/
+
+.quote-card{
+
+    background:linear-gradient(135deg,#7B1113,#9B1C1F);
+
+    color:#fff;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    min-height:220px;
+
+    max-height:220px;
+
+}
+
+.quote-icon{
+
+    font-size:30px;
+
+    margin-bottom:12px;
+
+}
+
+.quote-card h4{
+
+    font-size:22px;
+
+    margin-bottom:15px;
+
+    font-weight:600;
+
+}
+
+.quote-card p{
+
+    font-size:15px;
+
+    line-height:1.6;
+
+    font-style:italic;
+
+    margin-bottom:15px;
+
+}
+
+.quote-card span{
+
+    font-size:14px;
+
+    opacity:.9;
+
+}
+
+/*=========================
+    Announcements
+=========================*/
+
+.announcement-card{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:35px;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+
+    height:100%;
+
+}
+
+.announcement-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:28px;
+
+}
+
+.announcement-item{
+
+    display:flex;
+
+    gap:20px;
+
+    align-items:flex-start;
+
+}
+
+.announcement-icon{
+
+    width:55px;
+
+    height:55px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:#fff;
+
+    font-size:22px;
+
+    flex-shrink:0;
+
+}
+
+.announcement-content h6{
+
+    margin-bottom:6px;
+
+    font-size:17px;
+
+    font-weight:600;
+
+}
+
+.announcement-content p{
+
+    margin-bottom:6px;
+
+    color:#666;
+
+    line-height:1.7;
+
+}
+
+.announcement-content small{
+
+    color:#999;
+
+    font-size:13px;
+
+}
+
+/*=========================
+      Teacher Card
+=========================*/
+
+.teacher-card{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+
+    height:100%;
+
+}
+
+.teacher{
+
+    display:flex;
+
+    gap:18px;
+
+    align-items:center;
+
+}
+
+.teacher:not(:last-child){
+
+    margin-bottom:20px;
+
+}
+
+.teacher img{
+
+    width:75px;
+
+    height:75px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:3px solid #f2f2f2;
+
+}
+
+.teacher h6{
+
+    margin-bottom:4px;
+
+    font-weight:600;
+
+}
+
+.teacher p{
+
+    margin-bottom:12px;
+
+    color:#777;
+
+    font-size:14px;
+
+}
+
+.teacher-buttons{
+
+    display:flex;
+
+    gap:10px;
+
+}

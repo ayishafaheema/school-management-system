@@ -1,0 +1,335 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Teacher Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/teacher_dashboard.css' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- ================= Sidebar ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h2>EduPortal</h2>
+
+            <p>Teacher Panel</p>
+
+        </div>
+
+        <nav>
+
+            <ul>
+
+                <li class="active">
+                    Dashboard
+                </li>
+
+                <li>
+                    Assignments
+                </li>
+
+                <li>
+                    Students
+                </li>
+
+                <li>
+                    Calendar
+                </li>
+
+                <li>
+                    Reports
+                </li>
+
+                <li>
+                    Settings
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </aside>
+
+    <!-- ================= Main ================= -->
+
+    <main class="main">
+
+        <!-- Header -->
+
+        <header class="header">
+
+            <div class="search-box">
+
+                <input
+                type="text"
+                placeholder="Search students, assignments...">
+
+            </div>
+
+            <div class="header-right">
+
+                <div class="notification">
+
+                    🔔
+
+                </div>
+
+                <div class="profile">
+
+                    <div class="profile-img">
+
+                        👤
+
+                    </div>
+
+                    <div>
+
+                        <h4>Sarah Thomas</h4>
+
+                        <p>Python Lecturer</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- Welcome Banner -->
+
+        <section class="welcome">
+
+            <div>
+
+                <h1>Good Morning 👋</h1>
+
+                <p>
+
+                    You have 5 assignments waiting for review today.
+
+                </p>
+
+            </div>
+
+            <button>
+
+                View Assignments
+
+            </button>
+
+        </section>
+
+        <!-- Dashboard starts here -->
+
+        <div class="dashboard-grid">
+
+    <!-- LEFT SIDE -->
+    <div class="left-column">
+
+        <!-- Assignment Overview -->
+        <section class="card assignment-card">
+
+            <div class="section-header">
+                <h2>Assignment Overview</h2>
+                <a href="#">View All</a>
+            </div>
+
+            <div class="stats">
+
+                <div class="stat-box">
+                    <h3>128</h3>
+                    <p>Total Students</p>
+                </div>
+
+                <div class="stat-box">
+                    <h3>24</h3>
+                    <p>Assignments</p>
+                </div>
+
+                <div class="stat-box">
+                    <h3>116</h3>
+                    <p>Submitted</p>
+                </div>
+
+                <div class="stat-box">
+                    <h3>12</h3>
+                    <p>Pending</p>
+                </div>
+
+                <div class="stat-box">
+                    <h3>20</h3>
+                    <p>Marked</p>
+                </div>
+
+                <div class="stat-box">
+                    <h3>4</h3>
+                    <p>Not Marked</p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Tasks + Attendance -->
+        <div class="middle-row">
+
+            <section class="card tasks-card">
+
+                <div class="section-header">
+                    <h2>My Tasks</h2>
+                    <button>+ Add</button>
+                </div>
+
+                <ul>
+
+                    <li>☐ Review Python Assignment</li>
+
+                    <li>☑ Upload Django Notes</li>
+
+                    <li>☐ Prepare Quiz</li>
+
+                    <li>☐ Parent Meeting</li>
+
+                </ul>
+
+            </section>
+
+            <section class="card attendance-card">
+
+                <h2>Attendance</h2>
+
+                <div class="circle">
+
+                    92%
+
+                </div>
+
+                <p>Present : <strong>118</strong></p>
+
+                <p>Absent : <strong>10</strong></p>
+
+            </section>
+
+        </div>
+
+        <!-- Student Performance -->
+        <section class="card performance-card">
+
+            <div class="section-header">
+
+                <h2>Student Performance</h2>
+
+                <a href="#">View All</a>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="right-column">
+
+        <section class="card planner-card">
+
+    <div class="section-header">
+
+        <h2>Planner Calendar</h2>
+
+        <a href="#" id="todayBtn">Today</a>
+
+    </div>
+
+    <div class="calendar-container">
+
+        <div class="calendar-header">
+
+            <button id="prevMonth">&#10094;</button>
+
+            <h3 id="monthYear"></h3>
+
+            <button id="nextMonth">&#10095;</button>
+
+        </div>
+
+        <div class="weekdays">
+
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+
+        </div>
+
+        <div id="calendarDays" class="calendar-days">
+
+        </div>
+
+    </div>
+
+    <div class="events-section">
+
+        <div class="section-header">
+
+            <h4>Today's Events</h4>
+
+            <a href="#">View All</a>
+
+        </div>
+
+        <div id="eventList">
+
+            <!-- JS/Django will fill this -->
+
+        </div>
+
+    </div>
+
+</section>
+
+        <section class="card reports-card">
+
+            <div class="section-header">
+
+                <h2>Student Reports</h2>
+
+                <a href="#">View All</a>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</div>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>
