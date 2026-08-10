@@ -15,8 +15,8 @@ body{
 
 .wrapper{
     display:flex;
+    min-height:100vh;
 }
-
 /*=========================
         Sidebar
 ==========================*/
@@ -114,15 +114,10 @@ body{
 ==========================*/
 
 .main-content{
-
     margin-left:260px;
-
-    padding:35px;
-
-    width:100%;
-
+    width:calc(100% - 260px);
+    padding:20px;
 }
-
 /*=========================
       Header
 ==========================*/
@@ -320,7 +315,24 @@ body{
     color:white;
 
 }
-
+.teacher-profile{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.student-profile{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
 .student-image{
 
     width:170px;

@@ -1,0 +1,174 @@
+{% extends "admin/admin_base.html" %}
+
+{% load static %}
+
+
+{% block title %}
+Class-wise Attendance
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/class_wise.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<section class="class-attendance-page">
+
+<!-- ================= PAGE HEADER ================= -->
+
+<div class="page-header">
+
+    <div class="page-title">
+
+        <h2>Class-wise Attendance</h2>
+
+        <p>
+            View today's attendance summary for each class.
+        </p>
+
+    </div>
+
+    <div class="attendance-date">
+
+        <i class="bi bi-calendar3"></i>
+
+        <span>{{ today|date:"d F Y" }}</span>
+
+    </div>
+
+</div>
+
+
+<!-- ================= ATTENDANCE CARD ================= -->
+
+<div class="class-attendance-card">
+
+    <div class="card-header">
+
+        <div>
+
+            <h3>Today's Attendance</h3>
+
+            <p>
+                Attendance summary by class
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= TABLE ================= -->
+
+    <div class="table-wrapper">
+
+        <table class="attendance-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Class</th>
+
+                    <th>Total Students</th>
+
+                    <th>Present</th>
+
+                    <th>Absent</th>
+
+                    <th>Attendance</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for class in class_attendance %}
+
+                <tr>
+
+                    <td>
+                        <span class="class-name">
+                            {{ class.class }}
+                        </span>
+                    </td>
+
+                    <td>
+                        {{ class.total }}
+                    </td>
+
+                    <td>
+
+                        <span class="present-value">
+                            {{ class.present }}
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <span class="absent-value">
+                            {{ class.absent }}
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <div class="percentage-wrapper">
+
+                            <div class="percentage-bar">
+
+                                <div class="percentage-fill"
+                                     style="width: {{ class.percentage }}%;">
+                                </div>
+
+                            </div>
+
+                            <span class="percentage-value">
+                                {{ class.percentage }}%
+                            </span>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="5"
+                        class="no-attendance">
+
+                        No attendance data available for today.
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+```
+
+</section>
+
+{% endblock %}
+
+
+
+

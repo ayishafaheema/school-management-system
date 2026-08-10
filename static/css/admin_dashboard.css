@@ -1,13 +1,6 @@
-/*==========================
-    GOOGLE FONT
-==========================*/
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-
-/*==========================
-    GLOBAL
-==========================*/
+/*==========================================
+            RESET
+==========================================*/
 
 *{
     margin:0;
@@ -17,38 +10,45 @@
 }
 
 body{
-
-    background:#f5f6fa;
-
+    background:#f5f7fb;
 }
 
 
-/*==========================
-    MAIN LAYOUT
-==========================*/
+
+/*==========================================
+        MAIN CONTAINER
+==========================================*/
 
 .dashboard-container{
 
-    display:grid;
-    grid-template-columns:260px 1fr;
+    display:flex;
+
     min-height:100vh;
 
 }
 
 
-/*==========================
-    SIDEBAR
-==========================*/
+
+/*==========================================
+            SIDEBAR
+==========================================*/
 
 .sidebar{
 
-    background:#ffffff;
+    width:260px;
+
+    background:#7b1e1e;
+
+    color:#fff;
+
+    position:fixed;
+
+    left:0;
+    top:0;
+
+    height:100vh;
 
     padding:30px 20px;
-
-    border-right:1px solid #ececec;
-
-    box-shadow:5px 0 20px rgba(0,0,0,.05);
 
 }
 
@@ -57,90 +57,69 @@ body{
 
     text-align:center;
 
-    margin-bottom:45px;
+    margin-bottom:40px;
 
 }
 
-.logo h3{
-
-    color:#b22222;
-
-    font-weight:700;
-
-}
-
-
-/*==========================
-    MENU
-==========================*/
 
 .menu{
 
     list-style:none;
 
+    padding:0;
+
 }
 
+
 .menu li{
-
-    padding:14px 18px;
-
-    margin-bottom:12px;
-
-    border-radius:12px;
-
-    cursor:pointer;
 
     display:flex;
 
     align-items:center;
 
-    gap:15px;
+    gap:12px;
+
+    padding:15px;
+
+    border-radius:10px;
+
+    cursor:pointer;
 
     transition:.3s;
 
-    color:#555;
-
-    font-weight:500;
+    margin-bottom:10px;
 
 }
 
-.menu li:hover{
 
-    background:#b22222;
-
-    color:white;
-
-}
-
+.menu li:hover,
 .menu li.active{
 
-    background:#b22222;
-
-    color:white;
-
-}
-
-.menu i{
-
-    font-size:18px;
+    background:rgba(255,255,255,.15);
 
 }
 
 
-/*==========================
-    MAIN CONTENT
-==========================*/
+
+/*==========================================
+        MAIN CONTENT
+==========================================*/
 
 .main-content{
+
+    margin-left:260px;
+
+    width:calc(100% - 260px);
 
     padding:30px;
 
 }
 
 
-/*==========================
-    TOP NAVBAR
-==========================*/
+
+/*==========================================
+        TOP NAVBAR
+==========================================*/
 
 .top-navbar{
 
@@ -155,52 +134,39 @@ body{
 }
 
 
-/*==========================
-    SEARCH
-==========================*/
-
 .search-box{
 
-    width:420px;
-
-    background:white;
-
-    border-radius:15px;
-
-    padding:12px 18px;
+    width:380px;
 
     display:flex;
 
     align-items:center;
 
-    gap:12px;
+    background:#fff;
 
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    padding:12px 18px;
+
+    border-radius:12px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
 
 }
 
-.search-box input{
 
-    width:100%;
+.search-box input{
 
     border:none;
 
     outline:none;
 
-    font-size:15px;
+    width:100%;
+
+    margin-left:10px;
+
+    background:transparent;
 
 }
 
-.search-box i{
-
-    color:#999;
-
-}
-
-
-/*==========================
-    ADMIN PROFILE
-==========================*/
 
 .top-right{
 
@@ -208,19 +174,19 @@ body{
 
     align-items:center;
 
-    gap:30px;
+    gap:20px;
 
 }
+
 
 .notification{
 
     font-size:22px;
 
-    color:#b22222;
-
     cursor:pointer;
 
 }
+
 
 .admin-profile{
 
@@ -228,490 +194,1708 @@ body{
 
     align-items:center;
 
-    gap:15px;
-
-    background:white;
-
-    padding:8px 18px;
-
-    border-radius:50px;
-
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    gap:12px;
 
 }
 
+
 .admin-profile img{
 
-    width:48px;
+    width:45px;
 
-    height:48px;
+    height:45px;
 
     border-radius:50%;
 
 }
 
-.admin-profile h6{
 
-    margin:0;
 
-    font-weight:600;
+/*==========================================
+        WELCOME
+==========================================*/
+
+.welcome-section{
+
+    background:#7b1e1e;
+
+    padding:25px;
+    color: white;
+
+    border-radius:18px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    margin-bottom:25px;
 
 }
 
-.admin-profile small{
 
-    color:gray;
+.welcome-section h2{
+
+    margin-bottom:8px;
+
+}
+
+/*-------------------------------------------------------------------------------------------------------------------*/
+
+
+/*==========================
+        Dashboard
+==========================*/
+
+.dashboard-container{
+
+    display:flex;
+    flex-direction:column;
+    gap:25px;
 
 }
 
 
-/*==========================
-    DASHBOARD GRID
-==========================*/
 
 /*==========================
-    DASHBOARD GRID
+      Top Section
 ==========================*/
 
-.dashboard-grid{
+.top-section{
 
     display:grid;
-
     grid-template-columns:2.3fr 1fr;
-    grid-template-areas:
-        "student calendar"
-        "teacher notice"
-        "attendance notice"
-        "distribution notice";
-
-    gap:22px;
+    gap:25px;
+    align-items:stretch;
 
 }
+
 
 
 /*==========================
-    CARD DESIGN
+     Left Section
 ==========================*/
 
-.dashboard-grid > div{
+.left-section{
 
-    background:white;
-
-    border-radius:22px;
-
-    padding:22px;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    display:flex;
+    flex-direction:column;
+    gap:20px;
 
 }
+
 
 
 /*==========================
-    CARD HEIGHTS
+      Statistics
 ==========================*/
+
+.stats-grid{
+
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+
+}
+
+
 
 /*==========================
-    CARD LAYOUT & HEIGHTS
+      Right Section
 ==========================*/
 
-.student-card{
+.right-section{
 
-    grid-area:student;
-    height:350px;
-
-}
-
-.teacher-card{
-
-    grid-area:teacher;
-    height:350px;
+    display:flex;
 
 }
 
-.calendar-card{
 
-    grid-area:calendar;
+
+/*==========================
+      Common Card
+==========================*/
+
+.card{
+
+    background:#fff;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+
+
+/*==========================
+      Welcome
+==========================*/
+
+.welcome-card{
+
+    min-height:110px;
+
+}
+
+
+
+/*==========================
+      Stat Card
+==========================*/
+
+.stat-card{
+
+    text-align:center;
+
+}
+
+.stat-card h3{
+
+    color:#8B0000;
+    font-size:28px;
+    margin-bottom:8px;
+
+}
+
+
+
+/*==========================
+      Overview
+==========================*/
+
+.overview-card{
+    min-height:220px;
+    height:auto;
+}
+
+.overview-content{
+    margin-top:15px;
+    border:none;      /* or keep your dashed border if you want */
+    height:auto;
+    display:block;
+}
+
+
+/*==========================================
+      Overview Header
+==========================================*/
+
+.overview-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+    gap:15px;
+}
+
+.overview-header h3{
+    margin:0;
+    color:#7B1113;
+    font-size:22px;
+    font-weight:600;
+}
+
+/*==========================================
+      Header Buttons
+==========================================*/
+
+.header-buttons{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+/*==========================================
+      View All Button
+==========================================*/
+
+.view-all{
+    text-decoration:none;
+    color:#7B1113;
+    font-size:14px;
+    font-weight:600;
+    padding:9px 18px;
+    border:2px solid #7B1113;
+    border-radius:8px;
+    transition:0.3s ease;
+}
+
+.view-all:hover{
+    background:#7B1113;
+    color:#fff;
+}
+
+/*==========================================
+      Create Student Button
+==========================================*/
+
+.create-btn{
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    background:#7B1113;
+    color:#fff;
+
+    border:none;
+    outline:none;
+
+    padding:10px 18px;
+    border-radius:8px;
+
+    font-size:14px;
+    font-weight:500;
+
+    cursor:pointer;
+    transition:0.3s ease;
+}
+
+.create-btn:hover{
+    background:#5d0d0f;
+    transform:translateY(-2px);
+    box-shadow:0 8px 18px rgba(123,17,19,0.25);
+}
+
+.create-btn i{
+    font-size:16px;
+}
+/*==========================
+      Notice
+==========================*/
+
+.notice-card{
+
+    flex:1;
+    height:100%;
+
+}
+
+.notice-content{
+
+    margin-top:20px;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+
+}
+
+.notice{
+
+    padding:12px;
+    background:#f7f7f7;
+    border-left:5px solid #8B0000;
+    border-radius:8px;
+
+}
+
+
+
+/*==========================
+      Attendance
+==========================*/
+
+.attendance-card{
+
+    width:100%;
+
+}
+
+.attendance-content{
+
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:30px;
+    margin-top:20px;
+    align-items:center;
+
+}
+
+.attendance-left{
+
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+
+}
+
+.mini-card{
+
+    background:#fafafa;
+    border-radius:12px;
+    padding:25px;
+    text-align:center;
+    border:1px solid #eee;
+
+}
+
+.mini-card h2{
+
+    color:#8B0000;
+    margin-bottom:10px;
+
+}
+
+.attendance-right{
+
     height:320px;
 
 }
 
-.notice-card{
+.attendance-right canvas{
 
-    grid-area:notice;
-    min-height:860px;
-
-}
-
-.attendance-card{
-
-    grid-area:attendance;
-    height:280px;
+    width:100% !important;
+    height:100% !important;
 
 }
 
-.distribution-card{
 
-    grid-area:distribution;
-    height:230px;
 
-}
 /*==========================
-    HOVER EFFECT
+      Bottom
 ==========================*/
 
-.dashboard-grid>div{
+.bottom-section{
 
-    transition:.3s;
-
-}
-
-.dashboard-grid>div:hover{
-
-    transform:translateY(-5px);
-
-    box-shadow:0 15px 30px rgba(0,0,0,.12);
-
-}
-
-/*=====================================
-        STUDENT OVERVIEW CARD
-======================================*/
-
-.student-card{
-
-    display:flex;
-
-    flex-direction:column;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
 
 }
 
 
-/* Header */
 
-.card-header{
+/*==========================
+      Graph
+==========================*/
 
-    display:flex;
+.graph-card{
 
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-bottom:25px;
-
-    border:none;
-
-    background:transparent;
-
-    padding:0;
+    height:420px;
 
 }
 
-.card-header h4{
+.graph-card canvas{
 
-    color:#b22222;
-
-    font-weight:600;
+    width:100% !important;
+    height:330px !important;
 
 }
 
 
-/* Header Buttons */
 
-.header-buttons{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:15px;
-
-}
-
-.view-all{
-
-    text-decoration:none;
-
-    color:#b22222;
-
-    font-weight:500;
-
-}
-
-.view-all:hover{
-
-    text-decoration:underline;
-
-}
-
-
-/* Create Button */
-
-.create-btn{
-
-    border:none;
-
-    background:#b22222;
-
-    color:white;
-
-    padding:10px 18px;
-
-    border-radius:12px;
-
-    font-size:14px;
-
-    transition:.3s;
-
-}
-
-.create-btn:hover{
-
-    background:#8e1b1b;
-
-}
-
-
-/* Student Cards */
-
-.student-container{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    gap:20px;
-
-}
-
-
-/* Individual Profile */
-
-.student-profile{
-
-    flex:1;
-
-    background:#fafafa;
-
-    border-radius:18px;
-
-    padding:20px;
-
-    text-align:center;
-
-    transition:.3s;
-
-    border:1px solid #efefef;
-
-}
-
-.student-profile:hover{
-
-    transform:translateY(-8px);
-
-    box-shadow:0 10px 20px rgba(0,0,0,.10);
-
-}
-
-
-/* Profile Image */
-
-.student-profile img{
-
-    width:75px;
-
-    height:75px;
-
-    border-radius:50%;
-
-    margin-bottom:15px;
-
-}
-
-
-/* Name */
-
-.student-profile h5{
-
-    margin-bottom:8px;
-
-    font-weight:600;
-
-}
-
-
-/* Program */
-
-.student-profile p{
-
-    color:#666;
-
-    margin-bottom:5px;
-
-}
-
-
-/* Semester */
-
-.student-profile span{
-
-    color:#999;
-
-    font-size:14px;
-
-}
-
-/*=====================================
-        TEACHER OVERVIEW CARD
-======================================*/
-
-.teacher-card{
-
-    display:flex;
-
-    flex-direction:column;
-
-}
-
-.teacher-container{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    gap:20px;
-
-}
-
-.teacher-profile{
-
-    flex:1;
-
-    background:#fafafa;
-
-    border-radius:18px;
-
-    padding:20px;
-
-    text-align:center;
-
-    border:1px solid #efefef;
-
-    transition:.3s;
-
-}
-
-.teacher-profile:hover{
-
-    transform:translateY(-8px);
-
-    box-shadow:0 10px 20px rgba(0,0,0,.10);
-
-}
-
-.teacher-profile img{
-
-    width:75px;
-
-    height:75px;
-
-    border-radius:50%;
-
-    margin-bottom:15px;
-
-}
-
-.teacher-profile h5{
-
-    margin-bottom:8px;
-
-    font-weight:600;
-
-}
-
-.teacher-profile p{
-
-    color:#666;
-
-    margin-bottom:5px;
-
-}
-
-.teacher-profile span{
-
-    color:#999;
-
-    font-size:14px;
-
-}
+/*==========================
+      Calendar
+==========================*/
 
 .calendar-card{
 
-    background:#fff;
-
-    padding:20px;
-
-    border-radius:20px;
-
-    box-shadow:0 10px 20px rgba(0,0,0,.08);
-
-    height:400px;
-
-    display:flex;
-
-    flex-direction:column;
+    height:420px;
 
 }
+
 #calendar{
 
-    flex:1;
-
     margin-top:15px;
-
-}
-.fc{
-
-    font-family:'Poppins',sans-serif;
+    height:320px;
 
 }
 
-.fc-toolbar-title{
 
-    font-size:18px !important;
 
-    font-weight:600;
+/*==========================
+      Responsive
+==========================*/
+
+@media(max-width:992px){
+
+    .top-section{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .bottom-section{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .attendance-content{
+
+        grid-template-columns:1fr;
+
+    }
 
 }
 
-.fc-button{
+@media(max-width:768px){
 
-    background:#7B1113 !important;
+    .stats-grid{
 
-    border:none !important;
+        grid-template-columns:1fr;
+
+    }
+
+    .attendance-left{
+
+        grid-template-columns:1fr;
+
+    }
 
 }
-
-.fc-button:hover{
-
-    background:#991b1b !important;
-
+.attendance-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-.fc-daygrid-day-number{
+.attendance-header h3 {
+    margin: 0;
+}
 
+.class-wise-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 8px 14px;
+
+    background: #6d1119;
+    color: #ffffff;
+
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.class-wise-btn:hover {
+    background: #4f0c12;
+    color: #ffffff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Student Grid */
+
+.student-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
+    width:100%;
+}
+
+/* Student Card */
+
+.student-profile{
+    background:#fff;
+    border:1px solid #e8e8e8;
+    border-radius:15px;
+    padding:18px;
+    text-align:center;
+    transition:.3s;
+    box-shadow:0 4px 10px rgba(0,0,0,.06);
+}
+
+.student-profile:hover{
+    transform:translateY(-5px);
+    box-shadow:0 10px 20px rgba(0,0,0,.12);
+}
+
+/* Image */
+
+.student-profile img{
+    width:75px;
+    height:75px;
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid #7B1113;
+    margin-bottom:12px;
+}
+
+/* Name */
+
+.student-info h5{
+    margin:0;
+    font-size:16px;
     color:#333;
-
-    text-decoration:none;
-
+    font-weight:600;
 }
 
-.fc-event{
+/* Class */
 
-    border:none;
-
-    border-radius:6px;
-
-    padding:2px;
-
-    font-size:12px;
-
+.student-info p{
+    margin:6px 0;
+    color:#666;
+    font-size:14px;
 }
+
+/* Roll */
+
+.roll-badge{
+    display:inline-block;
+    margin-top:10px;
+    background:#7B1113;
+    color:#fff;
+    padding:6px 14px;
+    border-radius:25px;
+    font-size:13px;
+    font-weight:500;
+}
+
+
+/*==========================================
+        Teacher Overview
+==========================================*/
+
+.teacher-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    width:100%;
+}
+
+.teacher-profile{
+    background:#fff;
+    border:1px solid #e8e8e8;
+    border-radius:15px;
+    padding:18px;
+    text-align:center;
+    transition:.3s;
+    box-shadow:0 4px 10px rgba(0,0,0,.06);
+}
+
+.teacher-profile:hover{
+    transform:translateY(-5px);
+    box-shadow:0 10px 20px rgba(0,0,0,.12);
+}
+
+.teacher-profile img{
+    width:75px;
+    height:75px;
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid #7B1113;
+    margin-bottom:12px;
+}
+
+.teacher-info h5{
+    margin:0;
+    font-size:16px;
+    color:#333;
+    font-weight:600;
+}
+
+.teacher-info p{
+    margin:6px 0;
+    color:#666;
+    font-size:14px;
+}
+
+.qualification-badge{
+    display:inline-block;
+    margin-top:10px;
+    padding:6px 14px;
+    border-radius:25px;
+    background:#7B1113;
+    color:#fff;
+    font-size:13px;
+    font-weight:500;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*==========================================
+        SUMMARY CARDS
+==========================================*/
+
+/*.summary-cards{*/
+
+/*    display:grid;*/
+
+/*    grid-template-columns:repeat(3,1fr);*/
+
+/*    gap:20px;*/
+
+/*    margin-bottom:25px;*/
+
+/*}*/
+
+
+/*.summary-card{*/
+
+/*    background:#fff;*/
+
+/*    padding:20px;*/
+
+/*    border-radius:18px;*/
+
+/*    display:flex;*/
+
+/*    align-items:center;*/
+
+/*    gap:18px;*/
+
+/*    box-shadow:0 8px 20px rgba(0,0,0,.08);*/
+
+/*}*/
+
+
+/*.summary-card i{*/
+
+/*    font-size:34px;*/
+
+/*    color:#7b1e1e;*/
+
+/*}*/
+
+
+/*.summary-card h6{*/
+
+/*    margin-bottom:6px;*/
+
+/*    color:#666;*/
+
+/*}*/
+
+
+/*.summary-card h2{*/
+
+/*    margin:0;*/
+
+/*    font-weight:700;*/
+
+/*}*/
+
+/*!*==========================================*/
+/*            MAIN DASHBOARD*/
+/*==========================================*!*/
+
+/*.dashboard-layout{*/
+
+/*    display:grid;*/
+
+/*    grid-template-columns:2.2fr 1fr;*/
+
+/*    gap:25px;*/
+
+/*    align-items:start;*/
+
+/*    margin-top:25px;*/
+
+/*}*/
+
+
+/*!*==========================================*/
+/*            LEFT COLUMN*/
+/*==========================================*!*/
+
+/*.left-column{*/
+
+/*    display:flex;*/
+
+/*    flex-direction:column;*/
+
+/*    gap:25px;*/
+
+/*}*/
+
+
+/*!*==========================================*/
+/*            RIGHT COLUMN*/
+/*==========================================*!*/
+
+/*.right-column{*/
+
+/*    display:flex;*/
+
+/*}*/
+
+
+/*!*==========================================*/
+/*            COMMON CARD*/
+/*==========================================*!*/
+
+/*.student-card,*/
+/*.teacher-card,*/
+/*.attendance-card,*/
+/*.report-card,*/
+/*.calendar-card,*/
+/*.distribution-card{*/
+
+/*    background:#fff;*/
+
+/*    border-radius:18px;*/
+
+/*    padding:22px;*/
+
+/*    box-shadow:0 8px 20px rgba(0,0,0,.08);*/
+
+/*}*/
+
+
+/*!*==========================================*/
+/*            CARD HEADER*/
+/*==========================================*!*/
+
+/*.card-header{*/
+
+/*    display:flex;*/
+
+/*    justify-content:space-between;*/
+
+/*    align-items:center;*/
+
+/*    margin-bottom:20px;*/
+
+/*    padding-bottom:15px;*/
+
+/*    border-bottom:1px solid #ececec;*/
+
+/*}*/
+
+
+/*.card-header h4{*/
+
+/*    margin:0;*/
+
+/*    font-size:20px;*/
+
+/*    font-weight:600;*/
+
+/*    color:#333;*/
+
+/*}*/
+
+
+/*!*==========================================*/
+/*            HEADER BUTTONS*/
+/*==========================================*!*/
+
+/*.header-buttons{*/
+
+/*    display:flex;*/
+
+/*    align-items:center;*/
+
+/*    gap:15px;*/
+
+/*}*/
+
+
+/*.view-all{*/
+
+/*    text-decoration:none;*/
+
+/*    color:#7b1e1e;*/
+
+/*    font-weight:600;*/
+
+/*    transition:.3s;*/
+
+/*}*/
+
+
+/*.view-all:hover{*/
+
+/*    color:#a32929;*/
+
+/*}*/
+
+
+/*!*==========================================*/
+/*            CREATE BUTTON*/
+/*==========================================*!*/
+
+/*.create-btn{*/
+
+/*    background:#7b1e1e;*/
+
+/*    color:white;*/
+
+/*    border:none;*/
+
+/*    padding:10px 18px;*/
+
+/*    border-radius:10px;*/
+
+/*    cursor:pointer;*/
+
+/*    transition:.3s;*/
+
+/*    font-size:14px;*/
+
+/*}*/
+
+
+/*.create-btn:hover{*/
+
+/*    background:#5d1414;*/
+
+/*}*/
+
+
+/*.create-btn i{*/
+
+/*    margin-right:6px;*/
+
+/*}*/
+
+/*!*==========================================*/
+/*        STUDENT GRID*/
+/*==========================================*!*/
+
+/*.student-grid{*/
+
+/*    display:grid;*/
+
+/*    grid-template-columns:repeat(3,1fr);*/
+
+/*    gap:20px;*/
+
+/*}*/
+
+
+
+/*!*==========================================*/
+/*        TEACHER GRID*/
+/*==========================================*!*/
+
+/*.teacher-grid{*/
+
+/*    display:grid;*/
+
+/*    grid-template-columns:repeat(3,1fr);*/
+
+/*    gap:20px;*/
+
+/*}*/
+
+
+
+/*!*==========================================*/
+/*        STUDENT PROFILE CARD*/
+/*==========================================*!*/
+
+/*.student-profile{*/
+
+/*    background:#fafafa;*/
+
+/*    border-radius:15px;*/
+
+/*    padding:20px;*/
+
+/*    text-align:center;*/
+
+/*    border:1px solid #ececec;*/
+
+/*    transition:0.3s;*/
+
+/*}*/
+
+
+/*.student-profile:hover{*/
+
+/*    transform:translateY(-5px);*/
+
+/*    box-shadow:0 10px 25px rgba(0,0,0,.10);*/
+
+/*}*/
+
+
+
+/*!*==========================================*/
+/*        STUDENT IMAGE*/
+/*==========================================*!*/
+
+/*.student-profile img{*/
+
+/*    width:80px;*/
+
+/*    height:80px;*/
+
+/*    object-fit:cover;*/
+
+/*    border-radius:50%;*/
+
+/*    margin-bottom:15px;*/
+
+/*    border:4px solid #f3f3f3;*/
+
+/*}*/
+
+
+
+/*!*==========================================*/
+/*        STUDENT TEXT*/
+/*==========================================*!*/
+
+/*.student-profile h5{*/
+
+/*    margin-bottom:6px;*/
+
+/*    font-size:17px;*/
+
+/*    font-weight:600;*/
+
+/*}*/
+
+
+/*.student-profile p{*/
+
+/*    color:#666;*/
+
+/*    margin-bottom:6px;*/
+
+/*    font-size:14px;*/
+
+/*}*/
+
+
+/*.student-profile span{*/
+
+/*    color:#999;*/
+
+/*    font-size:13px;*/
+
+/*}*/
+
+
+
+/*!*==========================================*/
+/*        TEACHER PROFILE CARD*/
+/*==========================================*!*/
+
+/*.teacher-profile{*/
+
+/*    background:#fafafa;*/
+
+/*    border-radius:15px;*/
+
+/*    padding:20px;*/
+
+/*    text-align:center;*/
+
+/*    border:1px solid #ececec;*/
+
+/*    transition:0.3s;*/
+
+/*}*/
+
+
+/*.teacher-profile:hover{*/
+
+/*    transform:translateY(-5px);*/
+
+/*    box-shadow:0 10px 25px rgba(0,0,0,.10);*/
+
+/*}*/
+
+
+
+/*!*==========================================*/
+/*        TEACHER IMAGE*/
+/*==========================================*!*/
+
+/*.teacher-profile img{*/
+
+/*    width:80px;*/
+
+/*    height:80px;*/
+
+/*    object-fit:cover;*/
+
+/*    border-radius:50%;*/
+
+/*    margin-bottom:15px;*/
+
+/*    border:4px solid #f3f3f3;*/
+
+/*}*/
+
+
+
+/*!*==========================================*/
+/*        TEACHER TEXT*/
+/*==========================================*!*/
+
+/*.teacher-profile h5{*/
+
+/*    margin-bottom:6px;*/
+
+/*    font-size:17px;*/
+
+/*    font-weight:600;*/
+
+/*}*/
+
+
+/*.teacher-profile p{*/
+
+/*    color:#666;*/
+
+/*    margin-bottom:6px;*/
+
+/*    font-size:14px;*/
+
+/*}*/
+
+
+/*.teacher-profile span{*/
+
+/*    color:#999;*/
+
+/*    font-size:13px;*/
+
+/*}*/
+
+/*!*==========================================*/
+/*        ATTENDANCE CARD*/
+/*==========================================*!*/
+
+/*.attendance-card{*/
+
+/*    display:flex;*/
+
+/*    flex-direction:column;*/
+
+/*}*/
+
+
+/*.attendance-content{*/
+
+/*    height:280px;*/
+
+/*    display:flex;*/
+
+/*    justify-content:center;*/
+
+/*    align-items:center;*/
+
+/*}*/
+
+
+/*.attendance-content canvas{*/
+
+/*    width:100% !important;*/
+
+/*    height:100% !important;*/
+
+/*}*/
+
+/*!*==========================================*/
+/*        Attendance Report Card*/
+/*==========================================*!*/
+
+/*.attendance-report{*/
+/*    display: flex;*/
+/*    gap: 25px;*/
+/*    align-items: stretch;*/
+/*}*/
+
+/*.attendance-summary{*/
+/*    flex: 1;*/
+/*    display: grid;*/
+/*    grid-template-columns: repeat(2, 1fr);*/
+/*    gap: 15px;*/
+/*}*/
+
+/*.attendance-graph{*/
+/*    flex: 1;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*}*/
+
+/*.attendance-graph canvas{*/
+/*    width: 100% !important;*/
+/*    height: 300px !important;*/
+/*}*/
+/*!*==========================================*/
+/*        Summary Cards*/
+/*==========================================*!*/
+
+/*.attendance-summary{*/
+
+/*    display:grid;*/
+/*    grid-template-columns:repeat(2,1fr);*/
+/*    gap:18px;*/
+
+/*}*/
+
+/*.attendance-box{*/
+
+/*    background:#fafafa;*/
+/*    border-radius:15px;*/
+/*    padding:20px;*/
+/*    display:flex;*/
+/*    align-items:center;*/
+/*    gap:15px;*/
+/*    transition:.3s;*/
+/*    border-left:5px solid #7B1113;*/
+
+/*}*/
+
+/*.attendance-box:hover{*/
+
+/*    transform:translateY(-4px);*/
+
+/*}*/
+
+/*.attendance-box .icon{*/
+
+/*    width:55px;*/
+/*    height:55px;*/
+/*    border-radius:50%;*/
+/*    display:flex;*/
+/*    justify-content:center;*/
+/*    align-items:center;*/
+/*    font-size:24px;*/
+/*    color:#fff;*/
+
+/*}*/
+
+/*.attendance-box h3{*/
+
+/*    margin:0;*/
+/*    font-size:28px;*/
+/*    font-weight:700;*/
+
+/*}*/
+
+/*.attendance-box p{*/
+
+/*    margin:4px 0 0;*/
+/*    color:#666;*/
+/*    font-size:14px;*/
+
+/*}*/
+
+/*!* Different Colors *!*/
+
+/*.total{*/
+
+/*    border-left-color:#2563eb;*/
+
+/*}*/
+
+/*.total .icon{*/
+
+/*    background:#2563eb;*/
+
+/*}*/
+
+/*.present{*/
+
+/*    border-left-color:#16a34a;*/
+
+/*}*/
+
+/*.present .icon{*/
+
+/*    background:#16a34a;*/
+
+/*}*/
+
+/*.absent{*/
+
+/*    border-left-color:#dc2626;*/
+
+/*}*/
+
+/*.absent .icon{*/
+
+/*    background:#dc2626;*/
+
+/*}*/
+
+/*.percentage{*/
+
+/*    border-left-color:#7B1113;*/
+
+/*}*/
+
+/*.percentage .icon{*/
+
+/*    background:#7B1113;*/
+
+/*}*/
+
+/*!*==========================================*/
+/*        Graph*/
+/*==========================================*!*/
+
+/*.attendance-graph{*/
+
+/*    background:#fff;*/
+/*    height:280px;*/
+/*    display:flex;*/
+/*    align-items:center;*/
+/*    justify-content:center;*/
+
+/*}*/
+
+/*.attendance-graph canvas{*/
+
+/*    width:100% !important;*/
+/*    height:260px !important;*/
+
+/*}*/
+
+/*!*==========================================*/
+/*        Responsive*/
+/*==========================================*!*/
+
+/*@media(max-width:992px){*/
+
+/*    .attendance-report{*/
+
+/*        grid-template-columns:1fr;*/
+
+/*    }*/
+
+/*}*/
+
+/*.attendance-summary{*/
+
+/*    display:grid;*/
+
+/*    grid-template-columns:1fr 1fr;*/
+
+/*    gap:15px;*/
+
+/*}*/
+
+
+/*.not-marked{*/
+
+/*    grid-column:1 / 3;*/
+
+/*}*/
+
+/*@media(max-width:576px){*/
+
+/*    .attendance-summary{*/
+
+/*        grid-template-columns:1fr;*/
+
+/*    }*/
+
+
+/*    .not-marked{*/
+
+/*        grid-column:1;*/
+
+/*    }*/
+
+/*}*/
+/*.attendance-graph{*/
+/*    height:300px;*/
+/*}*/
+
+/*.attendance-graph canvas{*/
+/*    width:100% !important;*/
+/*    height:100% !important;*/
+/*}*/
+
+
+/*!*==========================================*/
+/*        BOTTOM CARDS*/
+/*==========================================*!*/
+
+/*.bottom-cards{*/
+
+/*    display:grid;*/
+
+/*    grid-template-columns:1fr 1fr;*/
+
+/*    gap:25px;*/
+
+/*}*/
+
+
+
+/*!*==========================================*/
+/*        CALENDAR CARD*/
+/*==========================================*!*/
+
+/*.calendar-card{*/
+
+/*    display:flex;*/
+
+/*    flex-direction:column;*/
+
+/*}*/
+
+
+/*.card-header-custom{*/
+
+/*    margin-bottom:20px;*/
+
+/*}*/
+
+
+/*.card-header-custom h4{*/
+
+/*    margin:0;*/
+
+/*    font-size:20px;*/
+
+/*    font-weight:600;*/
+
+/*}*/
+
+
+/*#calendar{*/
+
+/*    width:100%;*/
+
+/*    min-height:380px;*/
+
+/*}*/
+
+
+
+/*!*==========================================*/
+/*        FULLCALENDAR*/
+/*==========================================*!*/
+
+/*.fc{*/
+
+/*    font-size:14px;*/
+
+/*}*/
+
+
+/*.fc-toolbar-title{*/
+
+/*    font-size:18px !important;*/
+
+/*    font-weight:600;*/
+
+/*}*/
+
+
+/*.fc-button{*/
+
+/*    background:#7b1e1e !important;*/
+
+/*    border:none !important;*/
+
+/*}*/
+
+
+/*.fc-button:hover{*/
+
+/*    background:#5d1414 !important;*/
+
+/*}*/
+
+
+/*.fc-daygrid-day-number{*/
+
+/*    color:#333;*/
+
+/*}*/
+
+
+
+/*!*==========================================*/
+/*        BOYS / GIRLS GRAPH*/
+/*==========================================*!*/
+
+/*.distribution-card{*/
+
+/*    display:flex;*/
+
+/*    flex-direction:column;*/
+
+/*}*/
+
+
+/*#genderChart{*/
+
+/*    width:100% !important;*/
+
+/*    height:380px !important;*/
+
+/*}*/
+
+/*!*==========================================*/
+/*            NOTICE BOARD*/
+/*==========================================*!*/
+
+/*.report-card{*/
+
+/*    height:100%;*/
+
+/*    min-height:1100px;*/
+
+/*    display:flex;*/
+
+/*    flex-direction:column;*/
+
+/*}*/
+
+
+/*.report-list{*/
+
+/*    display:flex;*/
+
+/*    flex-direction:column;*/
+
+/*    gap:18px;*/
+
+/*    margin-top:15px;*/
+
+/*}*/
+
+
+/*.report-item{*/
+
+/*    background:#fafafa;*/
+
+/*    border-left:5px solid #7b1e1e;*/
+
+/*    padding:15px;*/
+
+/*    border-radius:12px;*/
+
+/*    transition:.3s;*/
+
+/*}*/
+
+
+/*.report-item:hover{*/
+
+/*    transform:translateX(5px);*/
+
+/*    box-shadow:0 8px 18px rgba(0,0,0,.08);*/
+
+/*}*/
+
+
+/*.report-date{*/
+
+/*    display:inline-block;*/
+
+/*    background:#7b1e1e;*/
+
+/*    color:white;*/
+
+/*    font-size:12px;*/
+
+/*    padding:5px 10px;*/
+
+/*    border-radius:30px;*/
+
+/*    margin-bottom:10px;*/
+
+/*}*/
+
+
+/*.report-item h6{*/
+
+/*    margin-bottom:8px;*/
+
+/*    font-weight:600;*/
+
+/*}*/
+
+
+/*.report-item p{*/
+
+/*    margin:0;*/
+
+/*    color:#666;*/
+
+/*    font-size:14px;*/
+
+/*    line-height:1.6;*/
+
+/*}*/
+
+
+
+/*!*==========================================*/
+/*            SCROLLBAR*/
+/*==========================================*!*/
+
+/*::-webkit-scrollbar{*/
+
+/*    width:8px;*/
+
+/*    height:8px;*/
+
+/*}*/
+
+/*::-webkit-scrollbar-thumb{*/
+
+/*    background:#c5c5c5;*/
+
+/*    border-radius:20px;*/
+
+/*}*/
+
+/*::-webkit-scrollbar-thumb:hover{*/
+
+/*    background:#999;*/
+
+/*}*/
+
+
+
+/*!*==========================================*/
+/*            RESPONSIVE*/
+/*==========================================*!*/
+
+/*@media(max-width:1200px){*/
+
+/*    .dashboard-layout{*/
+
+/*        grid-template-columns:1fr;*/
+
+/*    }*/
+
+/*    .right-column{*/
+
+/*        order:2;*/
+
+/*    }*/
+
+/*    .report-card{*/
+
+/*        min-height:auto;*/
+
+/*    }*/
+
+/*}*/
+
+
+/*@media(max-width:992px){*/
+
+/*    .student-grid,*/
+/*    .teacher-grid{*/
+
+/*        grid-template-columns:repeat(2,1fr);*/
+
+/*    }*/
+
+/*    .bottom-cards{*/
+
+/*        grid-template-columns:1fr;*/
+
+/*    }*/
+
+/*}*/
+
+
+/*@media(max-width:768px){*/
+
+/*    .summary-cards{*/
+
+/*        grid-template-columns:1fr;*/
+
+/*    }*/
+
+/*    .student-grid,*/
+/*    .teacher-grid{*/
+
+/*        grid-template-columns:1fr;*/
+
+/*    }*/
+
+/*    .top-navbar{*/
+
+/*        flex-direction:column;*/
+
+/*        align-items:flex-start;*/
+
+/*        gap:20px;*/
+
+/*    }*/
+
+/*    .search-box{*/
+
+/*        width:100%;*/
+
+/*    }*/
+
+/*}*/
+
+
+/*@media(max-width:576px){*/
+
+/*    .main-content{*/
+
+/*        padding:15px;*/
+
+/*    }*/
+
+/*    .card-header{*/
+
+/*        flex-direction:column;*/
+
+/*        align-items:flex-start;*/
+
+/*        gap:15px;*/
+
+/*    }*/
+
+/*    .header-buttons{*/
+
+/*        width:100%;*/
+
+/*        justify-content:space-between;*/
+
+/*    }*/
+
+/*    .create-btn{*/
+
+/*        width:100%;*/
+
+/*    }*/
+
+/*}*/

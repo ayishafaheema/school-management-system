@@ -1,14 +1,37 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 
 from school_app import views, teacherView, studentView
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('student_dashboard', studentView.student_dashboard, name='student_dashboard'),
     path('login_view', views.login_view, name='login_view'),
+
+
+
+    # student url
+    path('student_dashboard', studentView.student_dashboard, name='student_dashboard'),
+    path('add_student', studentView.add_student, name='student_add'),
+    path("edit_student_profile/", studentView.edit_student_profile, name="edit_student_profile"),
+    path("student_attendance", studentView.student_attendance, name='student_attendance'),
+
+
+
+    # teacher url
     path('teacher_dashboard', teacherView.teacher_dashboard, name='teacher_dashboard'),
+    path('add_teacher', teacherView.add_teacher, name='teacher_add'),
+    path('mark_attendance', teacherView.mark_attendance, name='teacher_mark'),
+
+
+
+    # admin url
     path('admin_dashboard', views.admin_dashboard, name='admin_dashboard'),
-    path('add_teacher',teacherView.add_teacher, name='teacher_add'),
-    path('add_student',studentView.add_student, name='student_add'),
+    path('class_wise',views.class_wise_attendance,name='class_wise'),
+
+
+
 
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

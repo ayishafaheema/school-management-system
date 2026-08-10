@@ -1,44 +1,6 @@
+{% extends "student/student_base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>Student Dashboard</title>
-
-    <!-- Bootstrap -->
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-          rel="stylesheet">
-
-    <!-- Bootstrap Icons -->
-
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-    <!-- Google Font -->
-
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet">
-
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css" rel="stylesheet">
-
-    <link rel="stylesheet"
-          href="{% static 'css/student_dashboard.css' %}">
-
-</head>
+{% block content %}
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
 
 <script>
@@ -92,118 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 </script>
-<body>
-
-<div class="wrapper">
-
-    <!-- ================= Sidebar ================= -->
-
-    <aside class="sidebar">
-
-        <div class="logo">
-
-            <img src="{% static 'images/logo.png' %}" alt="logo">
-
-            <h4>Student Portal</h4>
-
-        </div>
-
-        <ul>
-
-            <li class="active">
-
-                <i class="bi bi-grid-fill"></i>
-
-                Dashboard
-
-            </li>
-
-            <li>
-
-                <i class="bi bi-bar-chart-fill"></i>
-
-                My Result
-
-            </li>
-
-            <li>
-
-                <i class="bi bi-upload"></i>
-
-                Submission
-
-            </li>
-
-            <li>
-
-                <i class="bi bi-calendar-event-fill"></i>
-
-                Exams
-
-            </li>
-
-            <li>
-
-                <i class="bi bi-gear-fill"></i>
-
-                Settings
-
-            </li>
-
-            <li>
-
-                <i class="bi bi-box-arrow-right"></i>
-
-                Logout
-
-            </li>
-
-        </ul>
-
-    </aside>
-
-    <!-- ================= Main ================= -->
-
-    <main class="main-content">
-
-        <!-- Header -->
-
-        <div class="top-header">
-
-            <div>
-
-                <h2>Welcome Back, {{ student.name }} 👋</h2>
-
-                <p>Let's make today another successful learning day.</p>
-
-            </div>
-
-            <div class="header-right">
-
-                <div class="search-box">
-
-                    <i class="bi bi-search"></i>
-
-                    <input type="text"
-                           placeholder="Search...">
-
-                </div>
-
-                <div class="notification">
-
-                    <i class="bi bi-bell-fill"></i>
-
-                </div>
-
-                <img src="{% static 'images/student.jpg' %}"
-                     class="profile-photo"
-                     alt="student">
-
-            </div>
-
-        </div>
-
-        <!-- Statistics -->
+<!-- Statistics -->
 
         <div class="row g-4 mt-3">
 
@@ -213,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     <i class="bi bi-check-circle-fill"></i>
 
-                    <h3>92%</h3>
+                    <h3>{{ attendance_percentage }}%</h3>
 
                     <p>Attendance</p>
 
@@ -279,10 +130,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 <h4>Your Profile</h4>
 
-                <button class="btn edit-btn">
+                <a href="{% url 'edit_student_profile' %}" class="btn edit-btn">
                     <i class="bi bi-pencil-square"></i> Edit
-                </button>
-
+                </a>
             </div>
 
             <div class="row align-items-center mt-3">
@@ -291,9 +141,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 <div class="col-md-4 text-center">
 
-                    <img src="{% static 'images/student.jpg' %}"
-                         class="student-image"
-                         alt="Student">
+                    {% if student.image %}
+                        <img src="{{ student.image.url }}"
+                             class="student-image"
+                             alt="Student">
+                    {% else %}
+                        <img src="{% static 'images/student.jpg' %}"
+                             class="student-image"
+                             alt="Student">
+                    {% endif %}
 
                 </div>
 
@@ -305,12 +161,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         <div class="col-md-6 profile-info">
                             <label>Name</label>
-                            <p>{{ student.name }}</p>
+                            <p>{{ student.user.username }}</p>
                         </div>
 
                         <div class="col-md-6 profile-info">
                             <label>Roll Number</label>
-                            <p>{{ student.roll_number }}</p>
+                            <p>{{ student.roll_no }}</p>
                         </div>
 
                         <div class="col-md-6 profile-info">
@@ -325,11 +181,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         <div class="col-md-6 profile-info">
                             <label>Class</label>
-                            <p>{{ student.class_name }}</p>
+                            <p>{{ student.student_class }}</p>
                         </div>
 
                         <div class="col-md-6 profile-info">
-                            <label>Email</label>
+                            <p>{{ student.user.email }}</p>
                             <p>{{ student.email }}</p>
                         </div>
 
@@ -340,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         <div class="col-md-6 profile-info">
                             <label>Academic Year</label>
-                            <p>2026 - 2027</p>
+                            <p>{{ student.academic_year }}</p>
                         </div>
 
                         <div class="col-12 profile-info">
@@ -366,28 +222,34 @@ document.addEventListener('DOMContentLoaded', function () {
 
             <div class="attendance-circle">
 
-                <h2>92%</h2>
+            <h2>{{ attendance_percentage }}%</h2>
 
             </div>
 
             <div class="attendance-details">
 
                 <div>
-                    <h5>180</h5>
+            <h5>{{ present }}</h5>
                     <span>Present</span>
                 </div>
 
                 <div>
-                    <h5>10</h5>
+            <h5>{{ absent }}</h5>
                     <span>Absent</span>
                 </div>
 
                 <div>
-                    <h5>2</h5>
+            <h5>{{ late }}</h5>
                     <span>Late</span>
                 </div>
 
             </div>
+            <br>
+            <br>
+            <a href="{% url 'student_attendance' %}" class="btn edit-btn">
+                    </i> View Attendance History
+                </a>
+
 
         </div>
 
@@ -596,10 +458,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
             <div class="teacher">
 
-                <img src="{% static 'images/teacher1.jpg' %}" alt="Teacher">
-
+                {% if teacher and teacher.image %}
+                    <img src="{{ teacher.image.url }}"
+                         class="teacher-profile"
+                         alt="Teacher">
+                {% else %}
+                    <p>No teacher image available.</p>
+                {% endif %}
                 <div>
-                    <h6>Mrs. Amina</h6>
+                    {% if teacher %}
+                        <h6>{{ teacher.user.username }}</h6>
+                    {% else %}
+                        <h6>No teacher assigned</h6>
+                    {% endif %}
                     <p>Class Teacher</p>
 
                     <div class="teacher-buttons">
@@ -758,17 +629,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         </div>
 
-</div>
 
-</div>
-
-
-    </main>
-
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-</body>
-
-</html>
+{% endblock %}

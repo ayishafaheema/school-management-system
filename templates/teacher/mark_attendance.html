@@ -1,0 +1,270 @@
+{% extends "teacher/teacher_base.html" %}
+{% load static %}
+{% block content %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/mark_attendance.css' %}">
+{% endblock %}
+{% if attendance_completed %}
+
+
+    <div class="attendance-success-card">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+        <h2>Attendance Completed</h2>
+
+        <p>
+            You have successfully marked today's attendance.
+        </p>
+
+        <div class="success-info">
+
+            <div class="success-item">
+                <span>Date</span>
+                <strong>{{ today|date:"d M Y" }}</strong>
+            </div>
+
+            <div class="success-item">
+                <span>Class</span>
+                <strong>{{ teacher.get_assigned_class_display }}</strong>
+            </div>
+
+        </div>
+
+        <div class="success-note">
+            Attendance has already been recorded for this class.
+            Please return tomorrow to mark a new attendance.
+        </div>
+        <div class="success-actions">
+
+    <a href="#" id="toggleAttendance" class="view-attendance-btn">
+        👁 View Today's Attendance
+    </a>
+
+</div>
+</div>
+    <!-- ADD THE TABLE HERE -->
+
+<div id="attendanceTable">
+
+    <h3>Today's Attendance</h3>
+
+    <table class="attendance-table">
+
+        <thead>
+
+            <tr>
+                <th>Roll No</th>
+                <th>Student</th>
+                <th>Status</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for attendance in today_attendance %}
+
+            <tr>
+
+                <td>{{ attendance.student.roll_no }}</td>
+
+                <td>
+
+                    {% if attendance.student.user.first_name %}
+                        {{ attendance.student.user.first_name }}
+                        {{ attendance.student.user.last_name }}
+                    {% else %}
+                        {{ attendance.student.user.username }}
+                    {% endif %}
+
+                </td>
+
+                <td>{{ attendance.get_status_display }}</td>
+
+            </tr>
+
+            {% empty %}
+
+            <tr>
+
+                <td colspan="3">
+                    No attendance records found.
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+
+
+    </div>
+
+
+
+    </div>
+
+
+
+{% else %}
+
+    <div class="attendance-container">
+
+            <!-- Header -->
+            <div class="page-header">
+                <div>
+                    <h2>📋 Mark Attendance</h2>
+                    <p>Record today's attendance for your assigned class.</p>
+                </div>
+            </div>
+
+            <!-- Info Card -->
+            <div class="attendance-info">
+
+                <div class="info-box">
+                    <span class="label">Today's Date</span>
+                    <h3>{{ today|date:"d M Y" }}</h3>
+                </div>
+
+                <div class="info-box">
+                    <span class="label">Assigned Class</span>
+                    <h3>{{ teacher.get_assigned_class_display }}</h3>
+                </div>
+
+            </div>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="students-card">
+
+                    <div class="card-header">
+                        <h3>Students</h3>
+                        <span>{{ students|length }} Students</span>
+                    </div>
+
+                    {% for student in students %}
+
+                    <div class="student-row">
+
+                        <div class="student-name">
+
+                            <span class="number">{{ forloop.counter }}</span>
+
+                            {% if student.image %}
+                                <img class="student-img" src="{{ student.image.url }}" alt="{{ student.user.username }}">
+                            {% else %}
+                                <div class="avatar">
+                                    {{ student.user.username|first|upper }}
+                                </div>
+                            {% endif %}
+
+                            <div class="student-details">
+
+                                    <h4>
+                                    {% if student.user.first_name %}
+                                        {{ student.user.first_name }}
+                                        {{ student.user.last_name }}
+                                    {% else %}
+                                        {{ student.user.username }}
+                                    {% endif %}
+                                    </h4>
+                                <p>Roll No: {{ student.roll_no }}</p>
+                            </div>
+
+                        </div>
+                        <div class="attendance-options">
+
+                            <label class="status present">
+                                <input type="radio"
+                                       name="attendance_{{ student.id }}"
+                                       value="P"
+                                       required>
+                                Present
+                            </label>
+
+                            <label class="status absent">
+                                <input type="radio"
+                                       name="attendance_{{ student.id }}"
+                                       value="A">
+                                Absent
+                            </label>
+
+                            <label class="status late">
+                                <input type="radio"
+                                       name="attendance_{{ student.id }}"
+                                       value="L">
+                                Late
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                    {% empty %}
+
+                    <div class="empty">
+                        No students assigned to your class.
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+                {% if students %}
+                <div>
+                    <a href="{% url 'mark_attendance' %}" class="save-btn">
+                    Save Attendance
+                </a>
+
+                </div>
+
+<!--                <div class="submit-area">-->
+<!--                    <button type="submit" class="save-btn" >-->
+<!--                        Save Attendance-->
+<!--                    </button>-->
+<!--                </div>-->
+                {% endif %}
+
+            </form>
+
+        </div>
+
+{% endif %}
+        <script>
+
+document.getElementById("toggleAttendance").onclick = function(e){
+
+    e.preventDefault();
+
+    let table = document.getElementById("attendanceTable");
+
+    if(table.style.display === "block"){
+
+        table.style.display="none";
+
+        this.innerHTML="👁 View Today's Attendance";
+
+    }
+    else{
+
+        table.style.display="block";
+
+        this.innerHTML="🔼 Hide Attendance";
+
+    }
+
+}
+
+</script>
+{% endblock %}

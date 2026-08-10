@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Teacher Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/teacher_dashboard.css' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- ================= Sidebar ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h2>EduPortal</h2>
+
+            <p>Teacher Panel</p>
+
+        </div>
+
+        <nav>
+
+            <ul>
+
+                <li class="active">
+                    Dashboard
+                </li>
+
+                <li>
+                    Assignments
+                </li>
+
+                <li>
+                    Students
+                </li>
+
+                <li>
+                    Calendar
+                </li>
+
+                <li>
+                    Reports
+                </li>
+
+                <li>
+                    Settings
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </aside>
+
+    <!-- ================= Main ================= -->
+
+    <main class="main">
+
+        <!-- Header -->
+
+        <header class="header">
+
+            <div class="search-box">
+
+                <input
+                type="text"
+                placeholder="Search students, assignments...">
+
+            </div>
+
+            <div class="header-right">
+
+                <div class="notification">
+
+                    🔔
+
+                </div>
+
+                <div class="profile">
+
+                    <div class="profile-img">
+
+                        {% if teacher.image %}
+                            <img src="{{ teacher.image.url }}" alt="Profile">
+                        {% else %}
+                            👤
+                        {% endif %}
+
+
+                    </div>
+
+                    <div>
+
+                        <h4>{{teacher.user.username}}</h4>
+
+                        <p>{{teacher.department}}</p>
+                        <p>{{ teacher.get_assigned_class_display }}</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+        {% block content %}
+            {% endblock %}
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,176 @@
+```html
+{% extends "student/student_base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/student_attendance.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="attendance-page">
+
+        <!-- Page Header -->
+        <div class="page-header">
+
+            <div>
+                <h2>📋 Attendance History</h2>
+                <p>View your attendance records and attendance statistics.</p>
+            </div>
+
+            <a href="{% url 'student_dashboard' %}" class="back-btn">
+                ← Back to Dashboard
+            </a>
+        </div>
+
+    <!-- Summary Cards -->
+    <div class="summary-grid">
+
+        <div class="summary-card percentage">
+            <h3>{{ attendance_percentage }}%</h3>
+            <p>Attendance</p>
+        </div>
+
+        <div class="summary-card present">
+            <h3>{{ present }}</h3>
+            <p>Present</p>
+        </div>
+
+        <div class="summary-card absent">
+            <h3>{{ absent }}</h3>
+            <p>Absent</p>
+        </div>
+
+        <div class="summary-card late">
+            <h3>{{ late }}</h3>
+            <p>Late</p>
+        </div>
+
+    </div>
+
+    <!-- Attendance Table -->
+    <div class="table-card">
+
+        <div class="table-header">
+
+            <h3>Attendance Records</h3>
+
+            <input
+                type="text"
+                id="searchAttendance"
+                placeholder="🔍 Search by date, day or status">
+
+        </div>
+
+        <table class="attendance-table">
+
+            <thead>
+
+                <tr>
+                    <th>Date</th>
+                    <th>Day</th>
+                    <th>Status</th>
+                    <th>Marked By</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="attendanceBody">
+
+                {% for record in attendance %}
+
+                <tr>
+
+                    <td>{{ record.date|date:"d M Y" }}</td>
+
+                    <td>{{ record.date|date:"l" }}</td>
+
+                    <td>
+
+                        {% if record.status == "P" %}
+
+                            <span class="badge present-badge">
+                                🟢 Present
+                            </span>
+
+                        {% elif record.status == "A" %}
+
+                            <span class="badge absent-badge">
+                                🔴 Absent
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge late-badge">
+                                🟡 Late
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        {% if record.teacher.user.first_name %}
+
+                            {{ record.teacher.user.first_name }}
+                            {{ record.teacher.user.last_name }}
+
+                        {% else %}
+
+                            {{ record.teacher.user.username }}
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="4" class="empty-row">
+                        No attendance records available.
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script>
+
+const searchInput = document.getElementById("searchAttendance");
+
+if (searchInput) {
+
+    searchInput.addEventListener("keyup", function () {
+
+        const value = this.value.toLowerCase();
+
+        const rows = document.querySelectorAll("#attendanceBody tr");
+
+        rows.forEach(function (row) {
+
+            row.style.display = row.innerText.toLowerCase().includes(value)
+                ? ""
+                : "none";
+
+        });
+
+    });
+
+}
+
+</script>
+
+{% endblock %}
+```

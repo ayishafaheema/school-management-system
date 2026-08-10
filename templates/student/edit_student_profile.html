@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="mb-3">
+        <label class="form-label">Phone Number</label>
+        {{ form.phone }}
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Address</label>
+        {{ form.address }}
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Profile Image</label>
+
+        {% if student.image %}
+            <img src="{{ student.image.url }}" width="120" class="mb-2 rounded">
+        {% endif %}
+
+        {{ form.image }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Update Profile
+    </button>
+</form>
+
+</body>
+</html>

@@ -15,6 +15,8 @@ class TeacherForm(forms.ModelForm):
             "password",
             "department",
             "qualification",
+            "assigned_class",
+            "image"
         ]
 
 class StudentForm(forms.ModelForm):
@@ -22,12 +24,24 @@ class StudentForm(forms.ModelForm):
     password=forms.CharField(
         widget=forms.PasswordInput()
     )
+
     class Meta:
         model = Student
         fields = [
             "username",
             "password",
             "student_class",
-            "roll_no"
+            "roll_no",
+            "student_id",
+            "address",
+            "academic_year",
+            "phone",
+            "department",
+            "image",
 
         ]
+
+class StudentProfileForm(forms.ModelForm):
+    class Meta:
+        model = Student
+        fields = ["phone", "address", "image"]

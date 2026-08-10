@@ -1,123 +1,7 @@
-
-<!DOCTYPE html>
+{% extends "teacher/teacher_base.html" %}
 {% load static %}
-<html lang="en">
-
-<head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Teacher Dashboard</title>
-
-    <link rel="stylesheet"
-          href="{% static 'css/teacher_dashboard.css' %}">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-</head>
-
-<body>
-
-<div class="layout">
-
-    <!-- ================= Sidebar ================= -->
-
-    <aside class="sidebar">
-
-        <div class="logo">
-
-            <h2>EduPortal</h2>
-
-            <p>Teacher Panel</p>
-
-        </div>
-
-        <nav>
-
-            <ul>
-
-                <li class="active">
-                    Dashboard
-                </li>
-
-                <li>
-                    Assignments
-                </li>
-
-                <li>
-                    Students
-                </li>
-
-                <li>
-                    Calendar
-                </li>
-
-                <li>
-                    Reports
-                </li>
-
-                <li>
-                    Settings
-                </li>
-
-            </ul>
-
-        </nav>
-
-    </aside>
-
-    <!-- ================= Main ================= -->
-
-    <main class="main">
-
-        <!-- Header -->
-
-        <header class="header">
-
-            <div class="search-box">
-
-                <input
-                type="text"
-                placeholder="Search students, assignments...">
-
-            </div>
-
-            <div class="header-right">
-
-                <div class="notification">
-
-                    🔔
-
-                </div>
-
-                <div class="profile">
-
-                    <div class="profile-img">
-
-                        👤
-
-                    </div>
-
-                    <div>
-
-                        <h4>Sarah Thomas</h4>
-
-                        <p>Python Lecturer</p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </header>
-
-        <!-- Welcome Banner -->
-
-        <section class="welcome">
+{% block content %}
+<section class="welcome">
 
             <div>
 
@@ -142,6 +26,7 @@
         <!-- Dashboard starts here -->
 
         <div class="dashboard-grid">
+
 
     <!-- LEFT SIDE -->
     <div class="left-column">
@@ -227,23 +112,78 @@
                 <p>Present : <strong>118</strong></p>
 
                 <p>Absent : <strong>10</strong></p>
+                <br>
+                <a href="{% url 'teacher_mark' %}" class="attendance-btn">
+                    Mark Attendance
+                </a>
 
             </section>
 
         </div>
 
-        <!-- Student Performance -->
-        <section class="card performance-card">
+<!-- Students -->
+<section class="card performance-card">
 
-            <div class="section-header">
+    <div class="section-header">
+        <h2>My Students</h2>
+        <a href="#">View All</a>
+    </div>
 
-                <h2>Student Performance</h2>
+    <div class="class-info">
+        <span><strong>Class:</strong> {{ teacher.get_assigned_class_display }}</span>
+        <span><strong>{{ student_count }}</strong> Students</span>
+    </div>
 
-                <a href="#">View All</a>
+    <div class="student-list">
+
+        {% for student in students %}
+
+        <div class="student-item">
+
+            <div class="student-left">
+
+                <div class="student-number">
+                    {{ forloop.counter|stringformat:"02d" }}
+                </div>
+
+                {% if student.image %}
+                    <img src="{{ student.image.url }}"
+                    class="student-img"
+                     alt="Student">
+                {% else %}
+                    <div class="student-img placeholder">
+                        {{ student.user.username}}
+                    </div>
+
+                {% endif %}
+
+
+                <div class="student-details">
+                    <h5>{{ student.user.username }}</h5>
+                    <p>Roll No : {{ student.roll_no }}</p>
+                </div>
 
             </div>
 
-        </section>
+            <div class="student-right">
+                <a href="#" class="student-btn">
+                    View
+                </a>
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="no-students">
+            No students assigned to this class.
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
 
     </div>
 
@@ -325,11 +265,6 @@
     </div>
 
 </div>
+<link rel="stylesheet" href="{% static 'css/mark_attendance.css' %}">
 
-    </main>
-
-</div>
-
-</body>
-
-</html>
+{% endblock %}

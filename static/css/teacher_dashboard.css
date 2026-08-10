@@ -229,25 +229,22 @@ HEADER
 }
 
 .profile-img{
-
     width:48px;
-
     height:48px;
-
-    background:var(--primary);
-
-    color:white;
-
     border-radius:50%;
-
+    overflow:hidden;
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
+    background:var(--primary);
+    color:white;
 }
 
+.profile-img img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
 .profile h4{
 
     color:#222;
@@ -745,7 +742,151 @@ Dashboard Placeholder
 ==================================*/
 
 .performance-card{
+    min-height:420px;
+    padding:25px;
+}
 
-    min-height:350px;
+.class-info{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:20px 0;
+    color:#666;
+    font-weight:600;
+}
+
+.student-list{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.student-item{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:14px 18px;
+
+    border-radius:14px;
+
+    background:#f8f9fa;
+
+    transition:.3s;
+}
+
+.student-item:hover{
+
+    background:#f1f3f5;
+
+    transform:translateY(-2px);
+
+}
+
+.student-left{
+
+    display:flex;
+    align-items:center;
+    gap:18px;
+
+}
+
+.student-number{
+
+    width:38px;
+    height:38px;
+
+    background:#65101d;
+
+    color:white;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-weight:bold;
+}
+
+.student-img{
+
+    width:55px;
+    height:55px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:3px solid #fff;
+
+    box-shadow:0 3px 8px rgba(0,0,0,.15);
+
+}
+
+.student-details h5{
+
+    margin:0;
+    font-size:17px;
+    font-weight:600;
+
+}
+
+.student-details p{
+
+    margin:4px 0 0;
+    color:#777;
+    font-size:14px;
+
+}
+
+.student-btn{
+
+    background:#65101d;
+
+    color:white;
+
+    padding:8px 20px;
+
+    border-radius:10px;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.student-btn:hover{
+
+    background:#65101d;
+
+}
+
+.no-students{
+
+    text-align:center;
+    padding:40px;
+    color:gray;
+
+}
+.attendance-btn{
+    background:#65101d;
+
+    color:white;
+
+    padding:8px 20px;
+
+    border-radius:10px;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.3s;
+
+
 
 }
