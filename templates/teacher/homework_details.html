@@ -1,0 +1,584 @@
+{% extends "teacher/teacher_base.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+
+/* ================= HOMEWORK DETAILS ================= */
+
+.homework-details-page {
+    padding: 30px;
+}
+
+
+/* ================= HEADER ================= */
+
+.details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.details-header h2 {
+    margin: 0;
+    color: #6b0f1a;
+    font-size: 26px;
+}
+
+.details-header p {
+    margin: 6px 0 0;
+    color: #888;
+    font-size: 14px;
+}
+
+
+/* Back Button */
+
+.back-btn {
+    text-decoration: none;
+    color: #6b0f1a;
+    border: 1px solid #6b0f1a;
+
+    padding: 9px 16px;
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background: #6b0f1a;
+    color: white;
+}
+
+
+/* ================= HOMEWORK INFORMATION ================= */
+
+.homework-info-card {
+    background: white;
+
+    border-radius: 15px;
+    padding: 28px;
+
+    border-top: 5px solid #6b0f1a;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+
+    margin-bottom: 30px;
+}
+
+
+/* Subject */
+
+.homework-subject {
+    display: inline-block;
+
+    background: #f8e9eb;
+    color: #6b0f1a;
+
+    padding: 6px 14px;
+    border-radius: 20px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    margin-bottom: 15px;
+}
+
+
+/* Title */
+
+.homework-info-card h3 {
+    margin: 0 0 12px;
+    font-size: 24px;
+    color: #333;
+}
+
+
+/* Description */
+
+.homework-description {
+    color: #777;
+    line-height: 1.7;
+
+    max-width: 800px;
+}
+
+
+/* Dates */
+
+.homework-dates {
+    display: flex;
+    gap: 40px;
+
+    margin-top: 25px;
+    padding-top: 20px;
+
+    border-top: 1px solid #eee;
+}
+
+.date-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.date-label {
+    font-size: 12px;
+    color: #999;
+}
+
+.date-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: #444;
+}
+
+
+/* ================= STUDENTS ================= */
+
+.students-section {
+    background: white;
+
+    border-radius: 15px;
+    padding: 25px;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+}
+
+
+.students-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.students-section-header h3 {
+    margin: 0;
+    color: #333;
+}
+
+
+/* Student Count */
+
+.student-count {
+    background: #f8e9eb;
+    color: #6b0f1a;
+
+    padding: 6px 12px;
+    border-radius: 20px;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* Student List */
+
+.student-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+
+.student-item {
+    border: 1px solid #eee;
+    border-radius: 10px;
+
+    padding: 15px 18px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    transition: 0.3s;
+}
+
+.student-item:hover {
+    border-color: #d6aeb4;
+    transform: translateY(-2px);
+}
+
+
+/* Student Information */
+
+.student-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+/* Student Icon */
+
+.student-avatar {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    background: #f8e9eb;
+    color: #6b0f1a;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 700;
+}
+
+
+/* Student Name */
+
+.student-name {
+    margin: 0;
+    color: #333;
+    font-size: 15px;
+}
+
+.student-roll {
+    margin: 4px 0 0;
+    color: #999;
+    font-size: 12px;
+}
+
+
+/* ================= STATUS ================= */
+
+.status-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+
+/* Not Submitted */
+
+.status-not-submitted {
+    background: #fff3f3;
+    color: #b42318;
+
+    padding: 7px 12px;
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* Submitted */
+
+.status-submitted {
+    background: #edf7ee;
+    color: #237a3b;
+
+    padding: 7px 12px;
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* Mark Button */
+
+.mark-status-btn {
+    background: #6b0f1a;
+    color: white;
+
+    border: none;
+    border-radius: 7px;
+
+    padding: 8px 14px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.mark-status-btn:hover {
+    background: #4d0810;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 700px) {
+
+    .homework-details-page {
+        padding: 20px;
+    }
+
+    .details-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .homework-dates {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .student-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .status-section {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+}
+
+</style>
+
+
+<div class="homework-details-page">
+
+
+    <!-- ================= HEADER ================= -->
+
+    <div class="details-header">
+
+        <div>
+
+            <h2>Homework Details</h2>
+
+            <p>
+                View homework information and student submission status.
+            </p>
+
+        </div>
+
+
+        <a href="{% url 'view_all_homework' %}"
+           class="back-btn">
+
+            <i class="bi bi-arrow-left"></i>
+            Back to Homework
+
+        </a>
+
+    </div>
+
+
+
+    <!-- ================= HOMEWORK INFORMATION ================= -->
+
+    <div class="homework-info-card">
+
+        <span class="homework-subject">
+
+            {{ homework.subject }}
+
+        </span>
+
+
+        <h3>
+
+            {{ homework.title }}
+
+        </h3>
+
+
+        <p class="homework-description">
+
+            {{ homework.description }}
+
+        </p>
+
+
+        <div class="homework-dates">
+
+
+            <div class="date-item">
+
+                <span class="date-label">
+
+                    Assigned Date
+
+                </span>
+
+                <span class="date-value">
+
+                    {{ homework.assigned_date }}
+
+                </span>
+
+            </div>
+
+
+            <div class="date-item">
+
+                <span class="date-label">
+
+                    Due Date
+
+                </span>
+
+                <span class="date-value">
+
+                    {{ homework.due_date }}
+
+                </span>
+
+            </div>
+
+
+            <div class="date-item">
+
+                <span class="date-label">
+
+                    Class
+
+                </span>
+
+                <span class="date-value">
+
+                    {{ homework.assigned_class }}
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= STUDENT STATUS ================= -->
+
+    <div class="students-section">
+
+
+        <div class="students-section-header">
+
+            <h3>Student Submissions</h3>
+
+            <span class="student-count">
+
+                {{ students.count }} Students
+
+            </span>
+
+        </div>
+
+
+
+        <div class="student-list">
+
+
+            {% for student in students %}
+
+            <div class="student-item">
+
+
+                <!-- Student Information -->
+
+                <div class="student-info">
+
+                    <div class="student-avatar">
+
+                        {{ student.user.username|slice:":1"|upper }}
+
+                    </div>
+
+
+                    <div>
+
+                        <h4 class="student-name">
+
+                            {{ student.user.username }}
+
+                        </h4>
+
+
+                        <p class="student-roll">
+
+                            Roll No: {{ student.roll_no }}
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Status -->
+
+                <div class="status-section">
+
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <input
+                            type="hidden"
+                            name="student_id"
+                            value="{{ student.id }}"
+                        >
+
+                        {% if student.homework_status == "Y" %}
+
+                            <span class="status-submitted">
+                                Submitted
+                            </span>
+
+                            <button
+                                type="submit"
+                                name="status"
+                                value="N"
+                                class="mark-status-btn">
+                                Mark Not Submitted
+                            </button>
+
+                        {% else %}
+
+                            <span class="status-not-submitted">
+                                Not Submitted
+                            </span>
+
+                            <button
+                                type="submit"
+                                name="status"
+                                value="Y"
+                                class="mark-status-btn">
+                                Mark Submitted
+                            </button>
+
+                        {% endif %}
+
+                    </form>
+
+                </div>
+            </div>
+
+
+            {% empty %}
+
+            <p>No students found in this class.</p>
+
+            {% endfor %}
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+{% endblock %}

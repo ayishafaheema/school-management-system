@@ -2,7 +2,10 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
 from school_app.forms import StudentForm, StudentProfileForm
-from school_app.models import LoginData, Student, Teacher, Attendance
+from school_app.models import  Student, Teacher, Attendance
+from school_app.search import StudentFilter
+from school_app.services.attendance import student_attendance_history
+from school_app.services.student import create_student
 
 
 @login_required(login_url="login_view")
@@ -11,34 +14,27 @@ def student_dashboard(request):
     if request.user.role != "STUDENT":
         return redirect("login_view")
     student = Student.objects.get(user=request.user)
-    attendance = Attendance.objects.filter(student=student)
 
-    total = attendance.count()
-    present = attendance.filter(status="P").count()
-    absent = attendance.filter(status="A").count()
-    late = attendance.filter(status="L").count()
 
-    if total == 0:
-        attendance_percentage = 0
-    else:
-        attendance_percentage = int(((present + late) / total) * 100)
+    attendance_percentage, total, present, absent, late = student_attendance_history(student)
 
     teacher = Teacher.objects.filter(
         assigned_class=student.student_class
     ).first()
 
+    context = {
+        "student":student,
+        "teacher": teacher,
+        "attendance_percentage":attendance_percentage,
+        "present":present,
+        "absent":absent,
+        "late":late,
+        "total":total,
 
-    return render(request, "student/student_dashboard2.html",
-                  {
-                      "student": student,
-                      "teacher": teacher,
-                      "attendance_percentage": attendance_percentage,
-                      "present": present,
-                      "absent": absent,
-                      "late": late,
-                  }
-    )
 
+    }
+
+    return render(request,"student/student_dashboard2.html",context)
 
 def add_student(request,):
 
@@ -47,37 +43,10 @@ def add_student(request,):
         form = StudentForm(request.POST, request.FILES)
 
         if form.is_valid():
-
-            username = form.cleaned_data["username"]
-            password = form.cleaned_data["password"]
-            student_class = form.cleaned_data["student_class"]
-            roll_no = form.cleaned_data["roll_no"]
-            student_id = form.cleaned_data["student_id"]
-            address = form.cleaned_data["address"]
-            academic_year = form.cleaned_data["academic_year"]
-            phone=form.cleaned_data["phone"]
-            department = form.cleaned_data["department"]
-            image = form.cleaned_data["image"]
-
-            user = LoginData(
-                username=username,
-                role="STUDENT"
+            student_created = create_student(
+                form.cleaned_data
             )
 
-            user.set_password(password)
-            user.save()
-
-            Student.objects.create(
-                user=user,
-                student_class=student_class,
-                roll_no=roll_no,
-                student_id=student_id,
-                address=address,
-                academic_year=academic_year,
-                phone=phone,
-                department=department,
-                image=image,
-            )
             return redirect("admin_dashboard")
 
     else:
@@ -93,31 +62,49 @@ def edit_student_profile(request):
     student = Student.objects.get(user=request.user)
 
     if request.method == "POST":
-        form = StudentProfileForm(request.POST, request.FILES, instance=student)
+        form = StudentProfileForm(
+            request.POST,
+            request.FILES,
+            instance=student
+        )
+
         if form.is_valid():
             form.save()
             return redirect("student_dashboard")
+
     else:
-        form = StudentForm(instance=student)
+        form = StudentProfileForm(instance=student)
 
-    return render(request, "student/edit_student_profile.html", {"form": form,"student": student})
+    return render(
+        request,
+        "student/edit_student_profile.html",
+        {
+            "form": form,
+            "student": student
+        }
+    )
 
-
+@login_required(login_url="login_view")
 def student_attendance(request):
+
     student = Student.objects.get(user=request.user)
-    attendance = Attendance.objects.filter(student=student).order_by("-date")
-    total=attendance.count()
-    present=attendance.filter(status="P").count()
-    absent=attendance.filter(status="A").count()
-    late=attendance.filter(status="L").count()
-    if total==0:
-        attendance_percentage=0
-    else:
-        attendance_percentage=int((present+late)/total*100)
 
-    return render(request, "student/student_attendance.html",{"attendance_percentage":attendance_percentage,
-                                                              "present":present,"absent":absent,"late":late,"attendance":attendance})
+    attendance_percentage, total, present, absent, late = (
+        student_attendance_history(student)
+    )
 
+    attendance = Attendance.objects.filter(
+        student=student
+    ).order_by("-date")
 
-
-
+    return render(
+        request,
+        "student/student_attendance.html",
+        {
+            "attendance_percentage": attendance_percentage,
+            "present": present,
+            "absent": absent,
+            "late": late,
+            "attendance": attendance,
+        }
+    )

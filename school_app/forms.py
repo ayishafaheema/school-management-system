@@ -1,6 +1,6 @@
 from django import forms
 
-from school_app.models import Teacher, Student
+from school_app.models import Teacher, Student, Homework
 
 
 class TeacherForm(forms.ModelForm):
@@ -45,3 +45,21 @@ class StudentProfileForm(forms.ModelForm):
     class Meta:
         model = Student
         fields = ["phone", "address", "image"]
+
+class HomeworkForm(forms.ModelForm):
+
+    class Meta:
+        model = Homework
+        fields = [
+            "subject",
+            "title",
+            "description",
+            "due_date",
+        ]
+        widgets = {
+            "due_date": forms.DateInput(
+                attrs={
+                    "type": "date"
+                }
+            )
+        }

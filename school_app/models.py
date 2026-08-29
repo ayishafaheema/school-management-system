@@ -82,3 +82,38 @@ class Attendance(models.Model):
 
     def __str__(self):
         return f"{self.student.user.username} - {self.date}"
+
+class Homework(models.Model):
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    assigned_class = models.CharField(
+        max_length=2,
+        choices=CLASS_CHOICES
+    )
+    subject=models.CharField(max_length=50)
+    title=models.CharField(max_length=50)
+    description = models.TextField()
+    assigned_date = models.DateField()
+    due_date = models.DateField()
+
+HOMEWORK_STATUS_CHOICES =[
+    ("Y","Submitted"),
+    ("N","Not submitted"),
+]
+class HomeworkStatus(models.Model):
+
+    homework=models.ForeignKey(Homework, on_delete=models.CASCADE)
+    student=models.ForeignKey(Student, on_delete=models.CASCADE)
+    status=models.CharField(
+        max_length=1,
+        choices=HOMEWORK_STATUS_CHOICES ,
+        default="N"
+
+    )
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["homework", "student"],
+                name="unique_homework_status"
+            )
+        ]
+

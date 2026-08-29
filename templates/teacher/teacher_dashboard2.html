@@ -81,24 +81,59 @@
             <section class="card tasks-card">
 
                 <div class="section-header">
-                    <h2>My Tasks</h2>
-                    <button>+ Add</button>
+                    <h2>Homework</h2>
+
+                    <a href="{% url 'create_homework' %}" class="attendance-btn">
+                        Add Homework
+                    </a>
                 </div>
 
-                <ul>
 
-                    <li>☐ Review Python Assignment</li>
+                <div class="homework-list">
 
-                    <li>☑ Upload Django Notes</li>
+                    {% for homework in homeworks %}
 
-                    <li>☐ Prepare Quiz</li>
+                    <div class="homework-item">
 
-                    <li>☐ Parent Meeting</li>
+                        <div class="homework-info">
 
-                </ul>
+                            <div class="homework-subject">
+                                {{ homework.subject }}
+                            </div>
+
+                            <h3>{{ homework.title }}</h3>
+
+                            <p>
+                                Due: {{ homework.due_date }}
+                            </p>
+
+                        </div>
+
+
+                        <a href="{% url 'homework_details' homework.id %}"
+                           class="view-details-btn">View Details →
+                        </a>
+                    </div>
+
+                    {% empty %}
+
+                    <div class="no-homework">
+                        <p>No homework added yet.</p>
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <div class="view-all-container">
+
+                    <a href="{% url 'view_all_homework' %}" class="view-all-btn">
+                        View All Homework →
+                    </a>
+                </div>
 
             </section>
-
             <section class="card attendance-card">
 
                 <h2>Attendance</h2>
@@ -113,7 +148,7 @@
 
                 <p>Absent : <strong>10</strong></p>
                 <br>
-                <a href="{% url 'teacher_mark' %}" class="attendance-btn">
+                <a href="{% url 'mark_attendance' %}" class="attendance-btn">
                     Mark Attendance
                 </a>
 

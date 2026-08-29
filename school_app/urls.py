@@ -9,7 +9,6 @@ urlpatterns = [
     path('login_view', views.login_view, name='login_view'),
 
 
-
     # student url
     path('student_dashboard', studentView.student_dashboard, name='student_dashboard'),
     path('add_student', studentView.add_student, name='student_add'),
@@ -17,18 +16,17 @@ urlpatterns = [
     path("student_attendance", studentView.student_attendance, name='student_attendance'),
 
 
-
     # teacher url
     path('teacher_dashboard', teacherView.teacher_dashboard, name='teacher_dashboard'),
     path('add_teacher', teacherView.add_teacher, name='teacher_add'),
-    path('mark_attendance', teacherView.mark_attendance, name='teacher_mark'),
-
-
+    path('mark_attendance', teacherView.mark_attendance, name='mark_attendance'),
+    path('create_homework', teacherView.create_homework, name='create_homework'),
+    path('homeworks',teacherView.view_all_homework,name='view_all_homework'),
+    path("homework/<int:homework_id>/",teacherView.homework_details,name="homework_details"),
 
     # admin url
     path('admin_dashboard', views.admin_dashboard, name='admin_dashboard'),
     path('class_wise',views.class_wise_attendance,name='class_wise'),
-
 
 
 

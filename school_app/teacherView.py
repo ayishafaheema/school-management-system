@@ -2,8 +2,13 @@ from datetime import date
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from school_app.forms import TeacherForm
-from school_app.models import LoginData, Teacher, Student, Attendance
+from school_app.forms import TeacherForm, HomeworkForm
+from school_app.models import LoginData, Teacher, Student, Homework, HomeworkStatus
+from school_app.services import teacher
+from school_app.services.attendance import get_attendance_on_date,is_attendance_completed,save_attendance
+from school_app.services.homework import create_homework_service, homework_status_service, \
+    get_students_with_homework_status
+from school_app.services.teacher import create_teacher
 
 
 @login_required(login_url="login_view")
@@ -13,6 +18,10 @@ def teacher_dashboard(request):
         return redirect("login_view")
 
     teacher = Teacher.objects.get(user=request.user)
+
+    homeworks = Homework.objects.filter(
+        teacher=teacher
+    ).order_by("-assigned_date")[:2]
 
     students = Student.objects.filter(
         student_class=teacher.assigned_class
@@ -26,53 +35,39 @@ def teacher_dashboard(request):
             "teacher": teacher,
             "students": students,
             "student_count": student_count,
+            "homeworks": homeworks,
+
         },
     )
 
 def add_teacher(request):
+
     if request.method == "POST":
+
         form = TeacherForm(request.POST, request.FILES)
 
         if form.is_valid():
-            username = form.cleaned_data["username"]
-            password = form.cleaned_data["password"]
-            department = form.cleaned_data["department"]
-            qualification = form.cleaned_data["qualification"]
-            assigned_class = form.cleaned_data["assigned_class"]
-            image = form.cleaned_data["image"]
 
-            # Check if the class is already assigned
-            if Teacher.objects.filter(assigned_class=assigned_class).exists():
+            teacher_created = create_teacher(
+                form.cleaned_data
+            )
+
+            if not teacher_created:
                 form.add_error(
                     "assigned_class",
                     "This class is already assigned to another teacher."
                 )
-
             else:
-                user = LoginData(
-                    username=username,
-                    role="TEACHER"
-                )
-                user.set_password(password)
-                user.save()
-
-                Teacher.objects.create(
-                    user=user,
-                    department=department,
-                    qualification=qualification,
-                    assigned_class=assigned_class,
-                    image=image
-                )
-
-
                 return redirect("admin_dashboard")
 
     else:
         form = TeacherForm()
 
-    return render(request, "teacher/add_teacher.html", {"form": form})
-
-
+    return render(
+        request,
+        "teacher/add_teacher.html",
+        {"form": form}
+    )
 
 
 
@@ -91,39 +86,26 @@ def mark_attendance(request):
     today = date.today()
 
     # Check whether today's attendance is already completed
-    attendance_count = Attendance.objects.filter(
-        student__in=students,
-        date=today,
-    ).count()
+    attendance_completed = is_attendance_completed(
+        students,
+        today
+    )
 
-    attendance_completed = attendance_count == students.count()
-    today_attendance = Attendance.objects.select_related(
-        "student",
-        "student__user"
-    ).filter(
-        student__in=students,
-        date=today
+    today_attendance = get_attendance_on_date(
+        students,
+        today
     )
     # Save attendance only if it has not already been completed
     if request.method == "POST" and not attendance_completed:
+        save_attendance(
+            students,
+            teacher,
+            today,
+            request.POST
+        )
 
-        for student in students:
-
-            field_name = f"attendance_{student.id}"
-
-            status = request.POST.get(field_name)
-
-            Attendance.objects.create(
-                student=student,
-                teacher=teacher,
-                date=today,
-                status=status,
-            )
-
-            print(student.user.username, status)
-
-        # Attendance has now been completed
         return redirect("mark_attendance")
+
     return render(
         request,
         "teacher/mark_attendance.html",
@@ -136,3 +118,73 @@ def mark_attendance(request):
 
         },
     )
+
+
+@login_required(login_url="login_view")
+def create_homework(request):
+    if request.user.role != "TEACHER":
+        return redirect("login_view")
+
+    if request.method == "POST":
+        form = HomeworkForm(request.POST)
+
+        if form.is_valid():
+            teacher = Teacher.objects.get(user=request.user)
+
+            created_homework = create_homework_service(
+                form.cleaned_data,
+                teacher
+            )
+
+            return redirect("teacher_dashboard")
+        else:
+            print(form.errors)
+
+
+    else:
+        form = HomeworkForm()
+
+    return render(request, "teacher/create_homework.html", {"form": form})
+
+def view_all_homework(request):
+    if request.user.role != "TEACHER":
+        return redirect("login_view")
+
+    teacher=Teacher.objects.get(user=request.user)
+    homeworks = Homework.objects.filter(teacher=teacher).order_by("-assigned_date")
+
+    return render(request, "teacher/view_all_homework.html", {"homeworks": homeworks})
+
+
+@login_required(login_url="login_view")
+def homework_details(request, homework_id):
+    if request.user.role != "TEACHER":
+        return redirect("login_view")
+    teacher = Teacher.objects.get(
+        user=request.user
+    )
+    homework = Homework.objects.get(
+        id=homework_id,
+        teacher=teacher
+    )
+
+    if request.method == "POST":
+        student_id = request.POST.get("student_id")
+        status = request.POST.get("status")
+        student = Student.objects.get(
+            id=student_id
+        )
+
+        homework_status_service(
+            homework,
+            student,
+            status
+
+        )
+        return redirect("homework_details", homework_id=homework.id)
+
+    students = get_students_with_homework_status(homework)
+
+
+    return render(request, "teacher/homework_details.html", {"homework": homework,
+                                                             "students": students})

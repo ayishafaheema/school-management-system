@@ -890,3 +890,136 @@ Dashboard Placeholder
 
 
 }
+/* ================= HOMEWORK SECTION ================= */
+
+.homework-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+
+.homework-item {
+    background: #fff;
+    border: 1px solid #eee;
+    border-left: 4px solid #6b0f1a;
+    border-radius: 10px;
+    padding: 15px 18px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    transition: 0.3s ease;
+}
+
+
+.homework-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Subject */
+
+.homework-subject {
+    display: inline-block;
+    background: #f8e9eb;
+    color: #6b0f1a;
+
+    padding: 4px 10px;
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    margin-bottom: 7px;
+}
+
+
+/* Title */
+
+.homework-info h3 {
+    margin: 0 0 5px;
+    font-size: 16px;
+    color: #333;
+}
+
+
+.homework-info p {
+    margin: 0;
+    font-size: 13px;
+    color: #888;
+}
+
+
+/* View Details */
+
+.view-details-btn {
+    text-decoration: none;
+    color: #6b0f1a;
+    font-size: 13px;
+    font-weight: 600;
+
+    white-space: nowrap;
+    transition: 0.3s;
+}
+
+
+.view-details-btn:hover {
+    color: #9b1c2c;
+}
+
+
+/* View All Homework */
+
+.view-all-container {
+    text-align: center;
+    margin-top: 18px;
+}
+
+
+.view-all-btn {
+    display: inline-block;
+
+    padding: 9px 18px;
+    border: 1px solid #6b0f1a;
+    border-radius: 7px;
+
+    text-decoration: none;
+    color: #6b0f1a;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+
+.view-all-btn:hover {
+    background: #6b0f1a;
+    color: white;
+}
+
+
+/* No Homework */
+
+.no-homework {
+    text-align: center;
+    padding: 25px;
+    color: #999;
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .homework-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+}

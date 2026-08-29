@@ -1,0 +1,380 @@
+{% extends "teacher/teacher_base.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+
+/* ================= VIEW ALL HOMEWORK ================= */
+
+.homework-page {
+    padding: 30px;
+}
+
+
+/* Header */
+
+.homework-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.homework-page-header h2 {
+    margin: 0;
+    color: #6b0f1a;
+    font-size: 26px;
+}
+
+.homework-page-header p {
+    margin-top: 6px;
+    color: #888;
+    font-size: 14px;
+}
+
+
+/* Add Homework Button */
+
+.add-homework-btn {
+    background: #6b0f1a;
+    color: white;
+    text-decoration: none;
+
+    padding: 11px 20px;
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+.add-homework-btn:hover {
+    background: #4d0810;
+    transform: translateY(-2px);
+}
+
+
+/* Homework Grid */
+
+.homework-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+}
+
+
+/* Homework Card */
+
+.homework-card {
+    background: white;
+
+    border-radius: 15px;
+    padding: 22px;
+
+    border: 1px solid #eee;
+    border-top: 5px solid #6b0f1a;
+
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+
+    transition: 0.3s;
+}
+
+.homework-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Card Top */
+
+.homework-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 18px;
+}
+
+
+/* Subject Badge */
+
+.subject-badge {
+    background: #f8e9eb;
+    color: #6b0f1a;
+
+    padding: 6px 12px;
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* Assigned Date */
+
+.assigned-date {
+    font-size: 12px;
+    color: #999;
+}
+
+
+/* Title */
+
+.homework-title {
+    color: #333;
+    font-size: 19px;
+
+    margin-bottom: 10px;
+}
+
+
+/* Description */
+
+.homework-description {
+    color: #777;
+
+    font-size: 14px;
+    line-height: 1.6;
+
+    margin-bottom: 20px;
+}
+
+
+/* Bottom Section */
+
+.homework-footer {
+    border-top: 1px solid #eee;
+
+    padding-top: 15px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/* Due Date */
+
+.due-date {
+    font-size: 13px;
+    color: #666;
+}
+
+.due-date span {
+    color: #6b0f1a;
+    font-weight: 600;
+}
+
+
+/* View Details */
+
+.details-btn {
+    text-decoration: none;
+
+    background: #f8e9eb;
+    color: #6b0f1a;
+
+    padding: 8px 14px;
+    border-radius: 7px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+.details-btn:hover {
+    background: #6b0f1a;
+    color: white;
+}
+
+
+/* Empty State */
+
+.no-homework {
+    grid-column: 1 / -1;
+
+    background: white;
+
+    padding: 60px 20px;
+
+    text-align: center;
+
+    border-radius: 15px;
+
+    color: #999;
+}
+
+.no-homework i {
+    font-size: 45px;
+    color: #6b0f1a;
+
+    display: block;
+    margin-bottom: 15px;
+}
+
+
+/* Responsive */
+
+@media (max-width: 850px) {
+
+    .homework-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .homework-page {
+        padding: 20px;
+    }
+
+    .homework-page-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+}
+
+</style>
+
+
+<div class="homework-page">
+
+    <!-- ================= HEADER ================= -->
+
+    <div class="homework-page-header">
+
+        <div>
+
+            <h2>All Homework</h2>
+
+            <p>
+                Manage and view all homework assignments.
+            </p>
+
+        </div>
+
+
+        <a href="{% url 'create_homework' %}"
+           class="add-homework-btn">
+
+            <i class="bi bi-plus-lg"></i>
+            Add Homework
+
+        </a>
+
+    </div>
+
+
+
+    <!-- ================= HOMEWORK LIST ================= -->
+
+    <div class="homework-grid">
+
+
+        {% for homework in homeworks %}
+
+        <div class="homework-card">
+
+
+            <!-- Top -->
+
+            <div class="homework-card-top">
+
+                <span class="subject-badge">
+
+                    {{ homework.subject }}
+
+                </span>
+
+
+                <span class="assigned-date">
+
+                    {{ homework.assigned_date }}
+
+                </span>
+
+            </div>
+
+
+
+            <!-- Title -->
+
+            <h3 class="homework-title">
+
+                {{ homework.title }}
+
+            </h3>
+
+
+
+            <!-- Description -->
+
+            <p class="homework-description">
+
+                {{ homework.description }}
+
+            </p>
+
+
+
+            <!-- Footer -->
+
+            <div class="homework-footer">
+
+                <div class="due-date">
+
+                    <i class="bi bi-calendar-event"></i>
+
+                    Due:
+
+                    <span>
+                        {{ homework.due_date }}
+                    </span>
+
+                </div>
+
+
+                <!-- We will connect this URL next -->
+
+                    <a href="{% url 'homework_details' homework.id %}"
+                       class="details-btn">
+
+                        View Details
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </a>
+                </div>
+
+
+        </div>
+
+
+        {% empty %}
+
+        <div class="no-homework">
+
+            <i class="bi bi-journal-x"></i>
+
+            <h3>No Homework Yet</h3>
+
+            <p>
+                You haven't created any homework assignments yet.
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+
+    </div>
+
+</div>
+
+{% endblock %}
