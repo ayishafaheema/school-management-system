@@ -5,9 +5,10 @@ from django.shortcuts import render, redirect
 from school_app.forms import TeacherForm, HomeworkForm
 from school_app.models import LoginData, Teacher, Student, Homework, HomeworkStatus
 from school_app.services import teacher
-from school_app.services.attendance import get_attendance_on_date,is_attendance_completed,save_attendance
+from school_app.services.attendance import get_attendance_on_date, is_attendance_completed, save_attendance, \
+    teacher_attendance_history, get_attendance_summary, calculate_attendance_percentage
 from school_app.services.homework import create_homework_service, homework_status_service, \
-    get_students_with_homework_status
+    get_students_with_homework_status, get_teacher_homework_stats
 from school_app.services.teacher import create_teacher
 
 
@@ -27,7 +28,18 @@ def teacher_dashboard(request):
         student_class=teacher.assigned_class
     )
     student_count = students.count()
+    today = date.today()
 
+    today_attendance = get_attendance_on_date(
+        students,
+        today
+    )
+    attendance_summary=get_attendance_summary(today_attendance)
+    attendance_percentage = calculate_attendance_percentage(
+        attendance_summary["present"] + attendance_summary["late"],
+        student_count
+    )
+    total_students, total_homeworks, total_submitted, total_pending = get_teacher_homework_stats(teacher)
     return render(
         request,
         "teacher/teacher_dashboard2.html",
@@ -36,6 +48,12 @@ def teacher_dashboard(request):
             "students": students,
             "student_count": student_count,
             "homeworks": homeworks,
+            "total_students": total_students,
+            "total_homeworks": total_homeworks,
+            "total_submitted": total_submitted,
+            "total_pending": total_pending,
+            "attendance_summary":attendance_summary,
+            "attendance_percentage":attendance_percentage,
 
         },
     )
@@ -95,6 +113,7 @@ def mark_attendance(request):
         students,
         today
     )
+
     # Save attendance only if it has not already been completed
     if request.method == "POST" and not attendance_completed:
         save_attendance(
@@ -188,3 +207,22 @@ def homework_details(request, homework_id):
 
     return render(request, "teacher/homework_details.html", {"homework": homework,
                                                              "students": students})
+
+
+@login_required(login_url="login_view")
+def teacher_attendance_history_view(request):
+
+    if request.user.role != "TEACHER":
+        return redirect("login_view")
+
+    teacher = Teacher.objects.get(user=request.user)
+
+    attendance_history = teacher_attendance_history(teacher)
+
+    return render(
+        request,
+        "teacher/teacher_attendance_history.html",
+        {
+            "teacher": teacher,
+            "attendance_history": attendance_history,
+        })

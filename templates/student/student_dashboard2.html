@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     <i class="bi bi-journal-check"></i>
 
-                    <h3>5</h3>
+                    <h3>{{ pending_count }}</h3>
 
                     <p>Assignments Due</p>
 
@@ -257,23 +257,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
 </div>
 
-        <!-- ================= Assignments & Calendar ================= -->
+<!-- ================= Assignments ================= -->
 
 <div class="row mt-4">
-
-    <!-- Assignments -->
 
     <div class="col-lg-7">
 
         <div class="assignment-card">
 
+            <!-- Header -->
+
             <div class="card-header-custom">
 
                 <h4>Assignments</h4>
 
-                <a href="#">View All</a>
+                <a href="{% url 'student_homework' %}">
+                    View All →
+                </a>
 
             </div>
+
+
+            <!-- Assignments Table -->
 
             <table class="table align-middle">
 
@@ -289,71 +294,62 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 </thead>
 
+
                 <tbody>
 
+                    {% for item in homework_data %}
+
                     <tr>
 
-                        <td>Python Programming</td>
+                        <!-- Subject -->
 
-                        <td>12 July</td>
+                        <td>
+                            <span class="subject-name">
+                                {{ item.homework.subject }}
+                            </span>
+                        </td>
+
+
+                        <!-- Due Date -->
+
+                        <td>
+                            {{ item.homework.due_date|date:"d M Y" }}
+                        </td>
+
+
+                        <!-- Status -->
 
                         <td>
 
-                            <span class="status pending">
-                                Pending
-                            </span>
+                            {% if item.status and item.status.status == "Y" %}
+
+                                <span class="status submitted">
+                                    Submitted
+                                </span>
+
+                            {% else %}
+
+                                <span class="status pending">
+                                    Pending
+                                </span>
+
+                            {% endif %}
 
                         </td>
 
                     </tr>
 
+                    {% empty %}
+
                     <tr>
 
-                        <td>Database Management</td>
-
-                        <td>14 July</td>
-
-                        <td>
-
-                            <span class="status submitted">
-                                Submitted
-                            </span>
-
+                        <td colspan="3" class="no-homework">
+                            No homework assigned yet.
                         </td>
 
                     </tr>
 
-                    <tr>
-
-                        <td>Mathematics</td>
-
-                        <td>18 July</td>
-
-                        <td>
-
-                            <span class="status pending">
-                                Pending
-                            </span>
-
-                        </td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td>Web Development</td>
-
-                        <td>20 July</td>
-
-                        <td>
-
-                            <span class="status late">
-                                Late
-                            </span>
-
-                        </td>
-
-                    </tr>
+                    {% endfor %}
 
                 </tbody>
 
@@ -362,6 +358,9 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
 
     </div>
+
+</div>
+
 
     <!-- Calendar -->
 

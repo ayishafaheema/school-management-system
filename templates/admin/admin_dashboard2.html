@@ -90,10 +90,9 @@ Admin Dashboard
 
                     <div class="header-buttons">
 
-                        <a href="#" class="view-all">
+                        <a href="{% url 'view_all_students' %}" class="view-all">
                             View All
                         </a>
-
                         <button class="create-btn"
                                 onclick="window.location.href='{% url 'student_add' %}'">
 
@@ -122,7 +121,7 @@ Admin Dashboard
 
                     <div class="student-grid">
 
-                        {% for student in students|slice:":15" %}
+                        {% for student in students|slice:":6" %}
 
                         <div class="student-profile">
 
@@ -170,7 +169,7 @@ Admin Dashboard
 
                     <div class="header-buttons">
 
-                        <a href="#" class="view-all">
+                        <a href="{% url 'view_all_teachers' %}" class="view-all">
                             View All
                         </a>
 

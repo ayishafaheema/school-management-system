@@ -1,0 +1,144 @@
+{% extends 'teacher/teacher_base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/teacher_attendance_history.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<div class="attendance-history-page">
+
+    <!-- Page Header -->
+    <div class="page-header">
+
+        <div>
+
+            <a href="{% url 'mark_attendance' %}" class="back-btn">
+                ← Back to Attendance
+            </a>
+
+            <h1>Attendance History</h1>
+
+            <p>
+                View daily attendance records for your assigned class.
+            </p>
+
+        </div>
+
+        <div class="class-badge">
+            Class {{ teacher.get_assigned_class_display }}
+        </div>
+
+    </div>
+
+
+    {% if attendance_history %}
+
+    <!-- Attendance History -->
+    <div class="history-card">
+
+        <div class="history-header">
+
+            <div>
+                <h2>Daily Attendance</h2>
+
+                <p>
+                    Attendance summary for each day
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="table-container">
+
+            <table class="attendance-table">
+
+                <thead>
+
+                    <tr>
+                        <th>Date</th>
+                        <th>Present</th>
+                        <th>Absent</th>
+                        <th>Late</th>
+                        <th>Total</th>
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for record in attendance_history %}
+
+                    <tr>
+
+                        <td class="date-cell">
+                            {{ record.date|date:"d M Y" }}
+                        </td>
+
+                        <td>
+                            <span class="status-badge present">
+                                {{ record.present }}
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="status-badge absent">
+                                {{ record.absent }}
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="status-badge late">
+                                {{ record.late }}
+                            </span>
+                        </td>
+
+                        <td class="total-cell">
+                            {{ record.present|add:record.absent|add:record.late }}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    {% else %}
+
+    <!-- Empty State -->
+
+    <div class="empty-state">
+
+        <div class="empty-icon">
+            📅
+        </div>
+
+        <h2>No Attendance History</h2>
+
+        <p>
+            Attendance records for your class will appear here
+            once attendance has been marked.
+        </p>
+
+        <a href="{% url 'mark_attendance' %}" class="primary-btn">
+            Mark Attendance
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

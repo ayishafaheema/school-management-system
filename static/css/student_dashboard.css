@@ -1005,3 +1005,293 @@ body{
     gap:10px;
 
 }
+
+<style>
+
+    /* ================= ASSIGNMENTS CARD ================= */
+
+    .assignment-card {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 22px;
+        box-shadow: 0 6px 22px rgba(0, 0, 0, 0.07);
+        border: 1px solid #eeeeee;
+        overflow: hidden;
+    }
+
+    /* Header */
+
+    .card-header-custom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+    }
+
+    .card-header-custom h4 {
+        margin: 0;
+        color: #6b0f1a;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .card-header-custom a {
+        color: #6b0f1a;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 7px 12px;
+        border-radius: 8px;
+        transition: 0.25s ease;
+    }
+
+    .card-header-custom a:hover {
+        background: #6b0f1a;
+        color: #ffffff;
+    }
+
+
+    /* ================= TABLE ================= */
+
+    .assignment-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0;
+    }
+
+    .assignment-table thead {
+        background: #faf5f6;
+    }
+
+    .assignment-table th {
+        padding: 13px 14px;
+        text-align: left;
+        color: #777777;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border-bottom: 1px solid #eeeeee;
+    }
+
+    .assignment-table td {
+        padding: 16px 14px;
+        color: #333333;
+        font-size: 14px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .assignment-table tbody tr {
+        transition: 0.2s ease;
+    }
+
+    .assignment-table tbody tr:hover {
+        background: #fffafa;
+    }
+
+    .assignment-table tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+
+    /* ================= SUBJECT ================= */
+
+    .subject-name {
+        font-weight: 600;
+        color: #333333;
+    }
+
+
+    /* ================= STATUS ================= */
+
+    .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 11px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .status::before {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    /* Pending */
+
+    .status.pending {
+        background: #fff4e5;
+        color: #a65b00;
+    }
+
+    .status.pending::before {
+        background: #d88900;
+    }
+
+    /* Submitted */
+
+    .status.submitted {
+        background: #edf8f1;
+        color: #267a45;
+    }
+
+    .status.submitted::before {
+        background: #2e9b59;
+    }
+
+
+    /* ================= EMPTY STATE ================= */
+
+    .no-homework {
+        text-align: center;
+        padding: 35px 15px !important;
+        color: #888888 !important;
+    }
+
+
+    /* ================= RESPONSIVE ================= */
+
+    @media (max-width: 600px) {
+
+        .assignment-card {
+            padding: 16px;
+        }
+
+        .assignment-table th,
+        .assignment-table td {
+            padding: 12px 8px;
+        }
+
+        .assignment-table th {
+            font-size: 11px;
+        }
+
+        .assignment-table td {
+            font-size: 13px;
+        }
+
+    }
+
+/* ================= ASSIGNMENTS ================= */
+
+.assignment-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+    border: 1px solid #eeeeee;
+}
+
+
+/* Header */
+
+.card-header-custom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.card-header-custom h4 {
+    margin: 0;
+    color: #6b0f1a;
+    font-weight: 700;
+}
+
+.card-header-custom a {
+    color: #6b0f1a;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.card-header-custom a:hover {
+    color: #4d0810;
+}
+
+
+/* Subject */
+
+.subject-name {
+    font-weight: 600;
+    color: #333333;
+}
+
+
+/* Status */
+
+.status {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* Pending */
+
+.status.pending {
+    background: #fff4e5;
+    color: #a65b00;
+}
+
+
+/* Submitted */
+
+.status.submitted {
+    background: #edf8f1;
+    color: #267a45;
+}
+
+
+/* Empty homework */
+
+.no-homework {
+    text-align: center;
+    color: #888888;
+    padding: 25px !important;
+}
+
+
+/* Table */
+
+.assignment-card .table {
+    margin-bottom: 0;
+}
+
+.assignment-card .table thead th {
+    color: #777777;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.assignment-card .table tbody td {
+    font-size: 14px;
+    color: #444444;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.assignment-card .table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* Hover */
+
+.assignment-card .table tbody tr {
+    transition: 0.2s ease;
+}
+
+.assignment-card .table tbody tr:hover {
+    background: #fffafa;
+}
+

@@ -1,0 +1,113 @@
+{% extends 'admin/admin_base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/view_all_teachers.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<div class="teachers-page">
+
+    <!-- Page Header -->
+    <div class="page-header">
+
+        <div>
+            <a href="{% url 'admin_dashboard' %}" class="back-btn">
+                ← Back to Dashboard
+            </a>
+
+            <h1>All Teachers</h1>
+
+            <p>
+                View all teachers registered in the school.
+            </p>
+        </div>
+
+        <a href="{% url 'teacher_add' %}" class="create-btn">
+            + Create Teacher
+        </a>
+
+    </div>
+
+
+    <!-- Teachers -->
+    <div class="teacher-grid">
+
+        {% for teacher in teachers %}
+
+        <div class="teacher-card">
+
+            <div class="teacher-image">
+
+                {% if teacher.image %}
+
+                    <img src="{{ teacher.image.url }}"
+                         alt="{{ teacher.user.username }}">
+
+                {% else %}
+
+                    <div class="default-avatar">
+                        👤
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="teacher-info">
+
+                <h3>
+                    {{ teacher.user.username }}
+                </h3>
+
+                <p class="department">
+                    {{ teacher.department }}
+                </p>
+
+                <p>
+                    Qualification:
+                    <strong>{{ teacher.qualification }}</strong>
+                </p>
+
+                <p>
+                    Class:
+                    <strong>
+                        {{ teacher.get_assigned_class_display }}
+                    </strong>
+                </p>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty-state">
+
+            <div class="empty-icon">
+                👨‍🏫
+            </div>
+
+            <h2>No Teachers Found</h2>
+
+            <p>
+                There are currently no teachers registered.
+            </p>
+
+            <a href="{% url 'teacher_add' %}" class="create-btn">
+                Create Teacher
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}
+

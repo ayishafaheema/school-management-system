@@ -1,0 +1,173 @@
+{% extends "student/student_base.html" %}
+{% load static %}
+{% block content %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/student_homework.css' %}">
+{% endblock %}
+
+<div class="homework-page">
+
+
+    <!-- ================= HEADER ================= -->
+
+    <div class="homework-header">
+
+        <div>
+
+            <h2>All Homework</h2>
+
+            <p>
+                View all assignments assigned to your class.
+            </p>
+
+        </div>
+
+
+        <a href="{% url 'student_dashboard' %}" class="back-btn">
+
+            ← Dashboard
+
+        </a>
+
+    </div>
+
+
+
+    <!-- ================= HOMEWORK ================= -->
+
+    {% if homework_data %}
+
+        <div class="homework-grid">
+
+
+            {% for item in homework_data %}
+
+                <div class="homework-item">
+
+
+                    <!-- Card Top -->
+
+                    <div class="homework-top">
+
+                        <span class="subject-badge">
+
+                            {{ item.homework.subject }}
+
+                        </span>
+
+
+                        <span class="assigned-date">
+
+                            {{ item.homework.assigned_date|date:"M d, Y" }}
+
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- Title -->
+
+                    <h3 class="homework-title">
+
+                        {{ item.homework.title }}
+
+                    </h3>
+
+
+
+                    <!-- Description -->
+
+                    <p class="homework-description">
+
+                        {{ item.homework.description }}
+
+                    </p>
+
+
+
+                    <!-- Footer -->
+
+                    <div class="homework-footer">
+
+
+                        <!-- Due Date -->
+
+                        <div class="due-date">
+
+                            <span class="due-label">
+                                Due
+                            </span>
+
+                            <span class="due-value">
+
+                                {{ item.homework.due_date|date:"M d, Y" }}
+
+                            </span>
+
+                        </div>
+
+
+
+                        <!-- Status -->
+
+                        {% if item.status and item.status.status == "Y" %}
+
+                            <span class="homework-status status-submitted">
+
+                                Submitted
+
+                            </span>
+
+                        {% else %}
+
+                            <span class="homework-status status-pending">
+
+                                Pending
+
+                            </span>
+
+                        {% endif %}
+
+
+                    </div>
+
+
+                </div>
+
+            {% endfor %}
+
+
+        </div>
+
+
+    {% else %}
+
+
+        <!-- ================= EMPTY STATE ================= -->
+
+        <div class="empty-homework">
+
+            <div class="empty-icon">
+
+                <i class="bi bi-journal-x"></i>
+
+            </div>
+
+            <h3>No Homework Yet</h3>
+
+            <p>
+                You don't have any homework assignments at the moment.
+            </p>
+
+        </div>
+
+
+    {% endif %}
+
+
+</div>
+
+
+{% endblock %}
+

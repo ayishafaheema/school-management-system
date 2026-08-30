@@ -2,9 +2,10 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
 from school_app.forms import StudentForm, StudentProfileForm
-from school_app.models import  Student, Teacher, Attendance
+from school_app.models import Student, Teacher, Attendance, Homework, HomeworkStatus
 from school_app.search import StudentFilter
 from school_app.services.attendance import student_attendance_history
+from school_app.services.homework import get_student_homework
 from school_app.services.student import create_student
 
 
@@ -13,8 +14,10 @@ def student_dashboard(request):
 
     if request.user.role != "STUDENT":
         return redirect("login_view")
+
     student = Student.objects.get(user=request.user)
 
+    homework_data,pending_count = get_student_homework(student)
 
     attendance_percentage, total, present, absent, late = student_attendance_history(student)
 
@@ -30,6 +33,8 @@ def student_dashboard(request):
         "absent":absent,
         "late":late,
         "total":total,
+        "homework_data":homework_data,
+        "pending_count": pending_count,
 
 
     }
@@ -108,3 +113,17 @@ def student_attendance(request):
             "attendance": attendance,
         }
     )
+
+@login_required(login_url="login_view")
+def student_homework(request):
+    if request.user.role != "STUDENT":
+        return redirect("login_view")
+
+    student = Student.objects.get(user=request.user)
+
+    homework_data=get_student_homework(student)
+    return render(request, "student/student_homework.html",{
+        "homework_data":homework_data
+    })
+
+

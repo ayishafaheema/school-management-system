@@ -1,0 +1,110 @@
+{% extends 'admin/admin_base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/view_all_students.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<div class="students-page">
+
+    <!-- Page Header -->
+    <div class="page-header">
+
+        <div>
+            <a href="{% url 'admin_dashboard' %}" class="back-btn">
+                ← Back to Dashboard
+            </a>
+
+            <h1>All Students</h1>
+
+            <p>
+                View all students registered in the school.
+            </p>
+        </div>
+
+        <a href="{% url 'student_add' %}" class="create-btn">
+            + Create Student
+        </a>
+
+    </div>
+
+
+    <!-- Students -->
+    <div class="student-grid">
+
+        {% for student in students %}
+
+        <div class="student-card">
+
+            <div class="student-image">
+
+                {% if student.image %}
+
+                    <img src="{{ student.image.url }}"
+                         alt="{{ student.user.username }}">
+
+                {% else %}
+
+                    <div class="default-avatar">
+                        👤
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="student-info">
+
+                <h3>
+                    {{ student.user.username }}
+                </h3>
+
+                <p class="student-class">
+                    Class {{ student.get_student_class_display }}
+                </p>
+
+                <p>
+                    Roll No:
+                    <strong>{{ student.roll_no }}</strong>
+                </p>
+
+                <p>
+                    Student ID:
+                    <strong>{{ student.student_id }}</strong>
+                </p>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty-state">
+
+            <div class="empty-icon">
+                👨‍🎓
+            </div>
+
+            <h2>No Students Found</h2>
+
+            <p>
+                There are currently no students registered.
+            </p>
+
+            <a href="{% url 'student_add' %}" class="create-btn">
+                Create Student
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

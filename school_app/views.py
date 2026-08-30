@@ -115,7 +115,57 @@ def login_view(request):
 
     return render(request, "log_in.html")
 
+# @login_required(login_url="login_view")
+# def view_all_students(request):
+#
+#     if request.user.role != "ADMIN":
+#         return redirect("login_view")
+#
+#     students = Student.objects.all()
+#
+#     return render(
+#         request,
+#         "admin/view_all_students.html",
+#         {
+#             "students": students,
+#         },
+#     )
 
+@login_required(login_url="login_view")
+def view_all_students(request):
+
+    print("USER:", request.user)
+    print("ROLE:", request.user.role)
+
+    if request.user.role != "ADMIN":
+        return redirect("login_view")
+
+    students = Student.objects.all()
+
+    return render(
+        request,
+        "admin/view_all_students.html",
+        {
+            "students": students,
+        },
+    )
+
+
+@login_required(login_url="login_view")
+def view_all_teachers(request):
+
+    if request.user.role != "ADMIN":
+        return redirect("login_view")
+
+    teachers = Teacher.objects.all()
+
+    return render(
+        request,
+        "admin/view_all_teachers.html",
+        {
+            "teachers": teachers,
+        },
+    )
 
 @login_required(login_url="login_view")
 def class_wise_attendance(request):

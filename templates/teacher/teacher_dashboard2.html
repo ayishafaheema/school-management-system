@@ -42,22 +42,22 @@
             <div class="stats">
 
                 <div class="stat-box">
-                    <h3>128</h3>
+                    <h3>{{ total_students }}</h3>
                     <p>Total Students</p>
                 </div>
 
                 <div class="stat-box">
-                    <h3>24</h3>
+                    <h3>{{ total_homeworks }}</h3>
                     <p>Assignments</p>
                 </div>
 
                 <div class="stat-box">
-                    <h3>116</h3>
+                    <h3>{{ total_submitted }}</h3>
                     <p>Submitted</p>
                 </div>
 
                 <div class="stat-box">
-                    <h3>12</h3>
+                    <h3>{{ total_pending }}</h3>
                     <p>Pending</p>
                 </div>
 
@@ -81,10 +81,10 @@
             <section class="card tasks-card">
 
                 <div class="section-header">
-                    <h2>Homework</h2>
+                    <h2>Assignments</h2>
 
                     <a href="{% url 'create_homework' %}" class="attendance-btn">
-                        Add Homework
+                        Add Assignments
                     </a>
                 </div>
 
@@ -118,7 +118,7 @@
                     {% empty %}
 
                     <div class="no-homework">
-                        <p>No homework added yet.</p>
+                        <p>No Assignments added yet.</p>
                     </div>
 
                     {% endfor %}
@@ -129,7 +129,7 @@
                 <div class="view-all-container">
 
                     <a href="{% url 'view_all_homework' %}" class="view-all-btn">
-                        View All Homework →
+                        View All Assignments →
                     </a>
                 </div>
 
@@ -140,13 +140,15 @@
 
                 <div class="circle">
 
-                    92%
+                <h2>{{ attendance_percentage }}%</h2>
 
                 </div>
 
-                <p>Present : <strong>118</strong></p>
+                <p>Present : <strong>{{ attendance_summary.present }}</strong></p>
 
-                <p>Absent : <strong>10</strong></p>
+                <p>Absent : <strong>{{ attendance_summary.absent }}</strong></p>
+                <p>Late : <strong>{{ attendance_summary.late }}</strong></p>
+
                 <br>
                 <a href="{% url 'mark_attendance' %}" class="attendance-btn">
                     Mark Attendance

@@ -1,0 +1,329 @@
+/* ================= PAGE ================= */
+
+.homework-page {
+    padding: 30px;
+    min-height: 100vh;
+    background: #f8f8f8;
+}
+
+
+/* ================= HEADER ================= */
+
+.homework-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+.homework-header h2 {
+    margin: 0;
+    color: #6b0f1a;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.homework-header p {
+    margin: 6px 0 0;
+    color: #777;
+    font-size: 14px;
+}
+
+
+/* ================= BACK BUTTON ================= */
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 15px;
+
+    background: white;
+    color: #6b0f1a;
+
+    border: 1px solid #e5e5e5;
+    border-radius: 9px;
+
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+
+    transition: 0.25s ease;
+}
+
+.back-btn:hover {
+    background: #6b0f1a;
+    color: white;
+}
+
+
+/* ================= HOMEWORK GRID ================= */
+
+.homework-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+
+/* ================= HOMEWORK CARD ================= */
+
+.homework-item {
+    background: white;
+    border-radius: 17px;
+
+    padding: 24px;
+
+    border: 1px solid #eeeeee;
+
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+
+    position: relative;
+
+    transition: transform 0.25s ease,
+                box-shadow 0.25s ease;
+}
+
+.homework-item:hover {
+    transform: translateY(-4px);
+
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.10);
+}
+
+
+/* ================= CARD TOP ================= */
+
+.homework-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 18px;
+}
+
+
+/* Subject */
+
+.subject-badge {
+    display: inline-block;
+
+    padding: 6px 11px;
+
+    background: #f8e9eb;
+    color: #6b0f1a;
+
+    border-radius: 7px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+
+/* Assigned date */
+
+.assigned-date {
+    color: #999;
+    font-size: 12px;
+}
+
+
+/* ================= TITLE ================= */
+
+.homework-title {
+    margin: 0 0 10px;
+
+    color: #2f2f2f;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+
+/* ================= DESCRIPTION ================= */
+
+.homework-description {
+    color: #777;
+    font-size: 14px;
+    line-height: 1.7;
+
+    margin: 0 0 22px;
+
+    min-height: 48px;
+}
+
+
+/* ================= CARD FOOTER ================= */
+
+.homework-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-top: 17px;
+
+    border-top: 1px solid #eeeeee;
+}
+
+
+/* Due date */
+
+.due-date {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.due-label {
+    color: #999;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.due-value {
+    color: #333;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+/* ================= STATUS ================= */
+
+.homework-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 7px 12px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* Status dot */
+
+.homework-status::before {
+    content: "";
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+}
+
+
+/* Submitted */
+
+.status-submitted {
+    background: #edf8f1;
+    color: #267a45;
+}
+
+.status-submitted::before {
+    background: #2e9b59;
+}
+
+
+/* Pending */
+
+.status-pending {
+    background: #fff4e5;
+    color: #a65b00;
+}
+
+.status-pending::before {
+    background: #d88900;
+}
+
+
+/* ================= EMPTY STATE ================= */
+
+.empty-homework {
+    background: white;
+
+    border: 1px solid #eeeeee;
+
+    border-radius: 16px;
+
+    padding: 55px 20px;
+
+    text-align: center;
+
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+}
+
+.empty-icon {
+    width: 55px;
+    height: 55px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: #f8e9eb;
+    color: #6b0f1a;
+
+    font-size: 23px;
+}
+
+.empty-homework h3 {
+    margin: 0 0 7px;
+
+    color: #333;
+    font-size: 18px;
+}
+
+.empty-homework p {
+    margin: 0;
+
+    color: #888;
+    font-size: 14px;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+
+    .homework-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .homework-page {
+        padding: 20px;
+    }
+
+    .homework-header {
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .homework-header h2 {
+        font-size: 23px;
+    }
+
+    .homework-item {
+        padding: 20px;
+    }
+
+    .homework-footer {
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+}

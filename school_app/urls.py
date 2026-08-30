@@ -14,6 +14,7 @@ urlpatterns = [
     path('add_student', studentView.add_student, name='student_add'),
     path("edit_student_profile/", studentView.edit_student_profile, name="edit_student_profile"),
     path("student_attendance", studentView.student_attendance, name='student_attendance'),
+    path("student_homework",studentView.student_homework,name='student_homework'),
 
 
     # teacher url
@@ -23,10 +24,13 @@ urlpatterns = [
     path('create_homework', teacherView.create_homework, name='create_homework'),
     path('homeworks',teacherView.view_all_homework,name='view_all_homework'),
     path("homework/<int:homework_id>/",teacherView.homework_details,name="homework_details"),
+    path("teacher_attendance_history",teacherView.teacher_attendance_history_view,name="teacher_attendance_history"),
 
     # admin url
     path('admin_dashboard', views.admin_dashboard, name='admin_dashboard'),
     path('class_wise',views.class_wise_attendance,name='class_wise'),
+    path("students",views.view_all_students,name='view_all_students'),
+    path("teachers",views.view_all_teachers,name='view_all_teachers'),
 
 
 

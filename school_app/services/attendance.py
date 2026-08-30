@@ -1,6 +1,9 @@
 from datetime import timedelta
 
-from school_app.models import Attendance
+from django.db.models import Count, Q
+
+from school_app.models import Attendance, Student
+from school_app.services import teacher
 
 
 def get_attendance_on_date(students, target_date):
@@ -106,3 +109,31 @@ def student_attendance_history(student):
         )
 
     return attendance_percentage, total, present, absent, late
+
+from django.db.models import Count, Q
+
+
+def teacher_attendance_history(teacher):
+    students = Student.objects.filter(
+        student_class=teacher.assigned_class
+    )
+
+    attendance = Attendance.objects.filter(
+        student__in=students
+    )
+
+    attendance = attendance.values("date").annotate(
+        present=Count("student", filter=Q(status="P")),
+        absent=Count("student", filter=Q(status="A")),
+        late=Count("student", filter=Q(status="L")),
+    ).order_by("-date")
+
+    return attendance
+
+
+
+
+
+
+
+
