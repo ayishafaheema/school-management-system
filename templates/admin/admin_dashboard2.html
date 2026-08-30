@@ -63,7 +63,7 @@ Admin Dashboard
                     <i class="bi bi-person-workspace"></i>
 
 
-                    <h3>{{ teachers|length }}</h3>
+                    <h3>{{ teacher_count }}</h3>
                     <span>Total Teachers</span>
 
 
@@ -101,17 +101,7 @@ Admin Dashboard
 
                         </button>
 
-                        <form method="get" class="form-inline" style="float:right;">
-                            <div class="md-form my-0">
 
-                                {{ studentFilter.form.student_class }}
-
-                                <button class="btn btn-primary mr-2" type="submit">
-                                    Search
-                                </button>
-
-                            </div>
-                        </form>
 
                     </div>
 
@@ -121,8 +111,7 @@ Admin Dashboard
 
                     <div class="student-grid">
 
-                        {% for student in students|slice:":6" %}
-
+                            {% for student in filtered_students|slice:":6" %}
                         <div class="student-profile">
 
                             {% if student.image %}
@@ -189,7 +178,7 @@ Admin Dashboard
 
                     <div class="teacher-grid">
 
-                        {% for teacher in teachers|slice:":6" %}
+                        {% for teacher in filtered_teachers|slice:":6" %}
 
                         <div class="teacher-profile">
 

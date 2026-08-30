@@ -31,6 +31,7 @@ urlpatterns = [
     path('class_wise',views.class_wise_attendance,name='class_wise'),
     path("students",views.view_all_students,name='view_all_students'),
     path("teachers",views.view_all_teachers,name='view_all_teachers'),
+    path("admin-search/", views.admin_search, name="admin_search"),
 
 
 

@@ -3,7 +3,6 @@ from django.shortcuts import redirect, render
 
 from school_app.forms import StudentForm, StudentProfileForm
 from school_app.models import Student, Teacher, Attendance, Homework, HomeworkStatus
-from school_app.search import StudentFilter
 from school_app.services.attendance import student_attendance_history
 from school_app.services.homework import get_student_homework
 from school_app.services.student import create_student

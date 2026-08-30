@@ -677,7 +677,35 @@ body{
 
 
 
+/* Search Button */
 
+.search-box .btn-primary {
+    height: 40px;
+    padding: 0 18px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #8b1e2d;
+    color: #ffffff;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+}
+
+.search-box .btn-primary:hover {
+    background: #6f1724;
+    transform: translateY(-1px);
+}
+
+.search-box .btn-primary:active {
+    transform: translateY(0);
+}
 
 
 

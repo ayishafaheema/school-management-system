@@ -102,15 +102,35 @@
 
         <header class="top-navbar">
 
-            <div class="search-box">
+<!--            <div class="search-box">-->
 
-                <i class="bi bi-search"></i>
+<!--                <i class="bi bi-search"></i>-->
 
-                <input
+<!--                <input-->
+<!--                        type="text"-->
+<!--                        placeholder="Search students, teachers...">-->
+
+<!--            </div>-->
+            <form method="get" class="form-inline">
+                <div class="search-box">
+
+                    <i class="bi bi-search"></i>
+
+                    <input
                         type="text"
-                        placeholder="Search students, teachers...">
+                        name="q"
+                        placeholder="Search students, teachers..."
+                        value="{{ request.GET.q }}"
 
-            </div>
+                    >
+
+                    <button class="btn btn-primary mr-2" type="submit">
+                        Search
+                    </button>
+
+                </div>
+            </form>
+
 
             <div class="top-right">
 
