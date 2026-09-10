@@ -1,0 +1,227 @@
+.exam-page {
+    padding: 30px;
+}
+
+
+/* Page Header */
+
+.exam-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.exam-header h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+.exam-header p {
+    margin-top: 8px;
+    color: #777;
+    font-size: 14px;
+}
+
+
+/* Create Exam Button */
+
+.add-exam-btn {
+    display: inline-block;
+    padding: 11px 18px;
+    background-color: #8b0000;
+    color: white;
+    text-decoration: none;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.2s ease;
+}
+
+.add-exam-btn:hover {
+    background-color: #6f0000;
+}
+
+
+/* Main Card */
+
+.exam-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+
+/* Table Header */
+
+.table-header {
+    margin-bottom: 20px;
+}
+
+.table-header h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+
+/* Table */
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: #f8f8f8;
+}
+
+th {
+    text-align: left;
+    padding: 14px;
+    font-size: 13px;
+    color: #555;
+    font-weight: 600;
+}
+
+td {
+    padding: 15px 14px;
+    border-top: 1px solid #eeeeee;
+    font-size: 14px;
+    color: #444;
+}
+
+td strong {
+    color: #222;
+}
+
+
+/* Result Button */
+
+.result-btn {
+    display: inline-block;
+    padding: 8px 13px;
+    background-color: #8b0000;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 13px;
+    transition: 0.2s ease;
+}
+
+.result-btn:hover {
+    background-color: #6f0000;
+}
+
+
+/* Empty State */
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.empty-icon {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.empty-state h3 {
+    margin: 0 0 8px;
+    font-size: 20px;
+}
+
+.empty-state p {
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.result-btn,
+.view-result-btn {
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.result-btn {
+    /* keep your existing Enter Results styling */
+}
+
+.view-result-btn {
+    background: #f3f4f6;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.view-result-btn:hover {
+    background: #e5e7eb;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.action-buttons a {
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.result-btn {
+    background: #8b0000;
+    color: white;
+}
+
+.view-result-btn {
+    background: #f1f1f1;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.result-btn:hover {
+    background: #6f0000;
+}
+
+.view-result-btn:hover {
+    background: #e2e2e2;
+}
+/* Responsive */
+
+@media (max-width: 768px) {
+
+    .exam-page {
+        padding: 20px;
+    }
+
+    .exam-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .exam-card {
+        padding: 15px;
+    }
+
+}
+
+

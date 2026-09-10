@@ -1,0 +1,245 @@
+{% extends "student/student_base.html" %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/student_result.css' %}">
+
+<div class="result-page">
+
+    <!-- Page Header -->
+    <div class="result-header">
+
+        <div>
+            <h1>My Results</h1>
+            <p>View your examination results and academic performance.</p>
+        </div>
+
+        <a href="{% url 'student_dashboard' %}" class="back-btn">
+            ← Dashboard
+        </a>
+
+    </div>
+
+
+    <!-- Class Information -->
+    <div class="class-card">
+
+        <div class="class-icon">
+            🎓
+        </div>
+
+        <div>
+            <span>My Class</span>
+
+            <h3>
+                {{ student_class }}
+            </h3>
+        </div>
+
+    </div>
+
+
+    <!-- Results Section -->
+    <div class="results-card">
+
+        <div class="results-section-header">
+
+            <div>
+                <h2>Examination Results</h2>
+
+                <p>
+                    Your results for the examinations conducted by your teacher.
+                </p>
+            </div>
+
+            <span class="result-count">
+                {{ results|length }} Results
+            </span>
+
+        </div>
+
+
+        <!-- Results Table -->
+
+        <div class="table-wrapper">
+
+            <table class="results-table">
+
+                <thead>
+
+                    <tr>
+                        <th>#</th>
+                        <th>Exam</th>
+                        <th>Date</th>
+                        <th>Total</th>
+                        <th>Percentage</th>
+                        <th>Grade</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for result in results %}
+
+                    <tr>
+
+                        <!-- Number -->
+                        <td>
+                            {{ forloop.counter|stringformat:"02d" }}
+                        </td>
+
+
+                        <!-- Exam -->
+                        <td class="exam-name">
+
+                            <strong>
+                                {{ result.exam.exam_name }}
+                            </strong>
+
+                        </td>
+
+
+                        <!-- Date -->
+                        <td class="exam-date">
+
+                            {{ result.exam.exam_date|date:"d M Y" }}
+
+                        </td>
+
+
+                        {% if result.status == "Not Published" %}
+
+                            <!-- Not Published -->
+
+                            <td class="not-published" colspan="3">
+                                Not Published
+                            </td>
+
+
+                            <td>
+
+                                <span class="status-badge not-published-badge">
+                                    Not Published
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="disabled-view">
+                                    View
+                                </span>
+
+                            </td>
+
+                        {% else %}
+
+                            <!-- Total -->
+
+                            <td class="total">
+
+                                {{ result.total }}/600
+
+                            </td>
+
+
+                            <!-- Percentage -->
+
+                            <td class="percentage">
+
+                                {{ result.percentage|floatformat:1 }}%
+
+                            </td>
+
+
+                            <!-- Grade -->
+
+                            <td>
+
+                                <span class="grade-badge">
+                                    {{ result.grade }}
+                                </span>
+
+                            </td>
+
+
+                            <!-- Status -->
+
+                            <td>
+
+                                {% if result.status == "Passed" %}
+
+                                    <span class="status-badge passed">
+                                        Passed
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="status-badge failed">
+                                        Failed
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <!-- Action -->
+
+                            <td>
+
+                                <a href="{% url 'student_result_details' result.exam.id %}" class="view-btn">
+                                    View
+                                </a>
+
+                            </td>
+
+                        {% endif %}
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td colspan="8">
+
+                            <div class="empty-state">
+
+                                <div class="empty-icon">
+                                    📊
+                                </div>
+
+                                <h3>No Results Available</h3>
+
+                                <p>
+                                    Your examination results will appear here
+                                    once they are published.
+                                </p>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+

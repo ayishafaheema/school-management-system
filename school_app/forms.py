@@ -1,6 +1,6 @@
 from django import forms
 
-from school_app.models import Teacher, Student, Homework
+from school_app.models import Teacher, Student, Homework, Exam, Result
 
 
 class TeacherForm(forms.ModelForm):
@@ -59,7 +59,35 @@ class HomeworkForm(forms.ModelForm):
         widgets = {
             "due_date": forms.DateInput(
                 attrs={
-                    "type": "date"
-                }
-            )
+                    "type": "date"}
+                 )}
+
+class ExamForm(forms.ModelForm):
+     class Meta:
+        model = Exam
+        fields = [
+            "exam_name","exam_date","description",
+        ]
+        widgets = {
+            "exam_date": forms.DateInput(
+                attrs={"type": "date"}
+            ),
         }
+
+class ResultForm(forms.ModelForm):
+    class Meta:
+        model = Result
+        fields = [
+            "english_mark",
+            "english_absent",
+            "science_mark",
+            "science_absent",
+            "mathematics_mark",
+            "mathematics_absent",
+            "second_language_mark",
+            "second_language_absent",
+            "social_science_mark",
+            "social_science_absent",
+            "hindi_mark",
+            "hindi_absent",
+        ]

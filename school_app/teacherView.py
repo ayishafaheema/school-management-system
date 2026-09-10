@@ -2,13 +2,14 @@ from datetime import date
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from school_app.forms import TeacherForm, HomeworkForm
-from school_app.models import LoginData, Teacher, Student, Homework, HomeworkStatus
+from school_app.forms import TeacherForm, HomeworkForm, ExamForm, ResultForm
+from school_app.models import LoginData, Teacher, Student, Homework, HomeworkStatus, Exam, Result
 from school_app.services import teacher
 from school_app.services.attendance import get_attendance_on_date, is_attendance_completed, save_attendance, \
     teacher_attendance_history, get_attendance_summary, calculate_attendance_percentage
 from school_app.services.homework import create_homework_service, homework_status_service, \
     get_students_with_homework_status, get_teacher_homework_stats
+from school_app.services.result import save_exam_results, calculate_results
 from school_app.services.teacher import create_teacher
 
 
@@ -226,3 +227,98 @@ def teacher_attendance_history_view(request):
             "teacher": teacher,
             "attendance_history": attendance_history,
         })
+
+def create_exam_view(request):
+    teacher = Teacher.objects.get(user=request.user)
+
+    if request.method == "POST":
+        form = ExamForm(request.POST)
+
+        if form.is_valid():
+            exam = form.save(commit=False)
+            exam.teacher = teacher
+            exam.assigned_class = teacher.assigned_class
+            exam.save()
+            return redirect("exam_list")
+
+        else:
+            print(form.errors)
+
+    else:
+        form = ExamForm()
+    return render(
+        request,
+        "teacher/create_exam.html",
+        {
+            "form": form,
+            "teacher": teacher,
+        }
+    )
+
+def exam_list_view(request):
+    teacher = Teacher.objects.get(user=request.user)
+    exams = Exam.objects.filter(teacher=teacher)
+    return render(request, "teacher/exam_list.html", {"exams": exams})
+
+
+def enter_result_view(request,exam_id):
+    if request.user.role != "TEACHER":
+        return redirect("login_view")
+
+    teacher = Teacher.objects.get(user=request.user)
+    exam = Exam.objects.get(id=exam_id)
+
+    if exam.teacher != teacher:
+        return redirect("exam_list")
+
+    students = Student.objects.filter(
+        student_class=exam.assigned_class
+    )
+    results = Result.objects.filter(exam=exam)
+
+    student_results = []
+
+    for student in students:
+        result = results.filter(student=student).first()
+
+        student_results.append({
+            "student": student,
+            "result": result,
+        })
+
+    if request.method == "POST":
+        save_exam_results(exam,students,request.POST)
+        return redirect("exam_list")
+
+    return render(
+        request,
+        "teacher/enter_result.html",
+        {
+            "exam": exam,
+            "student_results": student_results,
+
+        }
+    )
+
+def result_list_view(request,exam_id):
+    if request.user.role != "TEACHER":
+        return redirect("login_view")
+    teacher = Teacher.objects.get(user=request.user)
+    exam = Exam.objects.get(
+        id=exam_id,
+        teacher=teacher
+    )
+    students = Student.objects.filter(
+        student_class=exam.assigned_class
+    )
+    results=calculate_results(exam, students)
+
+
+    return render(request, "teacher/result_list_view.html",
+    {
+        "students": students,
+        "teacher": teacher,
+        "exam":exam,
+        "results": results
+    })
+

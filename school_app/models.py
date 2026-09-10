@@ -1,4 +1,5 @@
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
 # Create your models here.
@@ -117,3 +118,45 @@ class HomeworkStatus(models.Model):
             )
         ]
 
+class Exam(models.Model):
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    assigned_class = models.CharField(
+        max_length=2,
+        choices=CLASS_CHOICES
+    )
+    exam_name = models.CharField(max_length=50)
+    exam_date = models.DateField()
+    description=models.TextField(blank=True, null=True)
+
+
+
+
+class Result(models.Model):
+    exam = models.ForeignKey(Exam, on_delete=models.CASCADE)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+
+    english_mark = models.IntegerField(null=True, blank=True, validators=[MinValueValidator(0), MaxValueValidator(100)])
+    english_absent = models.BooleanField(default=False)
+
+    science_mark = models.IntegerField(null=True, blank=True, validators=[MinValueValidator(0), MaxValueValidator(100)])
+    science_absent = models.BooleanField(default=False)
+
+    mathematics_mark = models.IntegerField(null=True, blank=True, validators=[MinValueValidator(0), MaxValueValidator(100)])
+    mathematics_absent = models.BooleanField(default=False)
+
+    second_language_mark = models.IntegerField(null=True, blank=True, validators=[MinValueValidator(0), MaxValueValidator(100)])
+    second_language_absent = models.BooleanField(default=False)
+
+    social_science_mark = models.IntegerField(null=True, blank=True, validators=[MinValueValidator(0), MaxValueValidator(100)])
+    social_science_absent = models.BooleanField(default=False)
+
+    hindi_mark = models.IntegerField(null=True, blank=True, validators=[MinValueValidator(0), MaxValueValidator(100)])
+    hindi_absent = models.BooleanField(default=False)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["exam", "student"],
+                name="unique_student_exam_result"
+            )
+        ]

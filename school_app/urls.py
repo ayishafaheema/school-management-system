@@ -15,6 +15,9 @@ urlpatterns = [
     path("edit_student_profile/", studentView.edit_student_profile, name="edit_student_profile"),
     path("student_attendance", studentView.student_attendance, name='student_attendance'),
     path("student_homework",studentView.student_homework,name='student_homework'),
+    path("student_result_view", studentView.student_result_view, name='student_result_view'),
+    path("student_exam_list", studentView.student_exam_view, name='student_exam_list'),
+    path("student_result_details/<int:exam_id>/",studentView.student_result_details,name="student_result_details"),
 
 
     # teacher url
@@ -25,6 +28,12 @@ urlpatterns = [
     path('homeworks',teacherView.view_all_homework,name='view_all_homework'),
     path("homework/<int:homework_id>/",teacherView.homework_details,name="homework_details"),
     path("teacher_attendance_history",teacherView.teacher_attendance_history_view,name="teacher_attendance_history"),
+    path("create_exam",teacherView.create_exam_view,name="create_exam"),
+    path("exam_list",teacherView.exam_list_view,name="exam_list"),
+    path("enter_result/<int:exam_id>/",teacherView.enter_result_view,name="enter_result"),
+    path("result_list_view/<int:exam_id>/",teacherView.result_list_view,name="result_list_view"),
+
+
 
     # admin url
     path('admin_dashboard', views.admin_dashboard, name='admin_dashboard'),
@@ -32,6 +41,7 @@ urlpatterns = [
     path("students",views.view_all_students,name='view_all_students'),
     path("teachers",views.view_all_teachers,name='view_all_teachers'),
     path("admin-search/", views.admin_search, name="admin_search"),
+    path("admin_exam_results",views.admin_exam_results_view,name="admin_exam_results"),
 
 
 

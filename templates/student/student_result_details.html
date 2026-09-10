@@ -1,0 +1,229 @@
+{% extends "student/student_base.html" %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/student_result_details.css' %}">
+
+<div class="result-details-page">
+
+    <!-- Header -->
+    <div class="page-header">
+
+        <div>
+            <h1>Exam Result</h1>
+            <p>View your detailed examination result.</p>
+        </div>
+
+        <a href="{% url 'student_result_view' %}" class="back-btn">
+            ← Back to Results
+        </a>
+
+    </div>
+
+
+    {% if result %}
+
+    <!-- Exam Information -->
+    <div class="exam-info-card">
+
+        <div class="exam-info">
+
+            <span>Examination</span>
+
+            <h2>
+                {{ exam.exam_name }}
+            </h2>
+
+        </div>
+
+        <div class="exam-meta">
+
+            <div>
+                <span>Class</span>
+                <strong>{{ exam.get_assigned_class_display }}</strong>
+            </div>
+
+            <div>
+                <span>Exam Date</span>
+                <strong>{{ exam.exam_date|date:"d M Y" }}</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Subject Marks -->
+    <div class="marks-card">
+
+        <div class="card-header">
+
+            <div>
+                <h2>Subject Marks</h2>
+                <p>Marks obtained in each subject.</p>
+            </div>
+
+        </div>
+
+
+        <div class="marks-table-wrapper">
+
+            <table class="marks-table">
+
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Subject</th>
+                        <th>Marks Obtained</th>
+                        <th>Total Marks</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>01</td>
+                        <td>English</td>
+                        <td>{{ result.english_mark|default:"—" }}</td>
+                        <td>100</td>
+                    </tr>
+
+                    <tr>
+                        <td>02</td>
+                        <td>Science</td>
+                        <td>{{ result.science_mark|default:"—" }}</td>
+                        <td>100</td>
+                    </tr>
+
+                    <tr>
+                        <td>03</td>
+                        <td>Mathematics</td>
+                        <td>{{ result.mathematics_mark|default:"—" }}</td>
+                        <td>100</td>
+                    </tr>
+
+                    <tr>
+                        <td>04</td>
+                        <td>Second Language</td>
+                        <td>{{ result.second_language_mark|default:"—" }}</td>
+                        <td>100</td>
+                    </tr>
+
+                    <tr>
+                        <td>05</td>
+                        <td>Social Science</td>
+                        <td>{{ result.social_science_mark|default:"—" }}</td>
+                        <td>100</td>
+                    </tr>
+
+                    <tr>
+                        <td>06</td>
+                        <td>Hindi</td>
+                        <td>{{ result.hindi_mark|default:"—" }}</td>
+                        <td>100</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- Result Summary -->
+    <div class="summary-card">
+
+        <h2>Result Summary</h2>
+
+        <div class="summary-grid">
+
+            <div class="summary-item">
+
+                <span>Total Marks</span>
+
+                <strong>
+                    {{ total }}/600
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>Percentage</span>
+
+                <strong>
+                    {{ percentage|floatformat:1 }}%
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>Grade</span>
+
+                <strong class="grade">
+                    {{ grade }}
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>Status</span>
+
+                {% if status == "Passed" %}
+
+                    <strong class="status passed">
+                        Passed
+                    </strong>
+
+                {% else %}
+
+                    <strong class="status failed">
+                        Failed
+                    </strong>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    {% else %}
+
+    <!-- Not Published -->
+    <div class="not-published-card">
+
+        <div class="not-published-icon">
+            📊
+        </div>
+
+        <h2>Result Not Published</h2>
+
+        <p>
+            Your result for
+            <strong>{{ exam.exam_name }}</strong>
+            has not been published yet.
+        </p>
+
+        <a href="{% url 'student_result_view' %}" class="back-results-btn">
+            ← Back to Results
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
+

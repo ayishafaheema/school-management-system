@@ -1,0 +1,121 @@
+{% extends "teacher/teacher_base.html" %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/create_exam.css' %}">
+
+<div class="create-exam-page">
+
+    <div class="create-exam-card">
+
+        <!-- Header -->
+
+        <div class="form-header">
+
+            <h1>Create New Exam</h1>
+
+            <p>
+                Create an exam for your assigned class.
+            </p>
+
+        </div>
+
+
+        <!-- Exam Form -->
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="form-group">
+
+                <label for="{{ form.exam_name.id_for_label }}">
+                    Exam Name
+                </label>
+
+                {{ form.exam_name }}
+
+                {% if form.exam_name.errors %}
+                    <div class="form-error">
+                        {{ form.exam_name.errors }}
+                    </div>
+                {% endif %}
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="{{ form.exam_date.id_for_label }}">
+                    Exam Date
+                </label>
+
+                {{ form.exam_date }}
+
+                {% if form.exam_date.errors %}
+                    <div class="form-error">
+                        {{ form.exam_date.errors }}
+                    </div>
+                {% endif %}
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="{{ form.description.id_for_label }}">
+                    Description
+                </label>
+
+                {{ form.description }}
+
+                {% if form.description.errors %}
+                    <div class="form-error">
+                        {{ form.description.errors }}
+                    </div>
+                {% endif %}
+
+            </div>
+
+
+            <!-- Assigned Class -->
+
+            <div class="assigned-class-box">
+
+                <span class="class-label">
+                    Assigned Class
+                </span>
+
+                <strong>
+                    {{ teacher.get_assigned_class_display }}
+                </strong>
+
+                <small>
+                    This exam will automatically be assigned to your class.
+                </small>
+
+            </div>
+
+
+            <!-- Buttons -->
+
+            <div class="form-actions">
+
+                <a href="{% url 'exam_list' %}" class="cancel-btn">
+                    Cancel
+                </a>
+
+                <button type="submit" class="create-btn">
+                    Create Exam
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

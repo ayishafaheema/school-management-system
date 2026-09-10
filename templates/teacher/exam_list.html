@@ -1,0 +1,121 @@
+{% extends "teacher/teacher_base.html" %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/exam_list.css' %}">
+
+<div class="exam-page">
+
+    <!-- Page Header -->
+    <div class="exam-header">
+
+        <div>
+            <h1>Exams</h1>
+            <p>Manage exams and student results for your assigned class.</p>
+        </div>
+
+        <a href="{% url 'create_exam' %}" class="add-exam-btn">
+            + Create Exam
+        </a>
+
+    </div>
+
+
+    <!-- Exam Card -->
+    <div class="exam-card">
+
+        <div class="table-header">
+            <h2>My Exams</h2>
+        </div>
+
+
+        {% if exams %}
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Exam Name</th>
+                        <th>Class</th>
+                        <th>Exam Date</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for exam in exams %}
+
+                    <tr>
+
+                        <td>
+                            <strong>{{ exam.exam_name }}</strong>
+                        </td>
+
+                        <td>
+                            {{ exam.get_assigned_class_display }}
+                        </td>
+
+                        <td>
+                            {{ exam.exam_date|date:"d M Y" }}
+                        </td>
+
+                        <td>
+                            {% if exam.description %}
+                                {{ exam.description }}
+                            {% else %}
+                                —
+                            {% endif %}
+                        </td>
+
+                        <td class="action-buttons">
+
+                            <a href="{% url 'enter_result' exam.id %}" class="result-btn">
+                                Enter Results
+                            </a>
+
+                            <a href="{% url 'result_list_view' exam.id %}" class="view-result-btn">
+                                View Results
+                            </a>
+
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <!-- Empty State -->
+
+        <div class="empty-state">
+
+            <div class="empty-icon">📚</div>
+
+            <h3>No Exams Found</h3>
+
+            <p>You haven't created any exams yet.</p>
+
+            <a href="{% url 'create_exam' %}" class="add-exam-btn">
+                + Create Your First Exam
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}
+

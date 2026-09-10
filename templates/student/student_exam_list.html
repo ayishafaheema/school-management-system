@@ -1,0 +1,192 @@
+{% extends "student/student_base.html" %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/student_exam_list.css' %}">
+
+<div class="exam-page">
+
+    <!-- Page Header -->
+
+    <div class="exam-page-header">
+
+        <div>
+            <h1>Upcoming Exams</h1>
+
+            <p>
+                Check your upcoming examination schedule.
+            </p>
+        </div>
+
+        <a href="{% url 'student_dashboard' %}" class="back-btn">
+            ← Dashboard
+        </a>
+
+    </div>
+
+
+    <!-- Class Information -->
+
+    <div class="class-card">
+
+        <div class="class-icon">
+            📚
+        </div>
+
+        <div>
+            <span>My Class</span>
+
+            <h3>
+                {{ student_class }}
+            </h3>
+        </div>
+
+    </div>
+
+
+    <!-- Exams Section -->
+
+    <div class="exam-section">
+
+        <div class="section-header">
+
+            <div>
+                <h2>Upcoming Exams</h2>
+
+                <p>
+                    Your upcoming examinations are listed below.
+                </p>
+            </div>
+
+            <span class="exam-count">
+                {{ exams|length }} Exams
+            </span>
+
+        </div>
+
+
+        <!-- Exam Cards -->
+
+        <div class="exam-list">
+
+            {% for exam in exams %}
+
+            <div class="exam-card">
+
+                <!-- Exam Header -->
+
+                <div class="exam-card-header">
+
+                    <div>
+
+                        <h3>
+                            {{ exam.exam_name }}
+                        </h3>
+
+                        <span class="upcoming-badge">
+                            Upcoming
+                        </span>
+
+                    </div>
+
+                    <div class="exam-icon">
+                        📝
+                    </div>
+
+                </div>
+
+
+                <!-- Exam Information -->
+
+                <div class="exam-details">
+
+                    <div class="exam-detail">
+
+                        <span class="detail-icon">
+                            📅
+                        </span>
+
+                        <div>
+                            <small>Exam Date</small>
+
+                            <strong>
+                                {{ exam.exam_date|date:"d M Y" }}
+                            </strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="exam-detail">
+
+                        <span class="detail-icon">
+                            🏫
+                        </span>
+
+                        <div>
+                            <small>Class</small>
+
+                            <strong>
+                                {{ exam.get_assigned_class_display }}
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Description -->
+
+                <div class="exam-description">
+
+                    <small>Description</small>
+
+                    {% if exam.description %}
+
+                        <p>
+                            {{ exam.description }}
+                        </p>
+
+                    {% else %}
+
+                        <p class="no-description">
+                            No description provided.
+                        </p>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <!-- No Exams -->
+
+            <div class="empty-exam">
+
+                <div class="empty-icon">
+                    📅
+                </div>
+
+                <h3>No Upcoming Exams</h3>
+
+                <p>
+                    There are currently no upcoming exams
+                    scheduled for your class.
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+

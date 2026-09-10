@@ -1,0 +1,329 @@
+{% extends "teacher/teacher_base.html" %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/result_list_view.css' %}">
+
+<div class="results-page">
+
+    <!-- Page Header -->
+
+    <div class="results-header">
+
+        <div>
+            <h1>Student Results</h1>
+
+            <p>
+                View examination results for your students.
+            </p>
+        </div>
+
+        <a href="{% url 'exam_list' %}" class="back-btn">
+            ← Back to Exams
+        </a>
+
+    </div>
+
+
+    <!-- Exam Information -->
+
+    <div class="exam-card">
+
+        <div class="class-info">
+
+            <span>Exam</span>
+
+            <strong>
+                {{ exam.exam_name }}
+            </strong>
+
+        </div>
+
+
+        <div class="class-info">
+
+            <span>Class</span>
+
+            <strong>
+                {{ exam.get_assigned_class_display }}
+            </strong>
+
+        </div>
+
+
+        <div class="class-info">
+
+            <span>Date</span>
+
+            <strong>
+                {{ exam.exam_date|date:"d M Y" }}
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- Results Card -->
+
+    <div class="results-card">
+
+        <div class="results-card-header">
+
+            <div>
+                <h2>Students</h2>
+
+                <p>
+                    Results for students in this exam
+                </p>
+            </div>
+
+
+            <!-- Search -->
+
+            <div class="search-box">
+
+                <span>🔍</span>
+
+                <input
+                    type="text"
+                    id="studentSearch"
+                    placeholder="Search student..."
+                >
+
+            </div>
+
+        </div>
+
+
+        <!-- Results Table -->
+
+        <div class="table-wrapper">
+
+            <table class="results-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>#</th>
+
+                        <th>Student</th>
+
+                        <th>Roll No</th>
+
+                        <th>Total</th>
+
+                        <th>Percentage</th>
+
+                        <th>Grade</th>
+
+                        <th>Status</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="resultsTableBody">
+
+                    {% for result in results %}
+
+                    <tr>
+
+                        <!-- Number -->
+
+                        <td>
+                            {{ forloop.counter|stringformat:"02d" }}
+                        </td>
+
+
+                        <!-- Student -->
+
+                        <td class="student-name">
+
+                            {{ result.student.user.username }}
+
+                        </td>
+
+
+                        <!-- Roll Number -->
+
+                        <td>
+
+                            {{ result.student.roll_no }}
+
+                        </td>
+
+
+                        <!-- Total -->
+
+                        <td class="total">
+
+                            {% if result.total is not None %}
+
+                                {{ result.total }}/600
+
+                            {% else %}
+
+                                —
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <!-- Percentage -->
+
+                        <td class="percentage">
+
+                            {% if result.percentage is not None %}
+
+                                {{ result.percentage|floatformat:1 }}%
+
+                            {% else %}
+
+                                —
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <!-- Grade -->
+
+                        <td>
+
+                            <span class="grade">
+
+                                {% if result.grade %}
+
+                                    {{ result.grade }}
+
+                                {% else %}
+
+                                    —
+
+                                {% endif %}
+
+                            </span>
+
+                        </td>
+
+
+                        <!-- Status -->
+
+                        <td>
+
+                            <span class="status">
+
+                                {{ result.status }}
+
+                            </span>
+
+                        </td>
+
+
+                        <!-- Action -->
+
+                        <td>
+
+                            <a href="#" class="view-btn">
+
+                                View
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+
+                    {% empty %}
+
+                    <!-- No Students -->
+
+                    <tr>
+
+                        <td colspan="8">
+
+                            <div class="empty-state">
+
+                                <div class="empty-icon">
+                                    📊
+                                </div>
+
+                                <h3>
+                                    No Students Found
+                                </h3>
+
+                                <p>
+                                    There are no students assigned
+                                    to this class.
+                                </p>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Student Search -->
+
+<script>
+
+const searchInput = document.getElementById("studentSearch");
+
+searchInput.addEventListener("input", function () {
+
+    const searchValue = this.value.toLowerCase();
+
+    const rows = document.querySelectorAll(
+        "#resultsTableBody tr"
+    );
+
+    rows.forEach(function (row) {
+
+        const studentName =
+            row.querySelector(".student-name");
+
+        if (!studentName) {
+            return;
+        }
+
+        const name =
+            studentName.textContent.toLowerCase();
+
+        if (name.includes(searchValue)) {
+
+            row.style.display = "";
+
+        } else {
+
+            row.style.display = "none";
+
+        }
+
+    });
+
+});
+
+</script>
+
+{% endblock %}

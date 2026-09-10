@@ -1,43 +1,57 @@
 {% extends "teacher/teacher_base.html" %}
 {% load static %}
+
 {% block content %}
+
+<!-- =========================================================
+     WELCOME SECTION
+========================================================= -->
+
 <section class="welcome">
 
-            <div>
+    <div>
+        <h1>Good Morning 👋</h1>
 
-                <h1>Good Morning 👋</h1>
+        <p>
+            You have 5 assignments waiting for review today.
+        </p>
+    </div>
 
-                <p>
+    <button onclick="window.location.href='{% url 'view_all_homework' %}'">
+        View Assignments
+    </button>
 
-                    You have 5 assignments waiting for review today.
-
-                </p>
-
-            </div>
-
-            <button>
-
-                View Assignments
-
-            </button>
-
-        </section>
-
-        <!-- Dashboard starts here -->
-
-        <div class="dashboard-grid">
+</section>
 
 
-    <!-- LEFT SIDE -->
-    <div class="left-column">
+<!-- =========================================================
+     DASHBOARD
+========================================================= -->
 
-        <!-- Assignment Overview -->
+<div class="dashboard-grid">
+
+
+    <!-- =====================================================
+         ROW 1
+         ASSIGNMENT OVERVIEW + ATTENDANCE
+    ====================================================== -->
+
+    <div class="dashboard-row">
+
+        <!-- ASSIGNMENT OVERVIEW -->
+
         <section class="card assignment-card">
 
             <div class="section-header">
+
                 <h2>Assignment Overview</h2>
-                <a href="#">View All</a>
+
+                <a href="{% url 'view_all_homework' %}">
+                    View All
+                </a>
+
             </div>
+
 
             <div class="stats">
 
@@ -75,225 +89,186 @@
 
         </section>
 
-        <!-- Tasks + Attendance -->
-        <div class="middle-row">
 
-            <section class="card tasks-card">
+        <!-- ATTENDANCE -->
 
-                <div class="section-header">
-                    <h2>Assignments</h2>
-
-                    <a href="{% url 'create_homework' %}" class="attendance-btn">
-                        Add Assignments
-                    </a>
-                </div>
-
-
-                <div class="homework-list">
-
-                    {% for homework in homeworks %}
-
-                    <div class="homework-item">
-
-                        <div class="homework-info">
-
-                            <div class="homework-subject">
-                                {{ homework.subject }}
-                            </div>
-
-                            <h3>{{ homework.title }}</h3>
-
-                            <p>
-                                Due: {{ homework.due_date }}
-                            </p>
-
-                        </div>
-
-
-                        <a href="{% url 'homework_details' homework.id %}"
-                           class="view-details-btn">View Details →
-                        </a>
-                    </div>
-
-                    {% empty %}
-
-                    <div class="no-homework">
-                        <p>No Assignments added yet.</p>
-                    </div>
-
-                    {% endfor %}
-
-                </div>
-
-
-                <div class="view-all-container">
-
-                    <a href="{% url 'view_all_homework' %}" class="view-all-btn">
-                        View All Assignments →
-                    </a>
-                </div>
-
-            </section>
-            <section class="card attendance-card">
-
-                <h2>Attendance</h2>
-
-                <div class="circle">
-
-                <h2>{{ attendance_percentage }}%</h2>
-
-                </div>
-
-                <p>Present : <strong>{{ attendance_summary.present }}</strong></p>
-
-                <p>Absent : <strong>{{ attendance_summary.absent }}</strong></p>
-                <p>Late : <strong>{{ attendance_summary.late }}</strong></p>
-
-                <br>
-                <a href="{% url 'mark_attendance' %}" class="attendance-btn">
-                    Mark Attendance
-                </a>
-
-            </section>
-
-        </div>
-
-<!-- Students -->
-<section class="card performance-card">
-
-    <div class="section-header">
-        <h2>My Students</h2>
-        <a href="#">View All</a>
-    </div>
-
-    <div class="class-info">
-        <span><strong>Class:</strong> {{ teacher.get_assigned_class_display }}</span>
-        <span><strong>{{ student_count }}</strong> Students</span>
-    </div>
-
-    <div class="student-list">
-
-        {% for student in students %}
-
-        <div class="student-item">
-
-            <div class="student-left">
-
-                <div class="student-number">
-                    {{ forloop.counter|stringformat:"02d" }}
-                </div>
-
-                {% if student.image %}
-                    <img src="{{ student.image.url }}"
-                    class="student-img"
-                     alt="Student">
-                {% else %}
-                    <div class="student-img placeholder">
-                        {{ student.user.username}}
-                    </div>
-
-                {% endif %}
-
-
-                <div class="student-details">
-                    <h5>{{ student.user.username }}</h5>
-                    <p>Roll No : {{ student.roll_no }}</p>
-                </div>
-
-            </div>
-
-            <div class="student-right">
-                <a href="#" class="student-btn">
-                    View
-                </a>
-            </div>
-
-        </div>
-
-        {% empty %}
-
-        <div class="no-students">
-            No students assigned to this class.
-        </div>
-
-        {% endfor %}
-
-    </div>
-
-</section>
-
-    </div>
-
-    <!-- RIGHT SIDE -->
-    <div class="right-column">
-
-        <section class="card planner-card">
-
-    <div class="section-header">
-
-        <h2>Planner Calendar</h2>
-
-        <a href="#" id="todayBtn">Today</a>
-
-    </div>
-
-    <div class="calendar-container">
-
-        <div class="calendar-header">
-
-            <button id="prevMonth">&#10094;</button>
-
-            <h3 id="monthYear"></h3>
-
-            <button id="nextMonth">&#10095;</button>
-
-        </div>
-
-        <div class="weekdays">
-
-            <div>Sun</div>
-            <div>Mon</div>
-            <div>Tue</div>
-            <div>Wed</div>
-            <div>Thu</div>
-            <div>Fri</div>
-            <div>Sat</div>
-
-        </div>
-
-        <div id="calendarDays" class="calendar-days">
-
-        </div>
-
-    </div>
-
-    <div class="events-section">
-
-        <div class="section-header">
-
-            <h4>Today's Events</h4>
-
-            <a href="#">View All</a>
-
-        </div>
-
-        <div id="eventList">
-
-            <!-- JS/Django will fill this -->
-
-        </div>
-
-    </div>
-
-</section>
-
-        <section class="card reports-card">
+        <section class="card attendance-card">
 
             <div class="section-header">
 
-                <h2>Student Reports</h2>
+                <h2>Attendance</h2>
 
-                <a href="#">View All</a>
+            </div>
+
+
+            <div class="circle">
+
+                <h2>
+                    {{ attendance_percentage }}%
+                </h2>
+
+            </div>
+
+
+            <div class="attendance-summary">
+
+                <p>
+                    Present :
+                    <strong>{{ attendance_summary.present }}</strong>
+                </p>
+
+                <p>
+                    Absent :
+                    <strong>{{ attendance_summary.absent }}</strong>
+                </p>
+
+                <p>
+                    Late :
+                    <strong>{{ attendance_summary.late }}</strong>
+                </p>
+
+            </div>
+
+
+            <a href="{% url 'mark_attendance' %}"
+               class="attendance-btn">
+
+                Mark Attendance
+
+            </a>
+
+        </section>
+
+    </div>
+
+
+    <!-- =====================================================
+         ROW 2
+         ASSIGNMENTS + EXAMS
+    ====================================================== -->
+
+    <div class="dashboard-row">
+
+
+        <!-- ASSIGNMENTS -->
+
+        <section class="card tasks-card">
+
+            <div class="section-header">
+
+                <h2>Assignments</h2>
+
+                <a href="{% url 'create_homework' %}"
+                   class="attendance-btn">
+
+                    Add Assignment
+
+                </a>
+
+            </div>
+
+
+            <div class="homework-list">
+
+                {% for homework in homeworks %}
+
+                <div class="homework-item">
+
+                    <div class="homework-info">
+
+                        <div class="homework-subject">
+                            {{ homework.subject }}
+                        </div>
+
+                        <h3>
+                            {{ homework.title }}
+                        </h3>
+
+                        <p>
+                            Due: {{ homework.due_date }}
+                        </p>
+
+                    </div>
+
+
+                    <a href="{% url 'homework_details' homework.id %}"
+                       class="view-details-btn">
+
+                        View Details →
+
+                    </a>
+
+                </div>
+
+                {% empty %}
+
+                <div class="no-homework">
+                    <p>No Assignments added yet.</p>
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <div class="view-all-container">
+
+                <a href="{% url 'view_all_homework' %}"
+                   class="view-all-btn">
+
+                    View All Assignments →
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- EXAMS & RESULTS -->
+
+        <section class="card exam-card">
+
+            <div class="section-header">
+
+                <h2>Exams & Results</h2>
+
+                <a href="{% url 'exam_list' %}">
+                    View All
+                </a>
+
+            </div>
+
+
+            <div class="exam-content">
+
+                <div class="exam-icon">
+
+                    <i class="bi bi-journal-check"></i>
+
+                </div>
+
+
+                <div class="exam-info">
+
+                    <h3>
+                        Manage Exams & Results
+                    </h3>
+
+                    <p>
+                        Create exams and enter student marks
+                        for your assigned class.
+                    </p>
+
+                </div>
+
+
+                <a href="{% url 'exam_list' %}"
+                   class="exam-btn">
+
+                    Manage Exams →
+
+                </a>
 
             </div>
 
@@ -301,7 +276,123 @@
 
     </div>
 
+
+    <!-- =====================================================
+         ROW 3
+         MY STUDENTS - FULL WIDTH
+    ====================================================== -->
+
+    <section class="card performance-card">
+
+        <div class="section-header">
+
+            <h2>My Students</h2>
+
+            <a href="#">
+                View All
+            </a>
+
+        </div>
+
+
+        <div class="class-info">
+
+            <span>
+
+                <strong>Class:</strong>
+
+                {{ teacher.get_assigned_class_display }}
+
+            </span>
+
+
+            <span>
+
+                <strong>{{ student_count }}</strong>
+
+                Students
+
+            </span>
+
+        </div>
+
+
+        <div class="student-list">
+
+            {% for student in students %}
+
+            <div class="student-item">
+
+                <div class="student-left">
+
+                    <div class="student-number">
+
+                        {{ forloop.counter|stringformat:"02d" }}
+
+                    </div>
+
+
+                    {% if student.image %}
+
+                        <img src="{{ student.image.url }}"
+                             class="student-img"
+                             alt="Student">
+
+                    {% else %}
+
+                        <div class="student-img placeholder">
+
+                            {{ student.user.username|first|upper }}
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <div class="student-details">
+
+                        <h5>
+                            {{ student.user.username }}
+                        </h5>
+
+                        <p>
+                            Roll No : {{ student.roll_no }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="student-right">
+
+                    <a href="#"
+                       class="student-btn">
+
+                        View
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            {% empty %}
+
+            <div class="no-students">
+
+                No students assigned to this class.
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
 </div>
-<link rel="stylesheet" href="{% static 'css/mark_attendance.css' %}">
+
 
 {% endblock %}

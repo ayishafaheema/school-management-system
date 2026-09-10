@@ -1,0 +1,288 @@
+{% extends "teacher/teacher_base.html" %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/enter_result.css' %}">
+
+<div class="result-page">
+
+    <!-- Exam Header -->
+
+    <div class="result-header">
+
+        <div>
+            <h1>{{ exam.exam_name }}</h1>
+
+            <p>
+                Class: {{ exam.get_assigned_class_display }}
+                |
+                Date: {{ exam.exam_date|date:"d M Y" }}
+            </p>
+        </div>
+
+        <a href="{% url 'exam_list' %}" class="back-btn">
+            ← Back to Exams
+        </a>
+
+    </div>
+
+
+    <!-- Results Card -->
+
+    <div class="result-card">
+
+        <div class="card-header">
+            <h2>Enter Student Results</h2>
+            <p>Enter marks out of 100 or select absent for each subject.</p>
+        </div>
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            {% for item in student_results %}
+
+            <div class="student-result">
+
+                <div class="student-info">
+
+                    <div class="student-number">
+                        {{ forloop.counter|stringformat:"02d" }}
+                    </div>
+
+                    <div>
+                        <h3>{{ item.student.user.username }}</h3>
+                        <p>Roll No: {{ item.student.roll_no }}</p>
+                    </div>
+
+                </div>
+
+
+                <!-- Subjects -->
+
+                <div class="subjects-grid">
+
+
+                    <!-- English -->
+
+                    <div class="subject">
+
+                        <label>English</label>
+
+                        <input type="number"
+                               name="english_mark_{{ item.student.id }}"
+                               min="0"
+                               max="100"
+                               value="{{ item.result.english_mark|default_if_none:'' }}">
+
+                        <label class="absent">
+
+                            <input type="checkbox"
+                                   name="english_absent_{{ item.student.id }}"
+                                   onchange="toggleAbsent(this)"
+                                   {% if item.result.english_absent %}checked{% endif %}>
+
+                            Absent
+
+                        </label>
+
+                    </div>
+
+
+                    <!-- Science -->
+
+                    <div class="subject">
+
+                        <label>Science</label>
+
+                        <input type="number"
+                               name="science_mark_{{ item.student.id }}"
+                               min="0"
+                               max="100"
+                               value="{{ item.result.science_mark|default_if_none:'' }}">
+
+                        <label class="absent">
+                            <input type="checkbox"
+                                   name="science_absent_{{ item.student.id }}"
+                                   onchange="toggleAbsent(this)"
+                                   {% if item.result.science_absent %}checked{% endif %}>
+                            Absent
+                        </label>
+                    </div>
+
+
+                    <!-- Mathematics -->
+
+                    <div class="subject">
+
+                        <label>Mathematics</label>
+
+                        <input type="number"
+                               name="mathematics_mark_{{ item.student.id }}"
+                               min="0"
+                               max="100"
+                               value="{{ item.result.mathematics_mark|default_if_none:'' }}">
+
+                        <label class="absent">
+
+                            <input type="checkbox"
+                                   name="mathematics_absent_{{ item.student.id }}"
+                                   onchange="toggleAbsent(this)"
+                                   {% if item.result.mathematics_absent %}checked{% endif %}>
+
+                            Absent
+
+                        </label>
+
+                    </div>
+
+
+                    <!-- Second Language -->
+
+                    <div class="subject">
+
+                        <label>Second Language</label>
+
+                        <input type="number"
+                               name="second_language_mark_{{ item.student.id }}"
+                               min="0"
+                               max="100"
+                               value="{{ item.result.second_language_mark|default_if_none:'' }}">
+
+                        <label class="absent">
+
+                            <input type="checkbox"
+                                   name="second_language_absent_{{ item.student.id }}"
+                                   onchange="toggleAbsent(this)"
+                                   {% if item.result.second_language_absent %}checked{% endif %}>
+
+                            Absent
+
+                        </label>
+
+                    </div>
+
+
+                    <!-- Social Science -->
+
+                    <div class="subject">
+
+                        <label>Social Science</label>
+
+                        <input type="number"
+                               name="social_science_mark_{{ item.student.id }}"
+                               min="0"
+                               max="100"
+                               value="{{ item.result.social_science_mark|default_if_none:'' }}">
+
+                        <label class="absent">
+
+                            <input type="checkbox"
+                                   name="social_science_absent_{{ item.student.id }}"
+                                   onchange="toggleAbsent(this)"
+                                   {% if item.result.social_science_absent %}checked{% endif %}>
+
+                            Absent
+
+                        </label>
+
+                    </div>
+
+
+                    <!-- Hindi -->
+
+                    <div class="subject">
+
+                        <label>Hindi</label>
+
+                        <input type="number"
+                               name="hindi_mark_{{ item.student.id }}"
+                               min="0"
+                               max="100"
+                               value="{{ item.result.hindi_mark|default_if_none:'' }}">
+
+                        <label class="absent">
+
+                            <input type="checkbox"
+                                   name="hindi_absent_{{ item.student.id }}"
+                                   onchange="toggleAbsent(this)"
+                                   {% if item.result.hindi_absent %}checked{% endif %}>
+
+                            Absent
+
+                        </label>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            {% empty %}
+
+            <div class="no-students">
+
+                <h3>No students found</h3>
+
+                <p>There are no students assigned to this class.</p>
+
+            </div>
+
+            {% endfor %}
+
+
+            {% if student_results %}
+
+            <div class="form-actions">
+
+                <a href="{% url 'exam_list' %}" class="cancel-btn">
+                    Cancel
+                </a>
+
+                <button type="submit" class="save-btn">
+                    Save Results
+                </button>
+
+            </div>
+
+            {% endif %}
+
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function toggleAbsent(checkbox) {
+
+    const subject = checkbox.closest(".subject");
+
+    const markInput = subject.querySelector(
+        'input[type="number"]'
+    );
+
+    if (checkbox.checked) {
+
+        markInput.value = "";
+        markInput.disabled = true;
+
+    } else {
+
+        markInput.disabled = false;
+
+    }
+}
+
+</script>
+
+
+{% endblock %}

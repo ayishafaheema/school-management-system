@@ -2,7 +2,7 @@ from datetime import date
 from django.contrib.auth import authenticate,login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from school_app.models import Student, Teacher, CLASS_CHOICES
+from school_app.models import Student, Teacher, CLASS_CHOICES, Result, Exam
 from school_app.services.attendance import get_attendance_on_date, calculate_attendance_percentage, \
     get_attendance_summary,get_weekly_attendance_data
 from school_app.services.search import admin_search
@@ -199,3 +199,29 @@ def class_wise_attendance(request):
     })
 
 
+@login_required(login_url="login_view")
+def admin_exam_results_view(request):
+
+    if request.user.role != "ADMIN":
+        return redirect("login_view")
+
+    exams = Exam.objects.all().order_by("exam_date")
+
+    for exam in exams:
+
+        result_exists = Result.objects.filter(
+            exam=exam
+        ).exists()
+
+        if result_exists:
+            exam.result_status = "Published"
+        else:
+            exam.result_status = "Pending"
+
+    return render(
+        request,
+        "admin/admin_exam_results.html",
+        {
+            "exams": exams,
+        }
+    )

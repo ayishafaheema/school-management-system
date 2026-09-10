@@ -1,0 +1,150 @@
+{% extends "admin/admin_base.html" %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/admin_exam_results.css' %}">
+
+<div class="exam-results-page">
+
+    <!-- Header -->
+
+    <div class="page-header">
+
+        <div>
+            <h1>Exams & Results</h1>
+
+            <p>
+                Monitor examinations and result status.
+            </p>
+        </div>
+
+        <a href="{% url 'admin_dashboard' %}" class="back-btn">
+            ← Dashboard
+        </a>
+
+    </div>
+
+
+    <!-- Exams Card -->
+
+    <div class="exam-results-card">
+
+        <div class="card-header">
+
+            <div>
+                <h2>All Examinations</h2>
+
+                <p>
+                    View exam details and result publication status.
+                </p>
+            </div>
+
+        </div>
+
+
+        {% if exams %}
+
+        <div class="table-wrapper">
+
+            <table class="exam-table">
+
+                <thead>
+
+                    <tr>
+                        <th>#</th>
+                        <th>Exam Name</th>
+                        <th>Class</th>
+                        <th>Teacher</th>
+                        <th>Exam Date</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for exam in exams %}
+
+                    <tr>
+
+                        <td>
+                            {{ forloop.counter|stringformat:"02d" }}
+                        </td>
+
+
+                        <td class="exam-name">
+                            {{ exam.exam_name }}
+                        </td>
+
+
+                        <td>
+                            {{ exam.get_assigned_class_display }}
+                        </td>
+
+
+                        <td>
+                            {{ exam.teacher.user.username }}
+                        </td>
+
+
+                        <td>
+                            {{ exam.exam_date|date:"d M Y" }}
+                        </td>
+
+
+                        <td>
+
+                            {% if exam.result_status == "Published" %}
+
+                                <span class="status published">
+                                    ✓ Results Published
+                                </span>
+
+                            {% else %}
+
+                                <span class="status pending">
+                                    ◷ Results Pending
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        {% else %}
+
+        <!-- Empty State -->
+
+        <div class="empty-state">
+
+            <div class="empty-icon">
+                📚
+            </div>
+
+            <h3>No Exams Found</h3>
+
+            <p>
+                No examinations have been created yet.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

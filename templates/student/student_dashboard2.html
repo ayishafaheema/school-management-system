@@ -1,126 +1,75 @@
 {% extends "student/student_base.html" %}
 {% load static %}
+
 {% block content %}
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
 
-<script>
+<!-- =========================================================
+     STATISTICS
+========================================================= -->
 
-document.addEventListener('DOMContentLoaded', function () {
+<div class="row g-4 dashboard-section">
 
-    var calendarEl = document.getElementById('calendar');
+    <div class="col-lg-3 col-md-6">
+        <div class="stat-card">
 
-    var calendar = new FullCalendar.Calendar(calendarEl, {
+            <i class="bi bi-check-circle-fill"></i>
 
-        initialView: 'dayGridMonth',
+            <h3>{{ attendance_percentage }}%</h3>
 
-        height: 350,
-
-        headerToolbar: {
-
-            left: 'prev',
-
-            center: 'title',
-
-            right: 'next'
-
-        },
-
-        events: [
-
-            {
-                title: 'Python Assignment',
-                start: '2026-07-10',
-                color:'#7B1113'
-            },
-
-            {
-                title:'DBMS Exam',
-                start:'2026-07-18',
-                color:'#d97706'
-            },
-
-            {
-                title:'Holiday',
-                start:'2026-07-25',
-                color:'#16a34a'
-            }
-
-        ]
-
-    });
-
-    calendar.render();
-
-});
-
-</script>
-<!-- Statistics -->
-
-        <div class="row g-4 mt-3">
-
-            <div class="col-lg-3">
-
-                <div class="stat-card">
-
-                    <i class="bi bi-check-circle-fill"></i>
-
-                    <h3>{{ attendance_percentage }}%</h3>
-
-                    <p>Attendance</p>
-
-                </div>
-
-            </div>
-
-            <div class="col-lg-3">
-
-                <div class="stat-card">
-
-                    <i class="bi bi-journal-check"></i>
-
-                    <h3>{{ pending_count }}</h3>
-
-                    <p>Assignments Due</p>
-
-                </div>
-
-            </div>
-
-            <div class="col-lg-3">
-
-                <div class="stat-card">
-
-                    <i class="bi bi-calendar-week-fill"></i>
-
-                    <h3>2</h3>
-
-                    <p>Upcoming Exams</p>
-
-                </div>
-
-            </div>
-
-            <div class="col-lg-3">
-
-                <div class="stat-card">
-
-                    <i class="bi bi-trophy-fill"></i>
-
-                    <h3>#3</h3>
-
-                    <p>Current Rank</p>
-
-                </div>
-
-            </div>
+            <p>Attendance</p>
 
         </div>
+    </div>
 
-        <!-- Remaining cards will come in Part 2 -->
 
-        <!-- ================= Profile Section ================= -->
+    <div class="col-lg-3 col-md-6">
+        <div class="stat-card">
 
-<div class="row mt-4">
+            <i class="bi bi-journal-check"></i>
+
+            <h3>{{ pending_count }}</h3>
+
+            <p>Assignments Due</p>
+
+        </div>
+    </div>
+
+
+    <div class="col-lg-3 col-md-6">
+        <div class="stat-card">
+
+            <i class="bi bi-calendar-week-fill"></i>
+
+            <h3>2</h3>
+
+            <p>Upcoming Exams</p>
+
+        </div>
+    </div>
+
+
+    <div class="col-lg-3 col-md-6">
+        <div class="stat-card">
+
+            <i class="bi bi-trophy-fill"></i>
+
+            <h3>#3</h3>
+
+            <p>Current Rank</p>
+
+        </div>
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     PROFILE + ATTENDANCE
+========================================================= -->
+
+<div class="row g-4 dashboard-section">
+
+    <!-- PROFILE -->
 
     <div class="col-lg-8">
 
@@ -130,30 +79,41 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 <h4>Your Profile</h4>
 
-                <a href="{% url 'edit_student_profile' %}" class="btn edit-btn">
-                    <i class="bi bi-pencil-square"></i> Edit
+                <a href="{% url 'edit_student_profile' %}"
+                   class="edit-btn">
+
+                    <i class="bi bi-pencil-square"></i>
+                    Edit
+
                 </a>
+
             </div>
 
-            <div class="row align-items-center mt-3">
 
-                <!-- Student Photo -->
+            <div class="row align-items-center">
+
+                <!-- Student Image -->
 
                 <div class="col-md-4 text-center">
 
                     {% if student.image %}
+
                         <img src="{{ student.image.url }}"
                              class="student-image"
                              alt="Student">
+
                     {% else %}
+
                         <img src="{% static 'images/student.jpg' %}"
                              class="student-image"
                              alt="Student">
+
                     {% endif %}
 
                 </div>
 
-                <!-- Student Details -->
+
+                <!-- Student Information -->
 
                 <div class="col-md-8">
 
@@ -164,44 +124,57 @@ document.addEventListener('DOMContentLoaded', function () {
                             <p>{{ student.user.username }}</p>
                         </div>
 
+
                         <div class="col-md-6 profile-info">
                             <label>Roll Number</label>
                             <p>{{ student.roll_no }}</p>
                         </div>
+
 
                         <div class="col-md-6 profile-info">
                             <label>Student ID</label>
                             <p>{{ student.student_id }}</p>
                         </div>
 
+
                         <div class="col-md-6 profile-info">
                             <label>Department</label>
                             <p>{{ student.department }}</p>
                         </div>
+
 
                         <div class="col-md-6 profile-info">
                             <label>Class</label>
                             <p>{{ student.student_class }}</p>
                         </div>
 
+
                         <div class="col-md-6 profile-info">
+                            <label>Email</label>
                             <p>{{ student.user.email }}</p>
-                            <p>{{ student.email }}</p>
                         </div>
+
 
                         <div class="col-md-6 profile-info">
                             <label>Phone</label>
                             <p>{{ student.phone }}</p>
                         </div>
 
+
                         <div class="col-md-6 profile-info">
                             <label>Academic Year</label>
                             <p>{{ student.academic_year }}</p>
                         </div>
 
+
                         <div class="col-12 profile-info">
+
                             <label>Address</label>
-                            <p>{{ student.address }}</p>
+
+                            <p>
+                                {{ student.address }}
+                            </p>
+
                         </div>
 
                     </div>
@@ -214,42 +187,51 @@ document.addEventListener('DOMContentLoaded', function () {
 
     </div>
 
-        <div class="col-lg-4">
+
+    <!-- ATTENDANCE -->
+
+    <div class="col-lg-4">
 
         <div class="attendance-card">
 
             <h4>Attendance</h4>
 
+
             <div class="attendance-circle">
 
-            <h2>{{ attendance_percentage }}%</h2>
+                <h2>
+                    {{ attendance_percentage }}%
+                </h2>
 
             </div>
+
 
             <div class="attendance-details">
 
                 <div>
-            <h5>{{ present }}</h5>
+                    <h5>{{ present }}</h5>
                     <span>Present</span>
                 </div>
 
                 <div>
-            <h5>{{ absent }}</h5>
+                    <h5>{{ absent }}</h5>
                     <span>Absent</span>
                 </div>
 
                 <div>
-            <h5>{{ late }}</h5>
+                    <h5>{{ late }}</h5>
                     <span>Late</span>
                 </div>
 
             </div>
-            <br>
-            <br>
-            <a href="{% url 'student_attendance' %}" class="btn edit-btn">
-                    </i> View Attendance History
-                </a>
 
+
+            <a href="{% url 'student_attendance' %}"
+               class="edit-btn attendance-history-btn">
+
+                View Attendance History
+
+            </a>
 
         </div>
 
@@ -257,15 +239,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
 </div>
 
-<!-- ================= Assignments ================= -->
 
-<div class="row mt-4">
+<!-- =========================================================
+     ASSIGNMENTS + EXAMS
+========================================================= -->
+
+<div class="row g-4 dashboard-section">
+
+    <!-- ASSIGNMENTS -->
 
     <div class="col-lg-7">
 
         <div class="assignment-card">
-
-            <!-- Header -->
 
             <div class="card-header-custom">
 
@@ -278,174 +263,201 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
 
 
-            <!-- Assignments Table -->
+            <div class="table-responsive">
 
-            <table class="table align-middle">
+                <table class="table assignment-table">
 
-                <thead>
+                    <thead>
 
-                    <tr>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                        </tr>
 
-                        <th>Subject</th>
-                        <th>Due Date</th>
-                        <th>Status</th>
-
-                    </tr>
-
-                </thead>
+                    </thead>
 
 
-                <tbody>
+                    <tbody>
 
-                    {% for item in homework_data %}
+                        {% for item in homework_data %}
 
-                    <tr>
+                        <tr>
 
-                        <!-- Subject -->
-
-                        <td>
-                            <span class="subject-name">
-                                {{ item.homework.subject }}
-                            </span>
-                        </td>
-
-
-                        <!-- Due Date -->
-
-                        <td>
-                            {{ item.homework.due_date|date:"d M Y" }}
-                        </td>
-
-
-                        <!-- Status -->
-
-                        <td>
-
-                            {% if item.status and item.status.status == "Y" %}
-
-                                <span class="status submitted">
-                                    Submitted
+                            <td>
+                                <span class="subject-name">
+                                    {{ item.homework.subject }}
                                 </span>
+                            </td>
 
-                            {% else %}
 
-                                <span class="status pending">
-                                    Pending
-                                </span>
+                            <td>
+                                {{ item.homework.due_date|date:"d M Y" }}
+                            </td>
 
-                            {% endif %}
 
-                        </td>
+                            <td>
 
-                    </tr>
+                                {% if item.status and item.status.status == "Y" %}
 
-                    {% empty %}
+                                    <span class="status submitted">
+                                        Submitted
+                                    </span>
 
-                    <tr>
+                                {% else %}
 
-                        <td colspan="3" class="no-homework">
-                            No homework assigned yet.
-                        </td>
+                                    <span class="status pending">
+                                        Pending
+                                    </span>
 
-                    </tr>
+                                {% endif %}
 
-                    {% endfor %}
+                            </td>
 
-                </tbody>
+                        </tr>
 
-            </table>
+
+                        {% empty %}
+
+                        <tr>
+
+                            <td colspan="3"
+                                class="no-homework">
+
+                                No homework assigned yet.
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
 
         </div>
 
     </div>
 
-</div>
 
-
-    <!-- Calendar -->
-
+    <!-- EXAMS & RESULTS -->
 
     <div class="col-lg-5">
 
-    <div class="calendar-card">
+        <div class="exam-result-card">
 
-        <div class="card-header-custom">
+            <div class="exam-result-header">
 
-            <h4>Academic Calendar</h4>
+                <div>
+
+                    <h4>Exams & Results</h4>
+
+                    <p>
+                        Keep track of your upcoming examinations
+                        and academic results.
+                    </p>
+
+                </div>
+
+                <div class="exam-result-main-icon">
+
+                    <i class="bi bi-journal-check"></i>
+
+                </div>
+
+            </div>
+
+
+            <div class="exam-result-options">
+
+                <!-- Upcoming Exams -->
+
+                <div class="exam-option">
+
+                    <div class="exam-option-icon">
+
+                        <i class="bi bi-calendar-event"></i>
+
+                    </div>
+
+
+                    <div class="exam-option-content">
+
+                        <h5>Upcoming Exams</h5>
+
+                        <p>
+                            Check your upcoming examinations
+                            and exam dates.
+                        </p>
+
+                        <a href="{% url 'student_exam_list' %}"
+                           class="exam-option-btn">
+
+                            View Exams
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Results -->
+
+                <div class="exam-option">
+
+                    <div class="exam-option-icon">
+
+                        <i class="bi bi-bar-chart"></i>
+
+                    </div>
+
+
+                    <div class="exam-option-content">
+
+                        <h5>My Results</h5>
+
+                        <p>
+                            View your published examination
+                            results and marks.
+                        </p>
+
+                        <a href="{% url 'student_result_view' %}"
+                           class="exam-option-btn">
+
+                            View Results
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
-
-        <div id="calendar"></div>
 
     </div>
 
 </div>
 
-    <!-- ================= Announcements & Teacher Contact ================= -->
 
-<div class="row mt-4">
+<!-- =========================================================
+     TEACHER CONTACT + QUOTE
+========================================================= -->
 
-    <!-- Announcements -->
+<div class="row g-4 dashboard-section">
 
-    <div class="col-lg-8">
+    <!-- TEACHER CONTACT -->
 
-        <div class="announcement-card">
-
-            <div class="card-header-custom">
-
-                <h4>Announcements</h4>
-
-                <a href="#">View All</a>
-
-            </div>
-
-            <div class="announcement-list">
-
-                <div class="announcement-item">
-                    <div class="announcement-icon bg-danger">
-                        <i class="bi bi-megaphone-fill"></i>
-                    </div>
-
-                    <div class="announcement-content">
-                        <h6>Mid-Term Examination</h6>
-                        <p>Mid-term examinations will begin from <strong>20 July 2026</strong>.</p>
-                        <small>2 hours ago</small>
-                    </div>
-                </div>
-
-                <div class="announcement-item">
-                    <div class="announcement-icon bg-success">
-                        <i class="bi bi-check-circle-fill"></i>
-                    </div>
-
-                    <div class="announcement-content">
-                        <h6>Assignment Deadline Extended</h6>
-                        <p>Python assignment submission has been extended until <strong>12 July</strong>.</p>
-                        <small>Yesterday</small>
-                    </div>
-                </div>
-
-                <div class="announcement-item">
-                    <div class="announcement-icon bg-warning">
-                        <i class="bi bi-calendar-event-fill"></i>
-                    </div>
-
-                    <div class="announcement-content">
-                        <h6>Holiday Notice</h6>
-                        <p>College will remain closed on <strong>15 July</strong>.</p>
-                        <small>3 days ago</small>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- Teacher Contact -->
-
-    <div class="col-lg-4">
+    <div class="col-lg-5">
 
         <div class="teacher-card">
 
@@ -455,57 +467,102 @@ document.addEventListener('DOMContentLoaded', function () {
 
             </div>
 
+
+            <!-- Class Teacher -->
+
             <div class="teacher">
 
                 {% if teacher and teacher.image %}
+
                     <img src="{{ teacher.image.url }}"
                          class="teacher-profile"
                          alt="Teacher">
+
                 {% else %}
-                    <p>No teacher image available.</p>
+
+                    <img src="{% static 'images/teacher.jpg' %}"
+                         class="teacher-profile"
+                         alt="Teacher">
+
                 {% endif %}
+
+
                 <div>
+
                     {% if teacher %}
-                        <h6>{{ teacher.user.username }}</h6>
+
+                        <h6>
+                            {{ teacher.user.username }}
+                        </h6>
+
                     {% else %}
-                        <h6>No teacher assigned</h6>
+
+                        <h6>
+                            No teacher assigned
+                        </h6>
+
                     {% endif %}
+
                     <p>Class Teacher</p>
+
 
                     <div class="teacher-buttons">
 
-                        <button class="btn btn-sm btn-outline-danger">
-                            <i class="bi bi-envelope-fill"></i>
-                        </button>
+                        {% if teacher %}
 
-                        <button class="btn btn-sm btn-outline-danger">
-                            <i class="bi bi-telephone-fill"></i>
-                        </button>
+                            <a href="mailto:{{ teacher.user.email }}"
+                               class="btn btn-sm btn-outline-danger">
+
+                                <i class="bi bi-envelope-fill"></i>
+
+                            </a>
+
+                            <a href="tel:{{ teacher.phone }}"
+                               class="btn btn-sm btn-outline-danger">
+
+                                <i class="bi bi-telephone-fill"></i>
+
+                            </a>
+
+                        {% endif %}
 
                     </div>
 
                 </div>
 
             </div>
+
 
             <hr>
 
+
+            <!-- Academic Advisor -->
+
             <div class="teacher">
 
-                <img src="{% static 'images/teacher2.jpg' %}" alt="Teacher">
+                <img src="{% static 'images/teacher2.jpg' %}"
+                     alt="Teacher">
+
 
                 <div>
+
                     <h6>Mr. John</h6>
+
                     <p>Academic Advisor</p>
+
 
                     <div class="teacher-buttons">
 
                         <button class="btn btn-sm btn-outline-danger">
+
                             <i class="bi bi-envelope-fill"></i>
+
                         </button>
 
                         <button class="btn btn-sm btn-outline-danger">
+
                             <i class="bi bi-telephone-fill"></i>
+
                         </button>
 
                     </div>
@@ -513,123 +570,44 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
 
             </div>
-
 
         </div>
 
     </div>
 
-<!-- ================= Top Performers & Quote ================= -->
 
-        <div class="row mt-4">
+    <!-- QUOTE -->
 
-            <!-- Top Performers -->
+    <div class="col-lg-7">
 
-            <div class="col-lg-6">
+        <div class="quote-card">
 
-                <div class="topper-card">
+            <div class="quote-icon">
 
-                    <div class="card-header-custom">
-
-                        <h4><i class="bi bi-trophy-fill text-warning"></i> Top Performers</h4>
-
-                    </div>
-
-                    <div class="topper-item">
-
-                        <div class="topper-left">
-                            <img src="{% static 'images/student1.jpg' %}" alt="">
-                            <div>
-                                <h6>Sarah Ahmed</h6>
-                                <small>Computer Science</small>
-                            </div>
-                        </div>
-
-                        <div class="rank gold">
-                            🥇 98%
-                        </div>
-
-                    </div>
-
-                    <div class="topper-item">
-
-                        <div class="topper-left">
-                            <img src="{% static 'images/student2.jpg' %}" alt="">
-                            <div>
-                                <h6>Ayisha Faheema</h6>
-                                <small>Computer Science</small>
-                            </div>
-                        </div>
-
-                        <div class="rank silver">
-                            🥈 96%
-                        </div>
-
-                    </div>
-
-                    <div class="topper-item">
-
-                        <div class="topper-left">
-                            <img src="{% static 'images/student3.jpg' %}" alt="">
-                            <div>
-                                <h6>Mohammed Ali</h6>
-                                <small>Computer Science</small>
-                            </div>
-                        </div>
-
-                        <div class="rank bronze">
-                            🥉 95%
-                        </div>
-
-                    </div>
-
-                    <hr>
-
-                    <div class="my-rank">
-
-                        <h5>Your Current Rank</h5>
-
-                        <h2>#2</h2>
-
-                        <p>Out of 120 Students</p>
-
-                    </div>
-
-                </div>
+                <i class="bi bi-quote"></i>
 
             </div>
 
-            <!-- Quote Card -->
 
-            <div class="col-lg-6">
+            <h4>
+                Quote of the Day
+            </h4>
 
-                <div class="quote-card">
 
-                    <div class="quote-icon">
+            <p>
+                "Success is the sum of small efforts,
+                repeated day in and day out."
+            </p>
 
-                        <i class="bi bi-quote"></i>
 
-                    </div>
-
-                    <h4>Quote of the Day</h4>
-
-                    <p>
-
-                        "Success is the sum of small efforts,
-                        repeated day in and day out."
-
-                    </p>
-
-                    <span>- Robert Collier</span>
-
-                </div>
-
-            </div>
+            <span>
+                - Robert Collier
+            </span>
 
         </div>
 
+    </div>
 
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</div>
 
 {% endblock %}

@@ -1,0 +1,423 @@
+/* =================================
+   Result Details Page
+================================= */
+
+.result-details-page {
+    padding: 25px;
+}
+
+
+/* =================================
+   Page Header
+================================= */
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+.page-header h1 {
+    margin: 0;
+
+    font-size: 28px;
+    font-weight: 700;
+
+    color: #333;
+}
+
+.page-header p {
+    margin: 6px 0 0;
+
+    font-size: 14px;
+
+    color: #888;
+}
+
+
+/* =================================
+   Back Button
+================================= */
+
+.back-btn {
+    padding: 9px 16px;
+
+    border: 1px solid #7B1113;
+    border-radius: 8px;
+
+    background: #fff;
+
+    color: #7B1113;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+.back-btn:hover {
+    background: #7B1113;
+    color: #fff;
+}
+
+
+/* =================================
+   Exam Information
+================================= */
+
+.exam-info-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 25px;
+
+    margin-bottom: 25px;
+
+    background: #fff;
+
+    border: 1px solid #eee;
+    border-radius: 15px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.exam-info span,
+.exam-meta span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 12px;
+
+    color: #888;
+}
+
+.exam-info h2 {
+    margin: 0;
+
+    font-size: 22px;
+
+    color: #333;
+}
+
+.exam-meta {
+    display: flex;
+
+    gap: 50px;
+}
+
+.exam-meta strong {
+    font-size: 14px;
+
+    color: #333;
+}
+
+
+/* =================================
+   Marks Card
+================================= */
+
+.marks-card {
+    padding: 25px;
+
+    margin-bottom: 25px;
+
+    background: #fff;
+
+    border: 1px solid #eee;
+    border-radius: 15px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+    margin-bottom: 20px;
+}
+
+.card-header h2 {
+    margin: 0;
+
+    font-size: 20px;
+
+    color: #333;
+}
+
+.card-header p {
+    margin: 5px 0 0;
+
+    font-size: 13px;
+
+    color: #888;
+}
+
+
+/* =================================
+   Marks Table
+================================= */
+
+.marks-table-wrapper {
+    overflow-x: auto;
+}
+
+.marks-table {
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+.marks-table th {
+    padding: 14px;
+
+    background: #fafafa;
+
+    border-bottom: 1px solid #eee;
+
+    text-align: left;
+
+    font-size: 12px;
+
+    color: #777;
+}
+
+.marks-table td {
+    padding: 16px 14px;
+
+    border-bottom: 1px solid #f0f0f0;
+
+    font-size: 14px;
+
+    color: #555;
+}
+
+.marks-table tbody tr:hover {
+    background: #fcf9f9;
+}
+
+.marks-table td:nth-child(3) {
+    font-weight: 600;
+
+    color: #7B1113;
+}
+
+
+/* =================================
+   Summary Card
+================================= */
+
+.summary-card {
+    padding: 25px;
+
+    background: #fff;
+
+    border: 1px solid #eee;
+    border-radius: 15px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.summary-card h2 {
+    margin: 0 0 20px;
+
+    font-size: 20px;
+
+    color: #333;
+}
+
+
+/* =================================
+   Summary Grid
+================================= */
+
+.summary-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 15px;
+}
+
+.summary-item {
+    padding: 20px;
+
+    background: #fafafa;
+
+    border: 1px solid #eee;
+    border-radius: 10px;
+}
+
+.summary-item span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 12px;
+
+    color: #888;
+}
+
+.summary-item strong {
+    font-size: 20px;
+
+    color: #333;
+}
+
+.summary-item strong.grade {
+    color: #7B1113;
+}
+
+
+/* =================================
+   Status
+================================= */
+
+.status {
+    font-size: 14px !important;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+}
+
+.status.passed {
+    background: #eaf6ee;
+
+    color: #2f7d45;
+}
+
+.status.failed {
+    background: #fdecec;
+
+    color: #b42323;
+}
+
+
+/* =================================
+   Not Published
+================================= */
+
+.not-published-card {
+    padding: 70px 30px;
+
+    text-align: center;
+
+    background: #fff;
+
+    border: 1px solid #eee;
+    border-radius: 15px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.not-published-icon {
+    width: 70px;
+    height: 70px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #f5e9e9;
+
+    font-size: 30px;
+}
+
+.not-published-card h2 {
+    margin: 0 0 10px;
+
+    color: #333;
+}
+
+.not-published-card p {
+    margin: 0 0 25px;
+
+    color: #888;
+
+    font-size: 14px;
+}
+
+.back-results-btn {
+    display: inline-block;
+
+    padding: 10px 17px;
+
+    border-radius: 8px;
+
+    background: #7B1113;
+
+    color: #fff;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.back-results-btn:hover {
+    background: #5f0d0f;
+}
+
+
+/* =================================
+   Responsive
+================================= */
+
+@media (max-width: 800px) {
+
+    .exam-info-card {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 20px;
+    }
+
+    .exam-meta {
+        gap: 30px;
+    }
+
+    .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .result-details-page {
+        padding: 15px;
+    }
+
+    .page-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+    .page-header h1 {
+        font-size: 23px;
+    }
+
+    .exam-meta {
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
