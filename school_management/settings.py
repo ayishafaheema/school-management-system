@@ -135,5 +135,14 @@ MEDIA_ROOT = BASE_DIR / "media"
 # settings.py
 
 # This prints emails directly to your terminal screen for testing (No setup required!)
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-DEFAULT_FROM_EMAIL = 'schooladmin@school.com'
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = 'ayishafaheema77@gmail.com'
+EMAIL_HOST_PASSWORD = 'dgcp nmzc hrtt drxl'
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

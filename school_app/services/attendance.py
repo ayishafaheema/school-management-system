@@ -1,5 +1,5 @@
 from datetime import timedelta
-
+from django.core.mail import send_mail
 from django.db.models import Count, Q
 
 from school_app.models import Attendance, Student
@@ -90,6 +90,23 @@ def save_attendance(students, teacher, date, post_data):
             date=date,
             status=status
         )
+        # Send email to student
+        if status == "A":
+            send_mail(
+                subject="Attendance Notification",
+                message=f"""
+        Hello {student.user.username},
+
+        You were marked absent today ({date}).
+
+        Please contact your class teacher if you have any questions.
+
+        Thank you,
+        School Admin
+        """,
+                from_email=None,
+                recipient_list=[student.user.email],
+            )
 
 def student_attendance_history(student):
     attendance = Attendance.objects.filter(

@@ -11,6 +11,10 @@ from school_app.services.homework import create_homework_service, homework_statu
     get_students_with_homework_status, get_teacher_homework_stats
 from school_app.services.result import save_exam_results, calculate_results
 from school_app.services.teacher import create_teacher
+from django.core.mail import send_mail
+from school_app.models import Student, Teacher
+from school_app.forms import ExamForm
+
 
 
 @login_required(login_url="login_view")
@@ -228,6 +232,8 @@ def teacher_attendance_history_view(request):
             "attendance_history": attendance_history,
         })
 
+
+
 def create_exam_view(request):
     teacher = Teacher.objects.get(user=request.user)
 
@@ -239,6 +245,34 @@ def create_exam_view(request):
             exam.teacher = teacher
             exam.assigned_class = teacher.assigned_class
             exam.save()
+
+            # Get all students in the teacher's assigned class
+            students = Student.objects.filter(
+                student_class=exam.assigned_class
+            )
+
+            # Send exam notification
+            for student in students:
+                if student.user.email:
+                    send_mail(
+                        subject="New Exam Created",
+                        message=f"""
+                    Hello {student.user.username},
+                    
+                    A new exam has been created for your class.
+                    
+                    Exam: {exam.exam_name}
+                    Date: {exam.exam_date}
+                    
+                    Please check your student dashboard for more details.
+                    
+                    Thank you,
+                    School Admin
+                    """,
+                        from_email=None,
+                        recipient_list=[student.user.email],
+                    )
+
             return redirect("exam_list")
 
         else:
@@ -246,6 +280,7 @@ def create_exam_view(request):
 
     else:
         form = ExamForm()
+
     return render(
         request,
         "teacher/create_exam.html",

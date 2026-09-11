@@ -20,16 +20,20 @@ class TeacherForm(forms.ModelForm):
         ]
 
 class StudentForm(forms.ModelForm):
-    username=forms.CharField(max_length=150)
-    password=forms.CharField(
+    username = forms.CharField(max_length=150)
+
+    password = forms.CharField(
         widget=forms.PasswordInput()
     )
+
+    email = forms.EmailField()
 
     class Meta:
         model = Student
         fields = [
             "username",
             "password",
+            "email",
             "student_class",
             "roll_no",
             "student_id",
@@ -38,9 +42,7 @@ class StudentForm(forms.ModelForm):
             "phone",
             "department",
             "image",
-
         ]
-
 class StudentProfileForm(forms.ModelForm):
     class Meta:
         model = Student
@@ -61,6 +63,7 @@ class HomeworkForm(forms.ModelForm):
                 attrs={
                     "type": "date"}
                  )}
+
 
 class ExamForm(forms.ModelForm):
      class Meta:
