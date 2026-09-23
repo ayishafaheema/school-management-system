@@ -46,7 +46,9 @@
                 </li>
 
                 <li>
-                    Assignments
+                    <a href="{% url 'view_all_homework' %}">
+                        Assignments
+                    </a>
                 </li>
 
                 <li>
@@ -61,8 +63,15 @@
                     Reports
                 </li>
 
-                <li>
-                    Settings
+                <li class="logout-item">
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+
+                        <button type="submit" class="logout-btn">
+                            <i class="bi bi-box-arrow-right"></i>
+                            Logout
+                        </button>
+                    </form>
                 </li>
 
             </ul>

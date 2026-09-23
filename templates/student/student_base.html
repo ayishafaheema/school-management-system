@@ -69,11 +69,10 @@
             </li>
 
             <li>
-
-                <i class="bi bi-bar-chart-fill"></i>
-
-                My Result
-
+                <a href="{% url 'student_result_view' %}">
+                    <i class="bi bi-bar-chart-fill"></i>
+                    My Result
+                </a>
             </li>
 
             <li>
@@ -85,14 +84,12 @@
             </li>
 
             <li>
-
-                <i class="bi bi-calendar-event-fill"></i>
-
-                Exams
-
+                <a href="{% url 'student_exam_list' %}">
+                    <i class="bi bi-calendar-event-fill"></i>
+                    Exams
+                </a>
             </li>
-
-            <li>
+                <li>
 
                 <i class="bi bi-gear-fill"></i>
 
@@ -100,14 +97,17 @@
 
             </li>
 
-            <li>
+            <li class="logout-item">
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
 
-                <i class="bi bi-box-arrow-right"></i>
-
-                Logout
-
+                    <button type="submit" class="logout-btn">
+                        <i class="bi bi-box-arrow-right"></i>
+                        Logout
+                    </button>
+                </form>
+                </form>
             </li>
-
         </ul>
 
     </aside>

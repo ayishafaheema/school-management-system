@@ -122,11 +122,12 @@ def student_homework(request):
 
     student = Student.objects.get(user=request.user)
 
-    homework_data=get_student_homework(student)
-    return render(request, "student/student_homework.html",{
-        "homework_data":homework_data
-    })
+    homework_data, pending_count = get_student_homework(student)
 
+    return render(request, "student/student_homework.html", {
+        "homework_data": homework_data,
+        "pending_count": pending_count
+    })
 
 @login_required(login_url="login_view")
 def student_exam_view(request):

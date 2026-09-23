@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth.views import LogoutView
 from django.urls import path
 
 from school_app import views, teacherView, studentView
@@ -18,6 +19,7 @@ urlpatterns = [
     path("student_result_view", studentView.student_result_view, name='student_result_view'),
     path("student_exam_list", studentView.student_exam_view, name='student_exam_list'),
     path("student_result_details/<int:exam_id>/",studentView.student_result_details,name="student_result_details"),
+    path("logout/", LogoutView.as_view(), name="logout"),
 
 
     # teacher url
