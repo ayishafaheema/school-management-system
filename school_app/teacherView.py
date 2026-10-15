@@ -258,14 +258,14 @@ def create_exam_view(request):
                         subject="New Exam Created",
                         message=f"""
                     Hello {student.user.username},
-                    
+
                     A new exam has been created for your class.
-                    
+
                     Exam: {exam.exam_name}
                     Date: {exam.exam_date}
-                    
+
                     Please check your student dashboard for more details.
-                    
+
                     Thank you,
                     School Admin
                     """,
